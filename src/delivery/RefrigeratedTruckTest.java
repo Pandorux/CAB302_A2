@@ -14,23 +14,48 @@ class RefrigeratedTruckTest extends TruckBaseTest {
 	
 	@BeforeAll
 	void beforeEachTest() {
-		dummyTruck = new RefrigeratedTruck(0, 1000);	
+		// id, capacity, temp
+		dummyTruck = new RefrigeratedTruck(0, 800, 10);	
+	}
+	
+	@Test(expected = DeliveryExpection.class)
+	void testTemperatureStaysInRange_00() {
+		dummyTruck.setTemperature(50);
+	}
+	
+	@Test(expected = DeliveryExpection.class)
+	void testTemperatureStaysInRange_01() {
+		dummyTruck.setTemperature(-50);
 	}
 	
 	@Test
-	void testTemperatureStaysInRange() {
-		fail("Not yet implemented");
+	void testTemperatureStaysInRange_02() {
+		dummyTruck.setTemperature(-50);
 	}
 	
-	// TODO: Need to check if this is a new method
-	@Test
-	void testTruckCost() {
-		// TODO: Check if tester returns the correct cost
+	@Test(expected = DeliveryException.class)
+	void testAddItemOutOfTempRange_00() {
+		dummyTruck.addItem("Milk", 30);
+	}
+	
+	@Test(expected = DeliveryException.class)
+	void testAddItemOutOfTempRange_01() {
+		dummyTruck.addItem("Milk", -30);
 	}
 	
 	@Test
-	void testItemsInTemperatureRange() {
-		// TODO: Check if every item in collection is in
-		//		 the temperature range
+	void testTruckCost_Empty() {
+		assertEquals(900, dummyTruck.getCost());
+	}
+	
+	@Test
+	void testTruckCost_Empty() {
+		assertEquals(900, dummyTruck.getCost());
+	}
+	
+	@Test
+	void testAddItemsInTempRange() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		dummyTruck.addItems(items);
 	}
 }

@@ -9,16 +9,14 @@ class TruckTest extends TruckBaseTest {
 	
 	@BeforeAll
 	void beforeEachTest() {
+		// id, capacity
 		dummyTruck = new Truck(0, 1000);	
 	}
 	
+	// TODO: Name of GetItems should be TempLessThan
 	@Test
 	void testCargoIsOnlyDryItems() {
-		fail("Not yet implemented");
-		
-		// TODO: Check if every item in collection is a dry item
-		// Test fails if there is a wet item in cargo
-		
+		dummyTruck.getItems(10);
 	}
 
 }

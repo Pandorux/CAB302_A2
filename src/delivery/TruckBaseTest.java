@@ -38,6 +38,7 @@ abstract class TruckBaseTest {
 	 */
 	private class dummyTruckBase extends TruckBase { 
 		
+		// id, capacity
 		dummyTruckBase(int id, int capacity) {
 			super(int id, int capacity);
 		}
