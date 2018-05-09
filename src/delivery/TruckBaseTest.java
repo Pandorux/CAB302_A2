@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Random;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -141,51 +143,175 @@ abstract class TruckBaseTest {
 	}
 	
 	@Test
-	void testTruckRemoveItem_00() {
-		dummyTruck.removeItem(item);
+	void testTruckRemoveItem_Item() {
+		DummyItem item = new DummyItem("Milk", 0);
+		dummyTruck.addItem(item);
 		assertEquals(false, dummyTruck.getItem(item));
 	}
 	
 	@Test
-	void testTruckRemoveItem_01() {
-		dummyTruck.removeItem(itemName);
-		assertEquals(false, dummyTruck.getItem(itemName));
+	void testTruckRemoveItem_Name() {
+		dummyTruck.addItem(new DummyItem("Milk", 0));
+		dummyTruck.removeItem("Milk");
+		assertEquals(null, dummyTruck.getItem("Milk"));
 	}
 	
 	@Test
-	void testTruckAddItem_00() {
-		dummyTruck.addItem(item);
-		assertEquals(true, dummyTruck.getItem(item));
+	void testTruckAddItem() {
+		DummyItem item = new DummyItem("Milk", 0);
+		dummyTruck.addItems(item);
+		assertEquals(item, dummyTruck.getItem(item));
 	}
 	
 	@Test
-	void testTruckGetItem() {
+	void testTruckGetItems_Name() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		dummyTruck.addItems(items);
+		int totalItems = 0;
+		
+		for(Iterator i = items.iterator(); i.hasNext();) {
+			i.next();
+			if(i.name == "Milk") {
+				totalItems++;
+			}
+		}
+		
+		assertEquals(totalItems, dummyTruck.getItems("Milk").length);
+	}
+	
+	// TODO: Fix GetItem Name
+	@Test
+	void testTruckGetItems_TempEqual() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		dummyTruck.addItems(items);
+		int totalItems = 0;
+		
+		for(Iterator i = items.iterator(); i.hasNext();) {
+			i.next();
+			if(i.temp == -20) {
+				totalItems++;
+			}
+		}
+		
+		assertEquals(totalItems, dummyTruck.getItems(-20).length);
+	}
+	
+	// TODO: Fix GetItem Name
+	@Test
+	void testTruckGetItems_TempLessOf() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		dummyTruck.addItems(items);
+		int totalItems = 0;
+		
+		for(Iterator i = items.iterator(); i.hasNext();) {
+			i.next();
+			if(i.temp <= 0) {
+				totalItems++;
+			}
+		}
+		
+		assertEquals(totalItems, dummyTruck.getItems(-20).length);
+	}
+	
+	// TODO: Fix GetItem Name
+	@Test
+	void testTruckGetItems_TempMoreThan() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		dummyTruck.addItems(items);
+		int totalItems = 0;
+		
+		for(Iterator i = items.iterator(); i.hasNext();) {
+			i.next();
+			if(i.temp >= 0) {
+				totalItems++;
+			}
+		}
+		
+		assertEquals(totalItems, dummyTruck.getItems(-20).length);
+	}
+	
+	@Test
+	void testTruckGetItem_Name() {
 		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
+		DummyItem item = new DummyItem("Milk", 0);
+		dummyTruck.addItems(item);
+		assertEquals(item, dummyTruck.getItem("Milk"));
 	}
 	
 	@Test
-	void testTruckGetItems() {
-		// TODO: Get all items from truck cargo that mets a certain criteria (name, temperature, etc)
+	void testTruckGetItem_Temp() {
+		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
+		DummyItem item = new DummyItem("Milk", 0);
+		dummyTruck.addItems(item);
+		assertEquals(item, dummyTruck.getItem(0));
 	}
 	
 	@Test
-	void testTruckRemoveItems() {
-		// TODO: Input collection of items to remove from truck cargo
+	void testTruckGetItem_Item() {
+		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
+		DummyItem item = new DummyItem("Milk", 0);
+		dummyTruck.addItem(item);
+		assertEquals(item, dummyTruck.getItem(item));
 	}
 	
 	@Test
-	void testTruckAddItems() {
-		// TODO: Input collection of items to add to truck cargo
+	void testTruckRemoveItems_Items() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		dummyTruck.addItems(items);
+		dummyTruck.removeItems(items);
+		assertEquals(0, dummyTruck.totalItems);
 	}
 	
 	@Test
-	void testTruckRemoveAllItems() {
-		// TODO: Reset Truck Cargo
+	void testTruckRemoveItems_Name() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		dummyTruck.addItems(items);
+		dummyTruck.removeItems("Milk");
+		
+		assertEquals(null, dummyTruck.getItem("Milk"));
+	}
+	
+	// TODO: Fix GetItem and RemoveItems Name
+	@Test
+	void testTruckRemoveItems_TempEqual() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		dummyTruck.addItems(items);
+		dummyTruck.removeItems(-20);
+		
+		assertEquals(null, dummyTruck.getItem(-20));
+	}
+	
+	// TODO: Fix GetItem and RemoveItems Name
+	@Test
+	void testTruckRemoveItems_TempLessThan() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		dummyTruck.addItems(items);
+		dummyTruck.removeItems(-20);
+		
+		assertEquals(null, dummyTruck.getItem(-20));
+	}
+	
+	// TODO: Fix GetItem and RemoveItems Name
+	@Test
+	void testTruckRemoveItems_TempMoreThan() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		dummyTruck.addItems(items);
+		dummyTruck.removeItems(-20);
+		
+		assertEquals(null, dummyTruck.getItem(-20));
 	}
 	
 	@Test
+	void testTruckEmptyTruck() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		dummyTruck.addItems(items);
+		dummyTruck.empty();
+		
+		assertEquals(0, dummyTruck.totalItems);
+	}
+	
+	@Test(expected = DeliveryException.class)
 	void testCapacityCannotExceedMax() {
-		// TODO: An exception should be thrown if
-		//   	 max is exceeded
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(2000);
 	}
 }
