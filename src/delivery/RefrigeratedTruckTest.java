@@ -2,9 +2,8 @@ package delivery;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import delivery.TruckBaseTest.TruckTester;
 
 /**
  * 
@@ -13,7 +12,10 @@ import delivery.TruckBaseTest.TruckTester;
  */
 class RefrigeratedTruckTest extends TruckBaseTest {
 	
-	
+	@BeforeAll
+	void beforeEachTest() {
+		dummyTruck = new RefrigeratedTruck(0, 1000);	
+	}
 	
 	@Test
 	void testTemperatureStaysInRange() {
@@ -23,7 +25,6 @@ class RefrigeratedTruckTest extends TruckBaseTest {
 	// TODO: Need to check if this is a new method
 	@Test
 	void testTruckCost() {
-		TruckTester tester = new TruckTester();
 		// TODO: Check if tester returns the correct cost
 	}
 	
