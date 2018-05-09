@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import javafx.util.Pair;
 import store.Item;
 
 /**
@@ -24,7 +25,7 @@ import store.Item;
 abstract class TruckBaseTest {
 	
 	TruckBase dummyTruck = null;
-	
+	DummyCargoCreator cargoMaker = new DummyCargoCreator();
 	
 	/**
 	 * 
@@ -44,27 +45,19 @@ abstract class TruckBaseTest {
 	 * 
 	 * @author Jared Carey
 	 *
-	 * Enumerated Mock of Item
+	 * Mock of Item
 	 * 
 	 */
-	static enum DummyItem {
-		MILK(4.0),
-		BREAD(2.0),
-		EGGS(6.0),
-		CEREAL(10.5),
-		WATER(0.75),
-		RICE(3.6),
-		BACON(45.2);
+	public class DummyItem extends Item {
 		
-		private double cost;
-
-		DummyItem(double cost) {
-			this.cost = cost;
+		String name;
+		double temp;
+		
+		DummyItem(String name, double temp) {
+			this.name = name;
+			this.temp = temp;
 		}
 		
-		public double getCost() {
-			return cost;
-		}	
 	}
 	
 	/**
@@ -74,43 +67,37 @@ abstract class TruckBaseTest {
 	 * Class used for creating dynamic dummy cargo for unit tests
 	 *
 	 */
-	public static class DummyCargoCreator {
+	public class DummyCargoCreator {
 		
-		public static ArrayList<DummyItem> CreateCargo(int amount) {
+		public ArrayList<DummyItem> CreateCargo(int amount) {
 			
 			ArrayList<DummyItem> cargo = new ArrayList<DummyItem>();
+			Pair<String, Integer> item;
+			DummyItem dummy;
 			
 			for(int i = 0; i < amount; i++) {
-				cargo.add(GetItem());
+				item = GetItem();
+				dummy = new DummyItem(item.getKey(), item.getValue());
+				cargo.add(dummy);    
 			}
 			
 			return cargo;
 		}
 		
-		private static DummyItem GetItem() {
+		private Pair<String, Integer> GetItem() {
 			Random rand = new Random();
 			
-			switch(rand.nextInt(DummyItem.values().length)) {
+			switch(rand.nextInt(2)) {
+
 				case 0:
-					return DummyItem.MILK;
+					return new Pair<String, Integer>("Milk", -20);
 					
 				case 1:
-					return DummyItem.BREAD;
+					return new Pair<String, Integer>("Bread", 20);
 					
 				case 2:
-					return DummyItem.EGGS;
+					return new Pair<String, Integer>("Eggs", 6);
 					
-				case 3:
-					return DummyItem.CEREAL;
-					
-				case 4:
-					return DummyItem.WATER;
-					
-				case 5:
-					return DummyItem.RICE;
-					
-				case 6:
-					return DummyItem.BACON;
 			}
 			
 			return null;
@@ -135,13 +122,22 @@ abstract class TruckBaseTest {
 	}
 	
 	@Test
-	void testTruckCost_00() {
-		assertEquals(1000, dummyTruck.getCost());
+	void testTruckCost_Empty() {
+		assertEquals((750), dummyTruck.getCost());
 	}
 	
 	@Test
 	void testTruckCost_01() {
-		assertEquals(2000, dummyTruck.getCost());
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(1000);
+		dummyTruck.addItems(items);
+		assertEquals((750 + 0.25 * 1000), dummyTruck.getCost());
+	}
+	
+	@Test
+	void testTruckCost_02() {
+		ArrayList<DummyItem> items = cargoMaker.CreateCargo(5000);
+		dummyTruck.addItems(items);
+		assertEquals((750 + 0.25 * 5000), dummyTruck.getCost());
 	}
 	
 	@Test
