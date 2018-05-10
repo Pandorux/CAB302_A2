@@ -57,21 +57,21 @@ class RefrigeratedTruckTest extends TruckBaseTest {
 	@Test
 	void testTruckCost_01() {
 		dummyTruck.addItems(cargoMaker.CreateCargo(1000));
-		assertEquals(900 + (0.25 * 500) * (Math.pow(0.7, dummyTruck.getTemp() / 5)), dummyTruck.getCost());
+		assertEquals(900 + 200 * (Math.pow(0.7, dummyTruck.getTemp() / 5)), dummyTruck.getCost());
 	}
 	
 	@Test
 	void testTruckCost_02() {
 		dummyTruck.capacity = 2000;
 		dummyTruck.addItems(cargoMaker.CreateCargo(2000));
-		assertEquals(900 + (0.25 * 500) * (Math.pow(0.7, dummyTruck.getTemp() / 5)), dummyTruck.getCost());
+		assertEquals(900 + 200 * (Math.pow(0.7, dummyTruck.getTemp() / 5)), dummyTruck.getCost());
 	}
 	
 	@Test
 	void testTruckCost_03() {
 		dummyTruck.capacity = 5000;
 		dummyTruck.addItems(cargoMaker.CreateCargo(5000));
-		assertEquals(900 + (0.25 * 500) * (Math.pow(0.7, dummyTruck.getTemp() / 5)), dummyTruck.getCost());
+		assertEquals(900 + 200 * (Math.pow(0.7, dummyTruck.getTemp() / 5)), dummyTruck.getCost());
 	}
 	
 	@Test
