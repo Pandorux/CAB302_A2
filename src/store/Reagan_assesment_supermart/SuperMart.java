@@ -1,4 +1,4 @@
-package assesment_supermart;
+package store.Reagan_assesment_supermart;
 
 import java.util.ArrayList;
 

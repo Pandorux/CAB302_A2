@@ -1,4 +1,4 @@
-package assesment_supermart;
+package store.Reagan_assesment_supermart;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +20,7 @@ class StockTest {
 		Product_info[1]= "50.0";
 		Product_info[2]= "Cool_kids_crib";
 		
-		List_of_products.add(Product_info);
+		Stock.items_imported(List_of_products);
 		
 		assertTrue(List_of_products == Stock.give_sales_log( "Cool_kids_crib"));
 	}
