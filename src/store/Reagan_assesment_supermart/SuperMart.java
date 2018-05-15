@@ -16,7 +16,7 @@ import java.util.ArrayList;
 			
 		}
 		
-		static void Store_Object(String string, int i, double d, double e, String string2, int j, double f)
+		static void Store_Object()
 		{
 			
 		}

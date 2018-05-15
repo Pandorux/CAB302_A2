@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 class StockTest {
 
 	@Test//green
-	void test() //can you import and store stock?
+	void Test_StoreStock() //can you import and store stock?
 	{
 		setup();
 		
@@ -22,7 +22,7 @@ class StockTest {
 	}
 
 	@Test//green
-	void test2()//can you give a log of all the sales
+	void Test_SalesLog()//can you give a log of all the sales
 	{
 		
 		setup();

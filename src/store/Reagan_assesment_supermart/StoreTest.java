@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class StoreTest {
 
 	@Test//green
-	void test1() //look for a store
+	void Test_FindStore() //look for a store
 	{
 		Store.new_store("da crib", 50.0);//make new store
 		
@@ -23,7 +23,7 @@ class StoreTest {
 
 	
 	@Test//red
-	void test2() //search for a incorrect store
+	void test2_FindWrongStore() //search for a incorrect store
 	{
 		Store.new_store("the crib", 50.0);//make new store and look for the incorrect store
 		

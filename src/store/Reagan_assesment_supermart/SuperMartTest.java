@@ -2,6 +2,7 @@ package store.Reagan_assesment_supermart;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 
@@ -30,7 +31,7 @@ import org.junit.jupiter.api.Test;
 		 	
 		 	
 		 	@Test//return the stores capital
-		 	public void Test1() //green
+		 	public void Test_FindCapital() //green
 		 	{
 		 		
 		 		SuperMart.capital = 10;//make the capital 10 dollars
@@ -41,7 +42,7 @@ import org.junit.jupiter.api.Test;
 		 	
 		 	
 		 	@Test//returns the incorrect capital of the store
-		 	public void Test2()//red
+		 	public void Test_DontFindCapital()//red
 		 	{
 		 		SuperMart.capital = "pingaz";//the store has capital
 		 		
@@ -52,7 +53,7 @@ import org.junit.jupiter.api.Test;
 		 	
 
 			@Test//returns the incorrect inventory
-			public void Test4()//red
+			public void Test_ViewBadInventory()//red
 			{
 				
 				store_error_test();
@@ -68,7 +69,7 @@ import org.junit.jupiter.api.Test;
 			 */
 			
 		    @Test//return the inventories of the trucks and the store associated with a store
-		    public void Test5()//green
+		    public void Test_ViewAllInventories()//green
 		    {
 				
 		    		store_truck_tests();
@@ -95,7 +96,7 @@ import org.junit.jupiter.api.Test;
 		     */
 		    
 		    @Test //ensure you can view the inventory of a store
-		    public void Test6()//green
+		    public void Test_ViewStoreInventory()//green
 		    {
 		    	store_test_cases("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
 		    	
@@ -107,7 +108,7 @@ import org.junit.jupiter.api.Test;
 				 
 		    }
 		    
-		    
+		    @BeforeClass
 		    private void store_test_cases(String name,Integer Quantity,Double Cost,Double sell_price, String Distrobution_point, Integer reorder_amm, Double Temprature)//temp is not nessasary but if it is not input its null
 		    {
 		    	SuperMart.Product_name = name;
@@ -158,7 +159,7 @@ import org.junit.jupiter.api.Test;
 		 	}
 		    }
 		    
-		    
+		    @BeforeClass
 		    private void store_error_test()
 		    {
 
@@ -183,7 +184,7 @@ import org.junit.jupiter.api.Test;
 		 		SuperMart.Product_reorder_amount = 5;
 		 		SuperMart.Product_Storing_temprature = (double) 5;
 		    }
-		
+		    @BeforeClass
 		    private void store_truck_tests()
 		    {
 		    	ArrayList<String> Store_Test = new ArrayList<String>();//this is the store with all of the trucks inventory 
