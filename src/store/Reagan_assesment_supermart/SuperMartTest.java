@@ -29,85 +29,36 @@ import org.junit.jupiter.api.Test;
 		 	*/
 		 	
 		 	
-		 	@Test//return the stores capitaal
+		 	@Test//return the stores capital
 		 	public void Test1() //green
 		 	{
 		 		
 		 		SuperMart.capital = 10;//make the capital 10 dollars
 		 		
+		 		
 		 		assertEquals("$10", SuperMart.Return_Capital());// answer , returned answer
 		 	}
-		 	@Test
+		 	
+		 	
+		 	@Test//returns the incorrect capital of the store
 		 	public void Test2()//red
 		 	{
-		 		SuperMart.capital = 1000;
+		 		SuperMart.capital = "pingaz";//the store has capital
+		 		
 		 		
 		 		assertEquals("pingaz", SuperMart.Return_Capital());// this should fail as the stores capital cannot be a string
-		 		
+		 		//the store should have a integer for a capital not a string
 		 	}
 		 	
-		 	/*
-		 	@Test
-		 	public void Test3()//green
-		 	{
-		 		
-		 		//List Product_info = new ArrayList(); // input a list of values as they are related
-		 		//List List_of_products = new ArrayList();
-		 		//String[] List_of_products = new String[7];
-		 		
-		 		
-		 		String[] Product_info = new String[7];//a array of values that protane to a object
-		 		
-		 		ArrayList List_of_products = new ArrayList();//a list of 
-		 		
-		 		for (int i = 0; i < 6; i++)
-		 		{
-		 			Product_info[i] = "";//clear the product info list
-		 		}
-		 		//Product_info.clear();//doesnt work
-		 				
-		 		List_of_products.clear();	
-		 		
-		 		store_test_cases();//this is a method from below
-		 		
-		 	    
-		 		
-		 		List_of_products.add(Product_info); // this makes the first value the product potato with all the relevent info which can be retrieved easily
-		 		
-		 		assertEquals("Potato, 500, 50, 100, hell its self, 50, 0", SuperMart.View_Inventory());//this should show all the items in the stores inventory
-		 	}
-	*/
 
-			@Test
+			@Test//returns the incorrect inventory
 			public void Test4()//red
 			{
-				String[] Product_info = new String[7];//a array of values that protane to a object
+				
+				store_error_test();
 		 		
-		 		ArrayList List_of_products = new ArrayList();//a list of 
 		 		
-				for (int i = 0; i < 6; i++)
-		 		{
-		 			Product_info[i] = "";//clear the product info list
-		 		}
-		 		List_of_products.clear();	
-		 		
-		 		Product_info[0] = ("Potato");//this should not be allowed as the array shouldnt accept letters instead of numbers here
-		 		Product_info[1] = ("a");//qty
-		 		Product_info[2] = ("b");//m_cost
-		 		Product_info[3] = ("c");//sell_price
-		 		Product_info[4] = ("d");//disp_point
-		 		Product_info[5] = ("e");//re_amm
-		 		Product_info[6] = ("f");//storing_temp
-		 		
-		 		SuperMart.Product_name = "Potato";
-		 		SuperMart.Product_Quantity = 5;
-		 		SuperMart.Product_manufacture_cost = (double) 5;
-		 		SuperMart.Product_selling_price =  (double) 5;
-		 		SuperMart.Product_distrobution_point = "hell its self";
-		 		SuperMart.Product_reorder_amount = 5;
-		 		SuperMart.Product_Storing_temprature = (double) 5;
-		 		
-		 		assertEquals("Potato, 9, 9, 9, d, 9, 9", SuperMart.View_Inventory());
+		 		assertEquals("Potato, a, b, c, d, d, e", SuperMart.View_Inventory());//should not work because quantity cannot be a 
 		 		
 			}
 
@@ -116,27 +67,17 @@ import org.junit.jupiter.api.Test;
 			 * this should allow the user to view all the objects in the stores inventory even if its in a truck
 			 */
 			
-		    @Test
+		    @Test//return the inventories of the trucks and the store associated with a store
 		    public void Test5()//green
 		    {
 				
-					 ArrayList<String> Store_Test = new ArrayList<String>();//this is the store with all of the trucks inventory 
-					 //and the actual inventory of the store
-
-					 
-					 String[] Product_info = new String[7];//a array of values that protane to a object
-				 		
-				 	 ArrayList List_of_products = new ArrayList();//a list of 
-					 
-				 	 
-				 	 ArrayList Truck_Inventory = new ArrayList();//a list of 
+		    		store_truck_tests();
 				 	 
 				 	 
 				 	 store_test_cases("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
+				 	
 				 	 
 				 	 List_of_products.add(Product_info);
-				 	 
-				 	 
 				 	 
 				 	 
 				 	 Store_Test.addAll(List_of_products);//adds all the values from the stores inventory to the store
@@ -145,18 +86,23 @@ import org.junit.jupiter.api.Test;
 				 	 Store_Test.addAll(Truck_Inventory);
 				 	 
 				 	 
-				 	assertEquals("Potato, 500, 50, 100, hell its self, 50, 0", SuperMart.View_Inventory());
+				 	 assertEquals("Potato, 500, 50, 100, hell its self, 50, 0", SuperMart.View_Inventory());
 		    }
 		    
 		    
 		    /**
-		     * store a object with the relevent info
+		     * store a object with the relevant info
 		     */
 		    
-		    @Test 
+		    @Test //ensure you can view the inventory of a store
 		    public void Test6()//green
 		    {
+		    	store_test_cases("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
+		    	
+		    	
 		    	SuperMart.Store_Object("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
+		    	
+		    	
 		    	assertTrue("Potato, 500, 50, 100, hell its self, 50, 0" == SuperMart.View_Inventory());
 				 
 		    }
@@ -182,7 +128,7 @@ import org.junit.jupiter.api.Test;
 		 		
 		 		
 		 		
-		 	for (int i = 0; i < 7; i++)//shut it jared, i know what your gonna say, so plz no
+		 	for (int i = 0; i < 7; i++)
 		 	{
 		 		switch (i)
 		 		{
@@ -213,9 +159,44 @@ import org.junit.jupiter.api.Test;
 		    }
 		    
 		    
-		    
-		
+		    private void store_error_test()
+		    {
 
+
+		    	String[] Product_info = new String[7];//a array of values that pertain to a object
+		 		
+		 		ArrayList List_of_products = new ArrayList();//a list of 
+		    	
+		 		Product_info[0] = ("Potato");//this should not be allowed as the array shouldn't accept letters instead of numbers here
+		 		Product_info[1] = ("a");//quantity
+		 		Product_info[2] = ("b");//m_cost
+		 		Product_info[3] = ("c");//sell_price
+		 		Product_info[4] = ("d");//disp_point
+		 		Product_info[5] = ("e");//re_amm
+		 		Product_info[6] = ("f");//storing_temp
+		 		
+		 		SuperMart.Product_name = "Potato";
+		 		SuperMart.Product_Quantity = 5;
+		 		SuperMart.Product_manufacture_cost = (double) 5;
+		 		SuperMart.Product_selling_price =  (double) 5;
+		 		SuperMart.Product_distrobution_point = "hell its self";
+		 		SuperMart.Product_reorder_amount = 5;
+		 		SuperMart.Product_Storing_temprature = (double) 5;
+		    }
+		
+		    private void store_truck_tests()
+		    {
+		    	ArrayList<String> Store_Test = new ArrayList<String>();//this is the store with all of the trucks inventory 
+				 //and the actual inventory of the store
+
+				 
+				 String[] Product_info = new String[7];//a array of values that pertain to a object
+			 		
+			 	 ArrayList List_of_products = new ArrayList();//a list of 
+				 
+			 	 
+			 	 ArrayList Truck_Inventory = new ArrayList();//a list of 
+		    }
 
 	}
 

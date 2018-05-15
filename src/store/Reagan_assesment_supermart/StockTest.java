@@ -4,12 +4,39 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class StockTest {
 
-	@Test
-	void test() {
+	@Test//green
+	void test() //can you import and store stock?
+	{
+		setup();
+		
+		Stock.items_imported(List_of_products);//import the stores stock
+		
+		assertTrue(List_of_products == Stock.give_sales_log( "Cool_kids_crib"));
+		//does the store have its stock
+	}
+
+	@Test//green
+	void test2()//can you give a log of all the sales
+	{
+		
+		setup();
+
+		assertTrue(Product_info == give_sales_log("Cool_kids_crib"));
+		
+	}
+	
+	
+	
+	
+	@BeforeEach
+	private void setup()//give the store a sale
+	{
 		ArrayList List_of_products = new ArrayList();
 		
 		String[] Product_info = new String[3];//a array of values that protane to a object
@@ -19,10 +46,6 @@ class StockTest {
 		Product_info[0]= "Top hat";
 		Product_info[1]= "50.0";
 		Product_info[2]= "Cool_kids_crib";
-		
-		Stock.items_imported(List_of_products);
-		
-		assertTrue(List_of_products == Stock.give_sales_log( "Cool_kids_crib"));
 	}
-
+	
 }
