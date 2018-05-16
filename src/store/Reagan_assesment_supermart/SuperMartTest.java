@@ -42,7 +42,7 @@ import org.junit.jupiter.api.Test;
 		 	
 		 	
 		 	@Test//returns the incorrect capital of the store
-		 	public void Test_DontFindCapital()//red
+		 	public void Test_FindStringCapital()//red
 		 	{
 		 		SuperMart.capital = "pingaz";//the store has capital
 		 		
@@ -75,7 +75,7 @@ import org.junit.jupiter.api.Test;
 		    		store_truck_tests();
 				 	 
 				 	 
-				 	 store_test_cases("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
+		    		StoreTestInfomation("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
 				 	
 				 	 
 				 	 List_of_products.add(Product_info);
@@ -98,7 +98,7 @@ import org.junit.jupiter.api.Test;
 		    @Test //ensure you can view the inventory of a store
 		    public void Test_ViewStoreInventory()//green
 		    {
-		    	store_test_cases("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
+		    	StoreTestInfomation("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
 		    	
 		    	
 		    	SuperMart.Store_Object("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
@@ -109,7 +109,7 @@ import org.junit.jupiter.api.Test;
 		    }
 		    
 		    @BeforeClass
-		    private void store_test_cases(String name,Integer Quantity,Double Cost,Double sell_price, String Distrobution_point, Integer reorder_amm, Double Temprature)//temp is not nessasary but if it is not input its null
+		    private void StoreTestInfomation(String name,Integer Quantity,Double Cost,Double sell_price, String Distrobution_point, Integer reorder_amm, Double Temprature)//temp is not nessasary but if it is not input its null
 		    {
 		    	SuperMart.Product_name = name;
 		 		SuperMart.Product_Quantity = Quantity;

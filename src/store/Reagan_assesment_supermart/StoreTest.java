@@ -48,7 +48,7 @@ class StoreTest {
 	
 	
 	@Test//red
-	void test2_FindEmptyStore() 
+	void test2_FindEmptyStore2() 
 	{
 		Store.new_store(, 50.0);//Shouldn't allow a no name store to be made
 		
