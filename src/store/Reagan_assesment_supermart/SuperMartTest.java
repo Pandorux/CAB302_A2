@@ -56,7 +56,7 @@ import org.junit.jupiter.api.Test;
 			public void Test_ViewBadInventory()//red
 			{
 				
-				store_error_test();
+				StoreErrorTests();
 		 		
 		 		
 		 		assertEquals("Potato, a, b, c, d, d, e", SuperMart.View_Inventory());//should not work because quantity cannot be a 
@@ -160,7 +160,7 @@ import org.junit.jupiter.api.Test;
 		    }
 		    
 		    @BeforeClass
-		    private void store_error_test()
+		    private void StoreErrorTests()
 		    {
 
 
