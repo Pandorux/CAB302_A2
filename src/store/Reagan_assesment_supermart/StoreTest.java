@@ -34,6 +34,30 @@ class StoreTest {
 		assertTrue(List_of_products == Store.find_store("da crib"));//looking for the incorrect store
 	}
 
+	@Test//red
+	void test2_FindEmptyStore() 
+	{
+		Store.new_store("", 50.0);//Shouldn't allow a blank store to be made
+		
+		Setup();
+		
+		List_of_products.add(Product_info);//add the stores product
+		
+		assertTrue(List_of_products == Store.find_store(""));//looking for the incorrect store
+	}
+	
+	
+	@Test//red
+	void test2_FindEmptyStore() 
+	{
+		Store.new_store(, 50.0);//Shouldn't allow a no name store to be made
+		
+		Setup();
+		
+		List_of_products.add(Product_info);//add the stores product
+		
+		assertTrue(List_of_products == Store.find_store());//looking for the incorrect store
+	}
 	
 	
 	
