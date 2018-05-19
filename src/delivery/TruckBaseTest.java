@@ -146,13 +146,13 @@ abstract class TruckBaseTest {
 	@Test
 	void testTruckRemoveItem_Item() {
 		DummyItem item = new DummyItem("Milk", 0);
-		dummyTruck.addItem(item);
+		dummyTruck.addItems(item);
 		assertEquals(false, dummyTruck.getItem(item));
 	}
 	
 	@Test
 	void testTruckRemoveItem_Name() {
-		dummyTruck.addItem(new DummyItem("Milk", 0));
+		dummyTruck.addItems(new DummyItem("Milk", 0));
 		dummyTruck.removeItem("Milk");
 		assertEquals(null, dummyTruck.getItem("Milk"));
 	}
@@ -251,7 +251,7 @@ abstract class TruckBaseTest {
 	void testTruckGetItem_Item() {
 		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
 		DummyItem item = new DummyItem("Milk", 0);
-		dummyTruck.addItem(item);
+		dummyTruck.addItems(item);
 		assertEquals(item, dummyTruck.getItem(item));
 	}
 	

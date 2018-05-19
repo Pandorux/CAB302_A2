@@ -1,4 +1,4 @@
-package store.Reagan_assesment_supermart;
+package store;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,20 +34,20 @@ import org.junit.jupiter.api.Test;
 		 	public void Test_FindCapital() //green
 		 	{
 		 		
-		 		SuperMart.capital = 10;//make the capital 10 dollars
+		 		Item.capital = 10;//make the capital 10 dollars
 		 		
 		 		
-		 		assertEquals("$10", SuperMart.Return_Capital());// answer , returned answer
+		 		assertEquals("$10", Item.Return_Capital());// answer , returned answer
 		 	}
 		 	
 		 	
 		 	@Test//returns the incorrect capital of the store
 		 	public void Test_FindStringCapital()//red
 		 	{
-		 		SuperMart.capital = "pingaz";//the store has capital
+		 		Item.capital = "pingaz";//the store has capital
 		 		
 		 		
-		 		assertEquals("pingaz", SuperMart.Return_Capital());// this should fail as the stores capital cannot be a string
+		 		assertEquals("pingaz", Item.Return_Capital());// this should fail as the stores capital cannot be a string
 		 		//the store should have a integer for a capital not a string
 		 	}
 		 	
@@ -59,7 +59,7 @@ import org.junit.jupiter.api.Test;
 				StoreErrorTests();
 		 		
 		 		
-		 		assertEquals("Potato, a, b, c, d, d, e", SuperMart.View_Inventory());//should not work because quantity cannot be a 
+		 		assertEquals("Potato, a, b, c, d, d, e", Item.View_Inventory());//should not work because quantity cannot be a 
 		 		
 			}
 
@@ -87,7 +87,7 @@ import org.junit.jupiter.api.Test;
 				 	 Store_Test.addAll(Truck_Inventory);
 				 	 
 				 	 
-				 	 assertEquals("Potato, 500, 50, 100, hell its self, 50, 0", SuperMart.View_Inventory());
+				 	 assertEquals("Potato, 500, 50, 100, hell its self, 50, 0", Item.View_Inventory());
 		    }
 		    
 		    
@@ -101,29 +101,29 @@ import org.junit.jupiter.api.Test;
 		    	StoreTestInfomation("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
 		    	
 		    	
-		    	SuperMart.Store_Object("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
+		    	Item.Store_Object("Potato", 500, 50.0, 100.0, "hell its self", 50, 0.0);
 		    	
 		    	
-		    	assertTrue("Potato, 500, 50, 100, hell its self, 50, 0" == SuperMart.View_Inventory());
+		    	assertTrue("Potato, 500, 50, 100, hell its self, 50, 0" == Item.View_Inventory());
 				 
 		    }
 		    
 		    @BeforeClass
 		    private void StoreTestInfomation(String name,Integer Quantity,Double Cost,Double sell_price, String Distrobution_point, Integer reorder_amm, Double Temprature)//temp is not nessasary but if it is not input its null
 		    {
-		    	SuperMart.Product_name = name;
-		 		SuperMart.Product_Quantity = Quantity;
-		 		SuperMart.Product_manufacture_cost = (double)Cost;
-		 		SuperMart.Product_selling_price = (double) sell_price;
-		 		SuperMart.Product_distrobution_point = Distrobution_point;
-		 		SuperMart.Product_reorder_amount = reorder_amm;
+		    	Item.Product_name = name;
+		 		Item.Product_Quantity = Quantity;
+		 		Item.Product_manufacture_cost = (double)Cost;
+		 		Item.Product_selling_price = (double) sell_price;
+		 		Item.Product_distrobution_point = Distrobution_point;
+		 		Item.Product_reorder_amount = reorder_amm;
 		 		if (Temprature == null)
 		 		{
 		 			
 		 		}
 		 		else 
 		 		{
-		 			SuperMart.Product_Storing_temprature = (double) Temprature;
+		 			Item.Product_Storing_temprature = (double) Temprature;
 		 		}
 		 		
 		 		
@@ -134,25 +134,25 @@ import org.junit.jupiter.api.Test;
 		 		switch (i)
 		 		{
 		 			case 0:
-		 				Product_info[i] = SuperMart.Product_name;
+		 				Product_info[i] = Item.Product_name;
 		 				break;
 		 			case 1:
-		 				Product_info[i] = SuperMart.Product_Quantity.toString();
+		 				Product_info[i] = Item.Product_Quantity.toString();
 		 				break;
 		 			case 2:
-		 				Product_info[i] = SuperMart.Product_manufacture_cost.toString();
+		 				Product_info[i] = Item.Product_manufacture_cost.toString();
 		 				break;
 		 			case 3:
-		 				Product_info[i] = SuperMart.Product_selling_price.toString();
+		 				Product_info[i] = Item.Product_selling_price.toString();
 		 				break;
 		 			case 4:
-		 				Product_info[i] = SuperMart.Product_distrobution_point.toString();
+		 				Product_info[i] = Item.Product_distrobution_point.toString();
 		 				break;
 		 			case 5:
-		 				Product_info[i] = SuperMart.Product_reorder_amount.toString();
+		 				Product_info[i] = Item.Product_reorder_amount.toString();
 		 				break;
 		 			case 6:
-		 				Product_info[i] = SuperMart.Product_Storing_temprature.toString();
+		 				Product_info[i] = Item.Product_Storing_temprature.toString();
 		 				break;
 		 				
 		 		}
@@ -176,13 +176,13 @@ import org.junit.jupiter.api.Test;
 		 		Product_info[5] = ("e");//re_amm
 		 		Product_info[6] = ("f");//storing_temp
 		 		
-		 		SuperMart.Product_name = "Potato";
-		 		SuperMart.Product_Quantity = 5;
-		 		SuperMart.Product_manufacture_cost = (double) 5;
-		 		SuperMart.Product_selling_price =  (double) 5;
-		 		SuperMart.Product_distrobution_point = "hell its self";
-		 		SuperMart.Product_reorder_amount = 5;
-		 		SuperMart.Product_Storing_temprature = (double) 5;
+		 		Item.Product_name = "Potato";
+		 		Item.Product_Quantity = 5;
+		 		Item.Product_manufacture_cost = (double) 5;
+		 		Item.Product_selling_price =  (double) 5;
+		 		Item.Product_distrobution_point = "hell its self";
+		 		Item.Product_reorder_amount = 5;
+		 		Item.Product_Storing_temprature = (double) 5;
 		    }
 		    @BeforeClass
 		    private void store_truck_tests()
