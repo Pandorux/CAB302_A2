@@ -8,7 +8,7 @@ public class StockException extends Exception {
 		this.issue = issue;
 	}
 	
-	public void PrintException() {
+	public static void PrintException() {
 		System.out.println("StockException Thrown: "+ issue);
 	}
 	
