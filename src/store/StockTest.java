@@ -50,8 +50,7 @@ class StockTest {
 	@BeforeAll
 	private void setup()//give the store a sale
 	{
-		Stock milk = new Stock("milk", 50);//50 milk in stock
-		
+		Stock milk = new Stock("milk", 50);//50 milk in stock	
 	}
 	
 }

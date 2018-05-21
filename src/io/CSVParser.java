@@ -1,4 +1,4 @@
-package io;
+zpackage io;
 import store.*;
 
 import java.io.BufferedReader;
@@ -19,9 +19,9 @@ public class CSVParser {
 		File file = new File(fileName);
 		Scanner inputStream = new Scanner(file);
 		inputStream.useDelimiter("(,|\\s\n)");
-		ArrayList<SuperMart> items = new ArrayList<SuperMart>();
+		ArrayList<Item> items = new ArrayList<Item>();
 		while (inputStream.hasNext()) {
-			items.add(new SuperMart(inputStream.next(), inputStream.nextInt()));
+			items.add(new Item(inputStream.next(), inputStream.nextInt()));
 		}
 		
 	}
