@@ -37,6 +37,8 @@ import org.junit.jupiter.api.Test;
 			@Test
 			void testIncreaseManufactureCost()
 			{
+				// TODO: no string needed
+				// TODO: decrease cost needed
 				Item.increaseCost("potato", 90);//now costs $90 to import potatos
 				assertEquals("potato", 90 == Item.findItemManufactureCost());
 			}
@@ -64,6 +66,7 @@ import org.junit.jupiter.api.Test;
 			{
 				Item ice_cream = new Item("ice cream", 100, 200, "Brisbane", 10, -30);//assume only 1 item can exist at a time				
 				assertEquals(ice_cream == Item.findItem());
+				// TODO: Why should the Item find itself?
 			}
 			
 			
