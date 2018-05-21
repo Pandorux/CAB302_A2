@@ -36,39 +36,50 @@ import exceptions.*;
 			this.temperature = temperature;
 		}
 		
-		public static void increasePrice(String string, int i) {
-			// TODO Auto-generated method stub
-			
+		public void increasePrice(double amt) {
+			retailPrice += amt;
+		}
+		
+		// TODO: add exception for when you go under 0
+		public void decreasePrice(double amt) {
+			retailPrice -= amt;
 		}
 
-		public static int findItemCost() {
-			// TODO Auto-generated method stub
-			return 0;
+		public double findItemCost() {
+			return manufactureCost;
 		}
 
-		public static void changeReorderAmount(String string, int i) {
-			// TODO Auto-generated method stub
-			
+		public void increaseReorderAmount(int amt) {
+			reorderAmount += amt;
+		}
+		
+		// TODO: add exception to this when it goes under 0
+		public void decreaaseReorderAmount(int amt) {
+			reorderAmount -= amt;
+		}
+		
+		public int findItemReorderAmount() {
+			return reorderAmount;
 		}
 
-		public static int findItemReorderAmount() {
-			// TODO Auto-generated method stub
-			return 0;
+		public String findItemImportPoint() {
+			return reorderPoint;
+		}	
+		
+		public void changeReorderPoint(String loc) {
+			reorderPoint = loc;
 		}
 
-		public static void changeReorderPoint(String string, String string2) {
-			// TODO Auto-generated method stub
-			
+		public double findItemManufactureCost() {
+			return manufactureCost;
 		}
 
-		public static int findItemManufactureCost() {
-			// TODO Auto-generated method stub
-			return 0;
+		public void increaseCost(double amt) {
+			manufactureCost += amt;	
 		}
-
-		public static void increaseCost(String string, int i) {
-			// TODO Auto-generated method stub
-			
+		
+		public void decreaseCost(double amt) {
+			manufactureCost -= amt;	
 		}
 		
 		/**
@@ -113,7 +124,7 @@ import exceptions.*;
 			catch (CSVFormatException e) {
 				
 			}	
-		}	
+		}
 	}
 	
 

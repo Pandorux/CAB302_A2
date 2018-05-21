@@ -28,6 +28,8 @@ import org.junit.jupiter.api.Test;
 			@Test
 			void testChangeItemCost()
 			{
+				// TODO: No String needed for this method
+				// TODO: There should be a decrease price method as well
 				Item.increasePrice("potato", 80);//now worth $80
 				assertEquals("potato", 80 == Item.findItemCost());//find second item
 			}
@@ -42,6 +44,7 @@ import org.junit.jupiter.api.Test;
 			@Test
 			void testChangeImportPoint()
 			{
+				// TODO: Only reorderPoint string needed for this method
 				Item.changeReorderPoint("potato", "Zimbabwe");//now getting items from zimbabwe
 				assertEquals("potato", "Zimbabwe" == Item.findItemImportPoint());
 			}
@@ -49,6 +52,8 @@ import org.junit.jupiter.api.Test;
 			@Test
 			void testChangeReorderAmount()
 			{
+				// TODO: turn this into an increase and decrease reorderAmount
+				// TODO: No string needed for method
 				Item.changeReorderAmount("potato", 100);//now getting 100 potato
 				assertEquals("potato", 100 == Item.findItemReorderAmount());
 			}
