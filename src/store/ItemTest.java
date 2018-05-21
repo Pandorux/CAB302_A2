@@ -23,8 +23,6 @@ import org.junit.jupiter.api.Test;
 		 */
 		class ItemTest {
 
-			
-			
 			@Test
 			void testChangeItemCost()
 			{
@@ -69,11 +67,17 @@ import org.junit.jupiter.api.Test;
 				// TODO: Why should the Item find itself?
 			}
 			
+			@Test 
+			void testItemTemp()
+			{
+				assertEquals(NaN , Item.checkTemprature(potato));//NaN if there is not a temp control
+			}
+			
 			
 			@BeforeAll
 			private void setup()//give the store a sale
 			{
-				Item item = new Item("potato", 50, 60, "Brisbane", 70);
+				Item potato = new Item("potato", 50.00, 60.00, "Brisbane", 70);
 				//name, manufacture cost, sell cost, reorder point, reorder amount
 			}
 			

@@ -66,29 +66,35 @@ class StoreTest {
 	
 	
 	//item tests from store
-	/*
+	
 	@Test
 	void testInitialInventory()
 	{
-		assertEquals("potato", 50, 60, "Brisbane", 70 == Item.findItem(1));//find second item
+		Stock potato = new Stock("potato", 50);//item name and quantity
+		assertEquals("potato", 50 == Item.findItem(Sherbert));//find second item
 	}
 	
 	@Test
 	void testAddItem()
 	{
-		Item dolly = new Item("dolls", 100, 200, "Perth", 10);
-		Item.addItem(dolly);				
-		assertEquals(dolly == Item.findItem(2));//find second item
+		Stock dolly = new Stock("dolls", 100);
+		Stock potato = new Stock("potato", 50);
+		Stock.addItem(dolly);	
+		Stock.addItem(potato);
+		assertEquals(dolly == Stock.findItem(dolly));//find second item
 	}
 	
 	@Test
 	void testRemoveItem()
 	{
-		Item.addItem("dolls", 100, 200, "Perth", 10);//adds dolls to item 2
-		Item.removeItem(1);
-		assertEquals("dolls", 100, 200, "Perth", 10 == Item.findItem(1));//dolls become the first item
+		Stock dolly = new Stock("dolls", 100);
+		Stock potato = new Stock("potato", 50);
+		Stock.addItem(dolly);	
+		Stock.addItem(potato);
+		Stock.removeItem(dolly);
+		assertEquals("dolls", 100 == Stock.findItem(dolly));//dolls become the first item
 	}
-	*/
+	
 	@BeforeAll
 	private void Setup()//create a stores info
 	{
