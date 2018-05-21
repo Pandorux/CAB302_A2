@@ -10,71 +10,78 @@ import org.junit.jupiter.api.Test;
 
 class StockTest {
 
-	@Test//green
-	void Test_StoreStock() //can you import and store stock?
+	
+	@Test
+	void testHasStock()
 	{
-		Stock.items_imported(List_of_products);//import the stores stock
-		
-		setup();
-		
-		
-		
-		assertTrue(List_of_products == Stock.give_sales_log( "Cool_kids_crib"));
-		
+		assertTrue("milk", Stock.item.getName(milk));//
 	}
 	
-	@Test//red
-	void Test_WrongStore() //are you looking at the wrong store?
+	@Test
+	void testHasManyStock()
 	{
-		Stock.items_imported(List_of_products);//import the stores stock
-		
-		setup();
-		
-		
-		
-		assertTrue(List_of_products == Stock.give_sales_log( "Not_Cool_kids_crib"));//wrong store
-		
+		assertTrue(50, Stock.item.getQuantity(milk));//find how many of item one you have
+	}
+	
+	@Test
+	void testAddStock()
+	{
+		Stock potato = new Stock("potato", 100);
+		Stock.addItem(potato);//add potatos
+		assertEquals(potato == Stock.item.getItem(potato));//did u add potatos?
 	}
 
-	@Test//green
-	void Test_EmptyStoreStock() //can you import nothing?
+	@Test 
+	void testRemoveStock()
 	{
-		ArrayList List_of_products = new ArrayList();//empty array
-		assertTrue(List_of_products == Stock.give_sales_log( "Cool_kids_crib"));//is the stock originally empty
-		
+		Stock.removeItem(milk);//remove 50 of the first item
+		assertTrue(StockException.PrintException() , Stock.item.getItem(milk));//there is no item one so there should be a exception
 	}
 	
-	@Test//green
-	void Test_void_store() //a store with no name
+	@Test
+	void testRemoveAll()
 	{
-		
-		assertTrue(List_of_products == Stock.give_sales_log());
-		
-	}
-	
-	@Test //red
-	void Test_BlankSale()//shouldnt allow a blank sale
-	{
-		Stock.sale();
-		assertTrue(List_of_products == Stock.give_sales_log("Cool_kids_crib"));
+		Stock.addItem("potato", 100);//add potatos
+		Stock.addItem("carrots", 100);//add potatos
+		Stock.removeAll();
+		assertTrue(StockException.PrintException() ,Stock.item.getItem(milk));//there should be no items in stock
 	}
 	
 
+	@Test
+	void testInitialInventory()
+	{
+		Stock potato = new Stock("potato", 50);//item name and quantity
+		assertEquals("potato", 50 == Item.findItem(Sherbert));//find second item
+	}
+	
+	@Test
+	void testAddItem()
+	{
+		Stock dolly = new Stock("dolls", 100);
+		Stock potato = new Stock("potato", 50);
+		Stock.addItem(dolly);	
+		Stock.addItem(potato);
+		assertEquals(dolly == Stock.findItem(dolly));//find second item
+	}
+	
+	@Test
+	void testRemoveItem()
+	{
+		Stock dolly = new Stock("dolls", 100);
+		Stock potato = new Stock("potato", 50);
+		Stock.addItem(dolly);	
+		Stock.addItem(potato);
+		Stock.removeItem(dolly);
+		assertEquals("dolls", 100 == Stock.findItem(dolly));//dolls become the first item
+	}
 	
 	
 	@BeforeAll
 	private void setup()//give the store a sale
 	{
-		ArrayList List_of_products = new ArrayList();
-		
-		String[] Product_info = new String[3];//a array of values that protane to a object
-		
-		Stock.sale("Top hat", "50.0", "Cool_kids_crib");
-		
-		Product_info[0]= "Top hat";
-		Product_info[1]= "50.0";
-		Product_info[2]= "Cool_kids_crib";
-		List_of_products.add(Product_info);
+		Stock milk = new Stock("milk", 50);//50 milk in stock
+		//name, manufacture cost, sell cost, reorder point, reorder amount
 		
 	}
 	

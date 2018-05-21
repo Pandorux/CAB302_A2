@@ -5,70 +5,101 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtensionContext.Store;
 
 class StoreTest {
 
-	@Test//green
-	void Test_FindStore() //look for a store
-	{
-		Store.new_store("da crib", 50.0);//make new store
-		
-		Setup();
-		
-		List_of_products.add(Product_info);//add the stores product
-		
-		assertTrue(List_of_products == Store.find_store("da crib"));//does the store have a product
-	}
-
+	public Store testStore;
 	
-	@Test//red
-	void test2_FindWrongStore() //search for a incorrect store
+	@Test
+	void testSingleton_00()
 	{
-		Store.new_store("the crib", 50.0);//make new store and look for the incorrect store
-		
-		Setup();
-		
-		List_of_products.add(Product_info);//add the stores product
-		
-		assertTrue(List_of_products == Store.find_store("da crib"));//looking for the incorrect store
-	}
-
-	@Test//red
-	void test2_FindEmptyStore() 
-	{
-		Store.new_store("", 50.0);//Shouldn't allow a blank store to be made
-		
-		Setup();
-		
-		List_of_products.add(Product_info);//add the stores product
-		
-		assertTrue(List_of_products == Store.find_store(""));//looking for the incorrect store
+		assertTrue(Store.instance == testStore);
 	}
 	
-	
-	@Test//red
-	void test2_FindEmptyStore2() 
+	@Test
+	void testSingleton_01()
 	{
-		Store.new_store(, 50.0);//Shouldn't allow a no name store to be made
-		
-		Setup();
-		
-		List_of_products.add(Product_info);//add the stores product
-		
-		assertTrue(List_of_products == Store.find_store());//looking for the incorrect store
+		Store store2 = new Store();
+		assertTrue(testStore.instance == store2.instance);
 	}
 	
+	@Test
+	void testEmptyStore()
+	{
+		assertTrue(Store.instance.inventory.length == 0);
+	}
+	
+	@Test
+	void testGetName()
+	{
+		assertEquals("bob", Store.instance.getName());
+	}
+	
+	@Test
+	void testGetCapital()
+	{
+		assertEquals(50, Store.instance.getCapital());
+	}
+	
+	@Test
+	void testRenameStore()
+	{
+		Store.renameStore("bills");
+		assertTrue("bills" == Store.instance.getName());
+	}
+	
+	@Test
+	void testAddCapital()
+	{
+		Store.instance.AddCapital(100.50);
+		assertTrue(150.50, Store.instance.getCapital());
+	}
+	
+	void testRemoveCapital()
+	{
+		Store.instance.removeCapital(10.50);//50 - 10 = 39.50
+		assertTrue(39.50, Store.instance.getCaptial());
+	}	
 	
 	
+	//item tests from store
+	
+	@Test
+	void testInitialInventory()
+	{
+		Stock potato = new Stock("potato", 50);//item name and quantity
+		assertEquals("potato", 50 == Item.findItem(Sherbert));//find second item
+	}
+	
+	@Test
+	void testAddItem()
+	{
+		Stock dolly = new Stock("dolls", 100);
+		Stock potato = new Stock("potato", 50);
+		Stock.addItem(dolly);	
+		Stock.addItem(potato);
+		assertEquals(dolly == Stock.findItem(dolly));//find second item
+	}
+	
+	@Test
+	void testRemoveItem()
+	{
+		Stock dolly = new Stock("dolls", 100);
+		Stock potato = new Stock("potato", 50);
+		Stock.addItem(dolly);	
+		Stock.addItem(potato);
+		Stock.removeItem(dolly);
+		assertEquals("dolls", 100 == Stock.findItem(dolly));//dolls become the first item
+	}
+	
+	@BeforeAll
 	private void Setup()//create a stores info
 	{
-		ArrayList List_of_products = new ArrayList();
-		String[] Product_info = new String[3];//a array of values that pertains to a object
-		
-		Product_info[0] = "da crib";
-		Product_info[0] = "50.0";
-		Product_info[0] = "null";
+		Store store = new Store("bob", 50);
+
 	}
 	
 }
