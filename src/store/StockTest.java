@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import exceptions.StockException;
+
 class StockTest {
 
 	
@@ -50,8 +52,7 @@ class StockTest {
 	@BeforeAll
 	private void setup()//give the store a sale
 	{
-		Stock milk = new Stock("milk", 50);//50 milk in stock
-		
+		Stock milk = new Stock("milk", 50);//50 milk in stock	
 	}
 	
 }

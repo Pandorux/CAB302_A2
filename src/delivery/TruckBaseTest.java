@@ -11,11 +11,14 @@ import java.util.Random;
 import javax.swing.text.html.HTMLDocument.Iterator;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import exceptions.DeliveryException;
 import javafx.util.Pair;
 import store.Item;
 
@@ -25,6 +28,9 @@ import store.Item;
  *
  */
 abstract class TruckBaseTest {
+	
+	@Rule
+	public final ExpectedException e = ExpectedException.none();
 	
 	TruckBase dummyTruck = null;
 	DummyCargoCreator cargoMaker = new DummyCargoCreator();
@@ -170,9 +176,8 @@ abstract class TruckBaseTest {
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
-		for(Iterator i = items.iterator(); i.hasNext();) {
-			i.next();
-			if(i.name == "Milk") {
+		for(DummyItem i: items) {
+			if(i.getName() == "Milk") {
 				totalItems++;
 			}
 		}
@@ -187,8 +192,7 @@ abstract class TruckBaseTest {
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
-		for(Iterator i = items.iterator(); i.hasNext();) {
-			i.next();
+		for(DummyItem i: items) {
 			if(i.temp == -20) {
 				totalItems++;
 			}
@@ -204,8 +208,7 @@ abstract class TruckBaseTest {
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
-		for(Iterator i = items.iterator(); i.hasNext();) {
-			i.next();
+		for(DummyItem i: items) {
 			if(i.temp <= 0) {
 				totalItems++;
 			}
@@ -221,8 +224,7 @@ abstract class TruckBaseTest {
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
-		for(Iterator i = items.iterator(); i.hasNext();) {
-			i.next();
+		for(DummyItem i: items) {
 			if(i.temp >= 0) {
 				totalItems++;
 			}
@@ -311,8 +313,9 @@ abstract class TruckBaseTest {
 		assertEquals(0, dummyTruck.totalItems);
 	}
 	
-	@Test(expected = DeliveryException.class)
+	@Test
 	void testCapacityCannotExceedMax() {
+		e.expect(DeliveryException.class);
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(2000);
 	}
 }
