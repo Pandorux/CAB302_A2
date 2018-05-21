@@ -38,9 +38,12 @@ abstract class TruckBaseTest {
 	 */
 	private class dummyTruckBase extends TruckBase { 
 		
-		// id, capacity
-		dummyTruckBase(int id, int capacity) {
-			super(int id, int capacity);
+		dummyTruckBase(int capacity) {
+			super(capacity);
+		}
+		
+		dummyTruckBase() {
+			super();
 		}
 	}
 	
@@ -110,18 +113,30 @@ abstract class TruckBaseTest {
 	
 	@BeforeAll
 	void beforeEachTest() {
-		dummyTruck = new dummyTruckBase(0, 1000);	
+		dummyTruck = new dummyTruckBase();	
+	}
+	
+	@Test // Double Check Test Functionality
+	void testTruckId_00() {
+		assertEquals(1, dummyTruck.getId());
+	}
+	
+	@Test // Double Check Test Functionality
+	void testTruckId_01() {
+		dummyTruck dummy00 = new DummyTruck();
+		dummyTruck dummy01 = new DummyTruck();
+		assertEquals(3, dummy01.getId());
 	}
 	
 	@Test
 	void testGetCapacity_00() {
-		assertEquals(1000, dummyTruck.capacity);
+		assertEquals(1000, dummyTruck.getCapacity());
 	}
 	
 	@Test
 	void testGetCapacity_01() {
-		dummyTruck.capacity(34567);
-		assertEquals(34567, dummyTruck.capacity);
+		dummyTruck = new dummyTruckBase(34567);
+		assertEquals(34567, dummyTruck.getCapacity());
 	}
 	
 	@Test
@@ -172,7 +187,7 @@ abstract class TruckBaseTest {
 		
 		for(Iterator i = items.iterator(); i.hasNext();) {
 			i.next();
-			if(i.name == "Milk") {
+			if(i.getName == "Milk") {
 				totalItems++;
 			}
 		}
@@ -189,7 +204,7 @@ abstract class TruckBaseTest {
 		
 		for(Iterator i = items.iterator(); i.hasNext();) {
 			i.next();
-			if(i.temp == -20) {
+			if(i.getTemperature() == -20) {
 				totalItems++;
 			}
 		}
@@ -206,7 +221,7 @@ abstract class TruckBaseTest {
 		
 		for(Iterator i = items.iterator(); i.hasNext();) {
 			i.next();
-			if(i.temp <= 0) {
+			if(i.getTemperature <= 0) {
 				totalItems++;
 			}
 		}
@@ -223,7 +238,7 @@ abstract class TruckBaseTest {
 		
 		for(Iterator i = items.iterator(); i.hasNext();) {
 			i.next();
-			if(i.temp >= 0) {
+			if(i.getTemperature() >= 0) {
 				totalItems++;
 			}
 		}
@@ -308,7 +323,7 @@ abstract class TruckBaseTest {
 		dummyTruck.addItems(items);
 		dummyTruck.empty();
 		
-		assertEquals(0, dummyTruck.totalItems);
+		assertEquals(0, dummyTruck.totalItems());
 	}
 	
 	@Test(expected = DeliveryException.class)
