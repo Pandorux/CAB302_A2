@@ -47,6 +47,36 @@ class StockTest {
 		assertTrue(StockException.PrintException() ,Stock.item.getItem(milk));//there should be no items in stock
 	}
 	
+
+	@Test
+	void testInitialInventory()
+	{
+		Stock potato = new Stock("potato", 50);//item name and quantity
+		assertEquals("potato", 50 == Item.findItem(Sherbert));//find second item
+	}
+	
+	@Test
+	void testAddItem()
+	{
+		Stock dolly = new Stock("dolls", 100);
+		Stock potato = new Stock("potato", 50);
+		Stock.addItem(dolly);	
+		Stock.addItem(potato);
+		assertEquals(dolly == Stock.findItem(dolly));//find second item
+	}
+	
+	@Test
+	void testRemoveItem()
+	{
+		Stock dolly = new Stock("dolls", 100);
+		Stock potato = new Stock("potato", 50);
+		Stock.addItem(dolly);	
+		Stock.addItem(potato);
+		Stock.removeItem(dolly);
+		assertEquals("dolls", 100 == Stock.findItem(dolly));//dolls become the first item
+	}
+	
+	
 	@BeforeAll
 	private void setup()//give the store a sale
 	{
