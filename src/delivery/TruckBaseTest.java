@@ -38,9 +38,12 @@ abstract class TruckBaseTest {
 	 */
 	private class dummyTruckBase extends TruckBase { 
 		
-		// id, capacity
-		dummyTruckBase(int id, int capacity) {
-			super(int id, int capacity);
+		dummyTruckBase(int capacity) {
+			super(capacity);
+		}
+		
+		dummyTruckBase(int capacity) {
+			super(capacity);
 		}
 	}
 	
@@ -110,7 +113,19 @@ abstract class TruckBaseTest {
 	
 	@BeforeAll
 	void beforeEachTest() {
-		dummyTruck = new dummyTruckBase(0, 1000);	
+		dummyTruck = new dummyTruckBase();	
+	}
+	
+	@Test // Double Check Test Functionality
+	void testTruckId_00() {
+		assertEquals(1, dummyTruck.getId());
+	}
+	
+	@Test // Double Check Test Functionality
+	void testTruckId_01() {
+		dummyTruck dummy00 = new DummyTruck();
+		dummyTruck dummy01 = new DummyTruck();
+		assertEquals(3, dummy01.getId());
 	}
 	
 	@Test
