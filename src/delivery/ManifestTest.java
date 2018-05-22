@@ -1,11 +1,13 @@
 package delivery;
 import delivery.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import exceptions.DeliveryException;
+import delivery.Truck;
+import delivery.RefrigeratedTruck;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 
@@ -25,33 +27,45 @@ class ManifestTest {
 	
 	@Test
 	void testGetTruck_00() {
-		// TODO: Get a truck that meets a certain criteria(id)
+		assertEquals(1, manifest.getTruck(1).getId());
 	}
 
 	@Test
 	void testGetTruck_01() {
-		// TODO: Get exception if manifest is empty
+		assertEquals(4, manifest.getTruck(4).getId());
 	}
 	
 	@Test
-	void testRemoveTruck() {
+	void testGetTruckThatIsntInManifest_00() {
+		manifest.removeTruck(4);
+		assertEquals(null, manifest.getTruck(4));
+	}
+
+	@Test
+	void testGetTruckThatIsntInManifest_01() {
+		assertEquals(null, manifest.getTruck(7).getId());
+	}
+	
+	@Test
+	void testRemoveTruck_00() {
 		manifest.removeTruck(1);
-		// Throw exception?
+		assertEquals(null, manifest.getTruck(1));
+	}
+	
+	@Test
+	void testRemoveTruck_01() {
+		manifest.removeTruck(1);
+		assertEquals(null, manifest.removeTruck(1));
 	}
 	
 	@Test
 	void testAddTruck() {
-		// TODO: Remove truck from manifest using its id
+		
 	}
 	
 	@Test
 	void testGetTrucks() {
 		// TODO: Remove truck from manifest using its id
-	}
-
-	@Test
-	void testRemoveTrucks() {
-		
 	}
 	
 	@Test
@@ -76,30 +90,26 @@ class ManifestTest {
 	
 	@Test
 	void testManifestSize_01() {
-		manifest.clear();
-		assertEquals(0, trucks.size());
+		manifest.remove(1);
+		manifest.remove(4);
+		assertEquals(3, trucks.size());
 	}
 	
 	@Test
 	void testManifestSize_02() {
-		trucks.removeIf(); // TODO: Remove Refrigerated Trucks
-		assertEquals(0, trucks.size()); 
+		manifest.addTruck(new Truck());
+		manifest.addTruck(new RefrigeratedTruck());
+		assertEquals(7, trucks.size()); 
 	}
 	
-	@Test
-	void testManifestSize_03() {
-		manifest.removeTrucks .removeIf(); // TODO: Remove Ordinary Trucks
-		assertEquals(0, trucks.size());
-	}
-	
-	@BeforeAll 
+	@Before
 	void beforeEachTest() {
 		trucks = new ArrayList<TruckBase>();
-		trucks.add(Truck());
-		trucks.add(RefrigeratedTruck());
-		trucks.add(Truck());
-		trucks.add(RefrigeratedTruck());
-		trucks.add(Truck());
+		trucks.add(new Truck(1));
+		trucks.add(new RefrigeratedTruck(2));
+		trucks.add(new Truck(3));
+		trucks.add(new RefrigeratedTruck(4));
+		trucks.add(new Truck(5));
 		
 		manifest = new Manifest();
 	}
