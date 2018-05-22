@@ -1,10 +1,9 @@
 package delivery;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Before;
+import org.junit.Test;
 import exceptions.DeliveryException;
 
 /**
@@ -14,25 +13,25 @@ import exceptions.DeliveryException;
  */
 class RefrigeratedTruckTest extends TruckBaseTest {
 	
-	@BeforeAll
+	@Before
 	void beforeEachTest() {
 		// id, capacity, temp
 		dummyTruck = new RefrigeratedTruck(0, 800, 10);	
 	}
 	
-	@Test(expected = DeliveryExpection.class)
+	@Test(expected = DeliveryException.class)
 	void testTemperatureStaysInRange_00() {
-		dummyTruck.setTemperature(50);
+		dummyTruck.setTemp(50);
 	}
 	
-	@Test(expected = DeliveryExpection.class)
+	@Test(expected = DeliveryException.class)
 	void testTemperatureStaysInRange_01() {
-		dummyTruck.setTemperature(-50);
+		dummyTruck.setTemp(-50);
 	}
 	
-	@Test(expected = DeliveryExpection.class)
+	@Test(expected = DeliveryException.class)
 	void testTemperatureStaysInRange_02() {
-		dummyTruck.setTemperature(-50);
+		dummyTruck.setTemp(-50);
 	}
 	
 	@Test(expected = DeliveryException.class)
