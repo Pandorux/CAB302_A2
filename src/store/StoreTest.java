@@ -82,7 +82,7 @@ class StoreTest {
 	void testRemoveNegitiveCapital()
 	{
 		e.expect(DeliveryException.class);//cant have -ve increase
-		Store.instance.removeCapital(10.50);
+		Store.instance.removeCapital(-10.50);
 	}	
 	
 	//item tests from store
