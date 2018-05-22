@@ -129,8 +129,8 @@ abstract class TruckBaseTest {
 	
 	@Test // Double Check Test Functionality
 	void testTruckId_01() {
-		dummyTruck dummy00 = new DummyTruck();
-		dummyTruck dummy01 = new DummyTruck();
+		dummyTruckBase dummy00 = new dummyTruckBase();
+		dummyTruckBase dummy01 = new dummyTruckBase();
 		assertEquals(3, dummy01.getId());
 	}
 	
@@ -168,21 +168,21 @@ abstract class TruckBaseTest {
 	void testTruckRemoveItem_Item() {
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
-		assertEquals(false, dummyTruck.getItem(item));
+		assertEquals(false, dummyTruck.getItems(item));
 	}
 	
 	@Test
 	void testTruckRemoveItem_Name() {
 		dummyTruck.addItems(new DummyItem("Milk", 0));
-		dummyTruck.removeItem("Milk");
-		assertEquals(null, dummyTruck.getItem("Milk"));
+		dummyTruck.removeItems("Milk");
+		assertEquals(null, dummyTruck.getItems("Milk"));
 	}
 	
 	@Test
 	void testTruckAddItem() {
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
-		assertEquals(item, dummyTruck.getItem(item));
+		assertEquals(item, dummyTruck.getItems(item));
 	}
 	
 	@Test
@@ -191,7 +191,7 @@ abstract class TruckBaseTest {
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
-		for(DummyItem i: items) {
+		for(Item i: items) {
 			if(i.getName() == "Milk") {
 				totalItems++;
 			}
@@ -207,14 +207,13 @@ abstract class TruckBaseTest {
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
-		for(Iterator i = items.iterator(); i.hasNext();) {
-			i.next();
+		for(Item i: items) {
 			if(i.getTemperature() == -20) {
 				totalItems++;
 			}
 		}
 		
-		assertEquals(totalItems, dummyTruck.getItems(-20).length);
+		assertEquals(totalItems, dummyTruck.getItemsWithTemp(-20).length);
 	}
 	
 	// TODO: Fix GetItem Name
@@ -224,14 +223,13 @@ abstract class TruckBaseTest {
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
-		for(Iterator i = items.iterator(); i.hasNext();) {
-			i.next();
-			if(i.getTemperature <= 0) {
+		for(Item i: items) {
+			if(i.getTemperature() <= 0) {
 				totalItems++;
 			}
 		}
 		
-		assertEquals(totalItems, dummyTruck.getItems(-20).length);
+		assertEquals(totalItems, dummyTruck.getItemsWithTempUnder(-20).length);
 	}
 	
 	// TODO: Fix GetItem Name
@@ -241,14 +239,13 @@ abstract class TruckBaseTest {
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
-		for(Iterator i = items.iterator(); i.hasNext();) {
-			i.next();
+		for(Item i: items) {
 			if(i.getTemperature() >= 0) {
 				totalItems++;
 			}
 		}
 		
-		assertEquals(totalItems, dummyTruck.getItems(-20).length);
+		assertEquals(totalItems, dummyTruck.getItemsWithTempOver(-20).length);
 	}
 	
 	@Test
@@ -280,7 +277,7 @@ abstract class TruckBaseTest {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems(items);
-		assertEquals(0, dummyTruck.totalItems);
+		assertEquals(0, dummyTruck.getTotalItems());
 	}
 	
 	@Test
@@ -335,5 +332,6 @@ abstract class TruckBaseTest {
 	void testCapacityCannotExceedMax() {
 		e.expect(DeliveryException.class);
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(2000);
+		dummyTruck.addItems(items);
 	}
 }

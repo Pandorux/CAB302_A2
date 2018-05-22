@@ -40,6 +40,10 @@ import exceptions.*;
 			retailPrice += amt;
 		}
 		
+		public String getName() {
+			return name;
+		}
+		
 		// TODO: add exception for when you go under 0
 		public void decreasePrice(double amt) {
 			retailPrice -= amt;
@@ -74,6 +78,10 @@ import exceptions.*;
 			return manufactureCost;
 		}
 
+		public double getTemperature() {
+			return temperature;
+		}
+		
 		public void increaseCost(double amt) {
 			manufactureCost += amt;	
 		}
