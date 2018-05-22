@@ -5,13 +5,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
+import org.junit.rules.ExpectedException;
+
+import delivery.DeliveryException;
 
 class StoreTest {
 
 	public Store testStore;
+	
+	@Rule 
+	public final ExpectedException e = ExpectedException.none();
+	
 	
 	@Test
 	void testSingleton_00()
@@ -58,42 +66,27 @@ class StoreTest {
 		assertTrue(150.50, Store.instance.getCapital());
 	}
 	
+	@Test
+	void testAddNegitiveCapital()
+	{
+		e.expect(DeliveryException.class);//cant have -ve increase
+		Store.instance.AddCapital(-100.50);
+	}
+	
 	void testRemoveCapital()
 	{
 		Store.instance.removeCapital(10.50);//50 - 10 = 39.50
 		assertTrue(39.50, Store.instance.getCaptial());
 	}	
-	
+
+	void testRemoveNegitiveCapital()
+	{
+		e.expect(DeliveryException.class);//cant have -ve increase
+		Store.instance.removeCapital(10.50);
+	}	
 	
 	//item tests from store
 	
-	@Test
-	void testInitialInventory()
-	{
-		Stock potato = new Stock("potato", 50);//item name and quantity
-		assertEquals("potato", 50 == Item.findItem(Sherbert));//find second item
-	}
-	
-	@Test
-	void testAddItem()
-	{
-		Stock dolly = new Stock("dolls", 100);
-		Stock potato = new Stock("potato", 50);
-		Stock.addItem(dolly);	
-		Stock.addItem(potato);
-		assertEquals(dolly == Stock.findItem(dolly));//find second item
-	}
-	
-	@Test
-	void testRemoveItem()
-	{
-		Stock dolly = new Stock("dolls", 100);
-		Stock potato = new Stock("potato", 50);
-		Stock.addItem(dolly);	
-		Stock.addItem(potato);
-		Stock.removeItem(dolly);
-		assertEquals("dolls", 100 == Stock.findItem(dolly));//dolls become the first item
-	}
 	
 	@BeforeAll
 	private void Setup()//create a stores info

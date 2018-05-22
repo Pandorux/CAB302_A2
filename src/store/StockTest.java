@@ -4,12 +4,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
+
+import delivery.DeliveryException;
 
 class StockTest {
 
+	@Rule 
+	public final ExpectedException e = ExpectedException.none();
+	
 	
 	@Test
 	void testHasStock()
@@ -30,12 +37,51 @@ class StockTest {
 		Stock.addItem(potato);//add potatos
 		assertEquals(potato == Stock.item.getItem(potato));//did u add potatos?
 	}
+	
+	@Test
+	void testIncreaseStock()
+	{
+		Stock.IncreaseAmount(milk, 100);//add potatos
+		assertEquals(150 == Stock.item.getQuantity(milk));//did u add more milk
+	}
+	
+	@Test
+	void testDecreaseStock()
+	{
+		Stock.DecreaseAmount(milk, 20);//add potatos
+		assertEquals(30 == Stock.item.getQuantity(milk));//did u add more milk
+	}
+	
+	@Test
+	void testIncreaseStock()
+	{
+		e.expect(DeliveryException.class);//cant have -ve increase
+		Stock.DecreaseAmount(milk, -100);//add potatos
+	}
+	
+	
+	
+	@Test
+	void testIncreaseNegitiveStock()
+	{
+		e.expect(DeliveryException.class);//cant have -ve increase
+		Stock.IncreaseAmount(milk, -100);//add potatos
+	}
+	
 
 	@Test 
 	void testRemoveStock()
 	{
 		Stock.removeItem(milk);//remove 50 of the first item
 		assertTrue(StockException.PrintException() , Stock.item.getItem(milk));//there is no item one so there should be a exception
+	}
+	
+	@Test
+	void testNegitaveStock()
+	{
+		Stock.removeItem(milk);
+		Stock potato = new Stock("potato", -50);
+		assertTrue(StockException.PrintException(), Stock.item.getItem(potato));//cant get -ve potatos
 	}
 	
 	@Test
@@ -51,8 +97,7 @@ class StockTest {
 	@Test
 	void testInitialInventory()
 	{
-		Stock potato = new Stock("potato", 50);//item name and quantity
-		assertEquals("potato", 50 == Item.findItem(Sherbert));//find second item
+		assertEquals("potato", 50 == Item.findItem(milk));//find second item
 	}
 	
 	@Test

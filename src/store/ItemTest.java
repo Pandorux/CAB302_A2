@@ -3,14 +3,17 @@ package store;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 
+import delivery.DeliveryException;
 
+import static org.junit.jupiter.api.Assertions.*;
 
-	import static org.junit.jupiter.api.Assertions.*;
-
-	import java.util.ArrayList;
+import java.io.EOFException;
+import java.util.ArrayList;
 
 	import org.junit.jupiter.api.Test;
 
@@ -21,20 +24,35 @@ import org.junit.jupiter.api.Test;
 		 * @author n9999884
 		 *
 		 */
+	
+	
+	
 		class ItemTest {
 
+			@Rule 
+			public final ExpectedException e = ExpectedException.none();
+			
+			
 			@Test
-			void testChangeItemCost()
+			void testIncreaseManufactureCost()
 			{
 				Item.increasePrice(80.00);//now worth $80
 				assertEquals(80.00 == Item.findItemCost(potato));//find item potato's info
 			}
 			
 			@Test
-			void testIncreaseManufactureCost()
+			void testChangeItemCost()
 			{
-				Item.increaseCost(90.00);//now costs $90 to import potatos
+				Item.newCost(90.00);//now costs $90 to import potatos
 				assertEquals(90.00 == Item.findItemManufactureCost(potato));
+			}
+			
+			@Test 
+			void testNegitaveManufactureCost()
+			{
+				e.expect(DeliveryException.class);//cant have -ve cost
+				Item.newCost(-90.00);
+				
 			}
 			
 			@Test
@@ -52,6 +70,13 @@ import org.junit.jupiter.api.Test;
 			}
 			
 			
+			void testChangeNegitaveReorderAmount()
+			{
+				e.expect(DeliveryException.class);//cant have -ve reorder
+				Item.changeReorderAmount(-100);//now getting 100 potato
+			}
+			
+			
 			@Test
 			void testAddTempControlItem()
 			{
@@ -60,10 +85,10 @@ import org.junit.jupiter.api.Test;
 			}
 			
 			@Test 
-			void testItemTemp()
+			void testItemTempControlNotCooled()
 			{
 				assertEquals(NaN , Item.checkTemprature(potato));//NaN if there is not a temp control
-			}
+			}//potatos arn't temp controlled
 			
 			
 			@BeforeAll

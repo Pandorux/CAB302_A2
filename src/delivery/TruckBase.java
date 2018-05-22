@@ -1,8 +1,10 @@
 package delivery;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 import delivery.TruckBaseTest.DummyItem;
+import store.Item;
 
 public abstract class TruckBase {
 
@@ -13,6 +15,8 @@ public abstract class TruckBase {
 	
 	public int id;
 	public Object capacity;
+
+	public Object totalItems = invenObjects.size();
 	
 	/**
 	 * 
@@ -96,10 +100,10 @@ public abstract class TruckBase {
 		{
 			if (invenObjects.get(i) == string)
 			{
-				return invenObjects.get(i);
+				return (Item) invenObjects.get(i);
 			}
 		}
-		return "Error, item not found";
+		throw new InputMismatchException();
 	}
 
 	/**
@@ -120,7 +124,8 @@ public abstract class TruckBase {
 	 * @return return the objects information
 	 */
 
-	public Object getItem(Item item) {
+	public Object getItem(Item item) 
+	{
 		// TODO Auto-generated method stub
 		for (int i = 0; i < invenObjects.size() - 1; i++)
 		{
@@ -131,7 +136,38 @@ public abstract class TruckBase {
 		}
 		return "Error, item not found";
 	}
-	
-	
+
+
+
+	public Object getItem(int i) 
+	{
+		// TODO Auto-generated method stub
+		return invenObjects.get(i);
+	}
+
+
+
+	public void removeItems(ArrayList<DummyItem> items)
+	{
+		invenObjects.remove(items);
+		
+	}
+
+
+
+	public void removeItems(String string) 
+	{
+		for (int i = 0; i < invenObjects.size(); i++)
+		{
+			if (invenObjects.get(i) == string)
+			{
+				invenObjects.remove(i);
+			}
+		}
+		
+	}
+
+
+
 	
 }
