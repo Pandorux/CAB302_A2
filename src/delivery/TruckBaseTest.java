@@ -1,7 +1,7 @@
 package delivery;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,8 +12,7 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -117,7 +116,7 @@ abstract class TruckBaseTest {
 		}
 	}
 	
-	@BeforeAll
+	@Before
 	void beforeEachTest() {
 		dummyTruck = new dummyTruckBase();	
 	}
@@ -253,7 +252,7 @@ abstract class TruckBaseTest {
 		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
-		assertEquals(item, dummyTruck.getItem("Milk"));
+		assertEquals(item, dummyTruck.getItems("Milk"));
 	}
 	
 	@Test
@@ -261,7 +260,7 @@ abstract class TruckBaseTest {
 		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
-		assertEquals(item, dummyTruck.getItem(0));
+		assertEquals(item, dummyTruck.getItems(0));
 	}
 	
 	@Test
@@ -269,7 +268,7 @@ abstract class TruckBaseTest {
 		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
-		assertEquals(item, dummyTruck.getItem(item));
+		assertEquals(item, dummyTruck.getItems(item));
 	}
 	
 	@Test
@@ -315,7 +314,6 @@ abstract class TruckBaseTest {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems(-20);
-		
 		assertEquals(null, dummyTruck.getItem(-20));
 	}
 	
@@ -324,13 +322,11 @@ abstract class TruckBaseTest {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.empty();
-		
 		assertEquals(0, dummyTruck.totalItems());
 	}
 	
-	@Test
+	@Test(expected = DeliveryException.class)
 	void testCapacityCannotExceedMax() {
-		e.expect(DeliveryException.class);
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(2000);
 		dummyTruck.addItems(items);
 	}
