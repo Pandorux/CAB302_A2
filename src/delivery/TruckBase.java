@@ -8,14 +8,12 @@ import store.Item;
 
 public abstract class TruckBase {
 
-	
-	
+	protected static int totalTrucks = 1;
 	
 	ArrayList<Object> invenObjects = new ArrayList<Object>();//Trucks inventory
-	
-	public int id;
-	public int capacity;
-	public int temp;
+
+	protected static int id;
+	private int capacity;//max capacity of normal truck
 	
 	//public Object Truck = invenObjects.size();
 
@@ -27,24 +25,19 @@ public abstract class TruckBase {
 	 * @param capacity2  its id and capacity of the truck
 	 */
 	
-	public TruckBase(int id, int capacity) //if its a normal truck
+	public TruckBase()
 	{
-		this.id = id;
-		this.capacity = capacity;
-		
+		this.capacity = 1000;
+		this.id = totalTrucks;
+		totalTrucks++;		
 	}
 	
-	public TruckBase(int id, int capacity, int temp) //if its a cold truck
+	public TruckBase(int capacity) 
 	{
-		this.id = id;
 		this.capacity = capacity;
-		this.temp = temp;
-		
+		this.id = totalTrucks;
+		totalTrucks++;
 	}
-	
-	
-	
-	
 	
 	/**
 	 * 
@@ -67,7 +60,14 @@ public abstract class TruckBase {
 	
 	public Object getCost() //assuming this truck is not being cooled
 	{
-		return (750 + (0.25 * (double)capacity));
+		if (temp == Double.NaN)//if not refregerated
+		{
+			return (750 + (0.25 * (double)capacity));
+		}
+		else //if refregerated
+		{
+			return java.lang.Math.pow((900 + 200 * 0.7), temp/5);//900+200 * 0.7^t/5
+		}
 	}
 
 	
@@ -142,7 +142,6 @@ public abstract class TruckBase {
 
 	public Object getItem(Item item) 
 	{
-		// TODO Auto-generated method stub
 		for (int i = 0; i < invenObjects.size() - 1; i++)
 		{
 			if (invenObjects.get(i) == item)
@@ -157,13 +156,12 @@ public abstract class TruckBase {
 
 	public Object getItem(int i) 
 	{
-		// TODO Auto-generated method stub
 		return invenObjects.get(i);
 	}
 
 
 
-	public void removeItems(ArrayList<DummyItem> items)
+	public void removeItems(ArrayList<Item> items)
 	{
 		invenObjects.remove(items);
 		
@@ -240,24 +238,17 @@ public abstract class TruckBase {
 	{
 		for (int l = 0; l < invenObjects.size(); l++)//remove everything
 		{
-			
 			invenObjects.remove(l);
-			
 		}
-		
 	}
 
 
-
-
-
-	}
+	
 
 
 	public void setTemperature(int i)
 	{
 		RefrigeratedTruck.temprature = i;	
-		
 	}
 
 
@@ -265,7 +256,30 @@ public abstract class TruckBase {
 	{
 		Object thing = Inventory(string, i);//have a item factory here probs
 		RefrigeratedTruck.Inventory.add(thing);
+		error, look here later
 	}
+
+	public Integer getId() 
+	{
+		return this.id;
+	}
+
+	public Object getCapacity() 
+	{
+		return this.capacity;
+	}
+
+	public void setTemp(int i) 
+	{
+		RefrigeratedTruck.temprature = i;	
+	}
+
+	public double getTemp() 
+	{
+		return RefrigeratedTruck.temprature;
+	}
+
+	
 
 
 
