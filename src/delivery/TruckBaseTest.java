@@ -80,9 +80,9 @@ abstract class TruckBaseTest {
 	 */
 	public class DummyCargoCreator {
 		
-		public ArrayList<DummyItem> CreateCargo(int amount) {
+		public ArrayList<Item> CreateCargo(int amount) {
 			
-			ArrayList<DummyItem> cargo = new ArrayList<DummyItem>();
+			ArrayList<Item> cargo = new ArrayList<Item>();
 			Pair<String, Integer> item;
 			DummyItem dummy;
 			
@@ -151,7 +151,7 @@ abstract class TruckBaseTest {
 	
 	@Test
 	void testTruckCost_01() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(1000);
+		ArrayList<Item> items = cargoMaker.CreateCargo(1000);
 		dummyTruck.addItems(items);
 		assertEquals((750 + 0.25 * 1000), dummyTruck.getCost());
 	}

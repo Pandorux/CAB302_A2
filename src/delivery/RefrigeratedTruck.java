@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 public class RefrigeratedTruck extends TruckBase {
 
-	int iD;
-	int capacity;
-	static double temprature;
+	double temprature;
 	
 	static ArrayList<Object> Inventory = new ArrayList<Object>();
 	//public Object Inventory;
@@ -15,7 +13,6 @@ public class RefrigeratedTruck extends TruckBase {
 	{
 		// TODO Auto-generated constructor stub
 		super(capacity);
-		this.iD = FindAvalableId();
 		this.temprature = FindTruckTemp();//does not have a temp?////////////////////////////////////////////////////////////////////
 	}
 
@@ -24,40 +21,30 @@ public class RefrigeratedTruck extends TruckBase {
 	{
 		// TODO Auto-generated constructor stub
 		super ();
-		this.iD = FindAvalableId();
 		this.capacity = 800;//capasity is specified to be 800 in task sheet
-		RefrigeratedTruck.temprature = FindTruckTemp();
+		temprature = FindTruckTemp();
 	}
 
-	public double FindTruckTemp()
+	double FindTruckTemp()
 	{
 		for (int i = 0; i < Inventory.size(); i++)
 		{
-			if (Truck.Inventory.Item.getTemperture() < this.temprature)
+			if(Double.isNaN(temprature)) 
 			{
-				this.temprature = Truck.Inventory.Item.getTemperture();
+				temprature = cargo.get(i).getTemperature();
+			}
+			else if (cargo.get(i).getTemperature() < temprature)
+			{
+				temprature = cargo.get(i).getTemperature();
 			}
 		}
 		return temprature; 
 	}
 	
-	public int FindAvalableId()
-	{
-		for (int i = 0; i < Manifest.Trucks.size(); i++)
-		{
-			if (TruckBase.id <= iD)//find highest Id in manafest
-			{
-				iD = TruckBase.id + 1;//one higher than the highest id in manafest
-			}
-		}
-		return capacity;
-		
-	}
-	
 	@Override
 	public double getCost() //assuming this truck is not being cooled
 	{
-		return java.lang.Math.pow((900 + 200 * 0.7), temprature/5);//900+200 * 0.7^t/5
+		return 900 + 200 * java.lang.Math.pow((0.7), temprature/5);//900+200 * 0.7^t/5
 	}
 			
 }

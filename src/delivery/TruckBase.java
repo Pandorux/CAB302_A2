@@ -8,7 +8,7 @@ import store.Item;
 
 public abstract class TruckBase {
 
-	protected int totalTrucks = 1;
+	protected int totalTrucks = 0;
 	
 	protected ArrayList<Item> cargo = new ArrayList<Item>();//Trucks inventory
 
@@ -27,16 +27,16 @@ public abstract class TruckBase {
 	
 	public TruckBase()
 	{
+		totalTrucks++;
+		this.id = totalTrucks;	
 		this.capacity = 1000;
-		this.id = totalTrucks;
-		totalTrucks++;		
 	}
 	
 	public TruckBase(int capacity) 
 	{
-		this.capacity = capacity;
-		this.id = totalTrucks;
 		totalTrucks++;
+		this.id = totalTrucks;
+		this.capacity = capacity;
 	}
 	
 	/**
@@ -188,34 +188,32 @@ public abstract class TruckBase {
 
 
 
-	public Object getItems(int i)//needs checkTemprature to be implemented in item to work
+	public ArrayList<Item> getItems(double temp)//needs checkTemprature to be implemented in item to work
 	{
-		ArrayList<Object> List_of_things = new ArrayList<Object>();
+		// TODO: Fix Naming
+		ArrayList<Item> List_of_things = new ArrayList<Item>();
 		
-		for (int l = 0; l < cargo.size(); l++)
-		{
-			Object thing = cargo.get(l);
-			
-			if (Item.getTemperature() == i)//if object has temp i
+		for (int i = 0; i < cargo.size(); i++)
+		{			
+			if (cargo.get(i).getTemperature() == temp)//if object has temp i
 			{
-				RefrigeratedTruck.Inventory.add(thing);//add it to a list
+				List_of_things.add(cargo.get(i));//add it to a list
 			}
 		}
+		
+		return List_of_things;//show all items that are below a temp
 	}
 
 
 
-	public void removeItems(int i)//needs checkTemprature to be implemented in item to work
+	public void removeItems(double temp)//needs checkTemprature to be implemented in item to work
 	{
-		ArrayList<Object> List_of_things = new ArrayList<Object>();
 		
-		for (int l = 0; l < cargo.size(); l++)
-		{
-			Object thing = cargo.get(l);
-			
-			if (Item.getTemperature() == i)//for each object found
+		for (int i = 0; i < cargo.size(); i++)
+		{			
+			if (cargo.get(i).getTemperature() == temp)//if object has temp i
 			{
-				RefrigeratedTruck.Inventory.remove(thing);//add it to a list
+				cargo.remove(cargo.get(i));//remove
 			}
 		}
 	}
@@ -233,13 +231,6 @@ public abstract class TruckBase {
 
 	
 
-
-	public void setTemperature(int i)
-	{
-		RefrigeratedTruck.temprature = i;	
-	}
-
-
 	public Item addItem(String name, int i) 
 	{
 		Item thing = addItem(name, i);//have a item factory here probs
@@ -256,7 +247,7 @@ public abstract class TruckBase {
 	{
 		return this.capacity;
 	}
-
+/*
 	public void setTemp(int i) 
 	{
 		RefrigeratedTruck.temprature = i;	
@@ -266,7 +257,7 @@ public abstract class TruckBase {
 	{
 		return RefrigeratedTruck.temprature;
 	}
-
+*/
 	
 
 
