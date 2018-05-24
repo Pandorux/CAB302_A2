@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class RefrigeratedTruck extends TruckBase {
 
-	double temprature;
+	static double temprature;
 	
 	static ArrayList<Object> Inventory = new ArrayList<Object>();
 	//public Object Inventory;

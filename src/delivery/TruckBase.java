@@ -252,12 +252,12 @@ public abstract class TruckBase {
 	{
 		RefrigeratedTruck.temprature = i;	
 	}
-
+*/
 	public static double getTemp() 
 	{
 		return RefrigeratedTruck.temprature;
 	}
-*/
+
 	
 
 
