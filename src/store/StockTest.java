@@ -1,17 +1,9 @@
-package store.Reagan_assesment_supermart;
-
-import static org.junit.jupiter.api.Assertions.*;
-
+package store;
 import java.util.ArrayList;
-
-import org.junit.Rule;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
-
-import delivery.DeliveryException;
-
+import static org.junit.Assert.assertEquals;
+import org.junit.*;
+import static org.junit.Assert.assertTrue;
+import exceptions.DeliveryException;
 import exceptions.StockException;
 
 class StockTest {
@@ -116,7 +108,7 @@ class StockTest {
 	}
 	
 	
-	@BeforeAll
+	@Before
 	private void setup()//give the store a sale
 	{
 		Stock milk = new Stock("milk", 50);//50 milk in stock

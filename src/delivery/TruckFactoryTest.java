@@ -1,28 +1,26 @@
 package delivery;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertTrue;
+import org.junit.*;
 
 class TruckFactoryTest {
 	
 	public TruckFactory testFactory;
 	
-	@BeforeAll
+	@Before
 	void beforeEachTest() {
 		testFactory = new TruckFactory();
 	}
 	
 	@Test
 	void testCreateOrdinaryTruck_00() {
-		Truck truck = testFactory.CreateTruck("Ordinary", 1000); 
+		Truck truck = testFactory.createTruck("Ordinary", 1000); 
 		assertTrue(truck != null);
 	}
 	
 	@Test
 	void testCreateRefrigeratedTruck_00() {
-		RefrigeratedTruck truck = testFactory.CreateTruck("Refrigerated", 1000); 
+		RefrigeratedTruck truck = testFactory.createTruck("Refrigerated", 1000); 
 		assertTrue(truck != null);
 	}
 	

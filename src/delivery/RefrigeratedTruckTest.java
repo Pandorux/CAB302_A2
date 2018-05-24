@@ -1,9 +1,8 @@
 package delivery;
 
+import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
-
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import exceptions.DeliveryException;
 
 /**
@@ -22,7 +21,7 @@ class RefrigeratedTruckTest extends TruckBaseTest {
 	@Before
 	void beforeEachTest() {
 		// id, capacity, temp
-		dummyTruck = new RefrigeratedTruck(0, 800, 10);	
+		dummyTruck = new RefrigeratedTruck();	
 	}
 	
 	@Test(expected = DeliveryException.class)

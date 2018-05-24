@@ -1,13 +1,12 @@
 package delivery;
 import delivery.*;
 
+import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import exceptions.DeliveryException;
 import delivery.Truck;
 import delivery.RefrigeratedTruck;
-
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 /**
  * A JUnit Test Class that tests functionality held within the

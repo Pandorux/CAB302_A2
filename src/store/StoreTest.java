@@ -1,17 +1,10 @@
-package store.Reagan_assesment_supermart;
-
+package store;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 
-import org.junit.Rule;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtensionContext.Store;
-import org.junit.rules.ExpectedException;
-
-import delivery.DeliveryException;
+import org.junit.*;
+import exceptions.DeliveryException;
 
 class StoreTest {
 
@@ -89,14 +82,14 @@ class StoreTest {
 	//item tests from store
 	
 	
-	@BeforeAll
+	@Before
 	private void Setup()//create a stores info
 	{
 		Store store = new Store("bob", 50);
 
 	}
 	
-	@AfterAll
+	@After
 	private void clearAll()
 	{
 		Store.instance.renameStore(null);//remove name
