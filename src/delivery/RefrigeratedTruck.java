@@ -53,4 +53,11 @@ public class RefrigeratedTruck extends TruckBase {
 		return capacity;
 		
 	}
+	
+	@Override
+	public double getCost() //assuming this truck is not being cooled
+	{
+		return java.lang.Math.pow((900 + 200 * 0.7), temprature/5);//900+200 * 0.7^t/5
+	}
+			
 }

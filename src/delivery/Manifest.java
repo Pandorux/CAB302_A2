@@ -57,9 +57,6 @@ public class Manifest {
 		catch (CSVFormatException e) {
 			
 		}
-
-		
-		
 		/**
 		 * 
 		 * @param i truck ID
