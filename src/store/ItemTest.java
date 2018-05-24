@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
 import delivery.DeliveryException;
+import exceptions.StockException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,65 +37,94 @@ import java.util.ArrayList;
 			@Test
 			void testIncreaseManufactureCost()
 			{
-				// TODO: No String needed for this method
-				// TODO: There should be a decrease price method as well
-				Item.increasePrice("potato", 80);//now worth $80
-				assertEquals("potato", 80 == Item.findItemCost());//find second item
+				Item.increasePrice(80);//now worth $80
+				assertEquals("potato", 130 == Item.findItemManufactureCost());//find second item
+			}
+			
+			@Test (expected = IndexOutOfBoundsException.class)
+			void testNegitiveIncreaseManufactureCost()
+			{
+				Item.increasePrice(-80);//now worth $80
 			}
 			
 			@Test
-			void testChangeItemCost()
+			void testDecreaseManufactureCost()
 			{
-<<<<<<< HEAD
-				// TODO: no string needed
-				// TODO: decrease cost needed
-				Item.increaseCost("potato", 90);//now costs $90 to import potatos
-				assertEquals("potato", 90 == Item.findItemManufactureCost());
-=======
-				Item.newCost(90.00);//now costs $90 to import potatos
-				assertEquals(90.00 == Item.findItemManufactureCost(potato));
->>>>>>> reagan/junit_tests
+				Item.decreasePrice(10);//now worth $80
+				assertEquals("potato", 40 == Item.findItemManufactureCost());//find second item
 			}
 			
-			@Test 
-			void testNegitaveManufactureCost()
+			@Test (expected = IndexOutOfBoundsException.class)
+			void testNegitiveDecreaseManufactureCost()
 			{
-				e.expect(DeliveryException.class);//cant have -ve cost
-				Item.newCost(-90.00);
-				
+				Item.decreasePrice(-10);//now worth $80
 			}
 			
+			@Test
+			void testIncreaseItemSalesCost()
+			{
+				Item.increaseCost(90);//now costs a extra $90 dollars to buy potatos with base of 50
+				assertEquals("potato", 150 == Item.findItemCost());
+			}
+			
+			@Test (expected = IndexOutOfBoundsException.class)
+			void testNegitiveIncreaseItemSalesCost()
+			{
+				Item.increaseCost(-90);//now costs a extra $90 dollars to buy potatos with base of 50
+			}
+			
+			@Test
+			void testDecreaseItemSalesCost()
+			{
+				Item.decreaseCost(5);//now costs a $5 less to buy potatos base 60
+				assertEquals("potato", 55 == Item.findItemCost());
+			}
+			
+			@Test (expected = IndexOutOfBoundsException.class)
+			void testNegitiveDecreaseItemSalesCost()
+			{
+				Item.decreaseCost(-5);//now costs a $5 less to buy potatos base 60
+			}
+			
+		
 			@Test
 			void testChangeImportPoint()
 			{
-				// TODO: Only reorderPoint string needed for this method
-				Item.changeReorderPoint("potato", "Zimbabwe");//now getting items from zimbabwe
+				Item.changeReorderPoint("Zimbabwe");//now getting items from zimbabwe
 				assertEquals("potato", "Zimbabwe" == Item.findItemImportPoint());
 			}
 			
 			@Test
-			void testChangeReorderAmount()
+			void testIncreaseReorderAmount()
 			{
-				// TODO: turn this into an increase and decrease reorderAmount
-				// TODO: No string needed for method
-				Item.changeReorderAmount("potato", 100);//now getting 100 potato
-				assertEquals("potato", 100 == Item.findItemReorderAmount());
+				Item.IncreaseReorderAmount(100);//now a extra getting 100 potato from 70
+				assertEquals(170 == Item.findItemReorderAmount());
 			}
 			
-			
-			void testChangeNegitaveReorderAmount()
+			@Test (expected = IndexOutOfBoundsException.class)
+			void testNegitiveIncreaseReorderAmount()
 			{
-				e.expect(DeliveryException.class);//cant have -ve reorder
-				Item.changeReorderAmount(-100);//now getting 100 potato
+				Item.IncreaseReorderAmount(-100);//now a extra getting 100 potato from 70
 			}
 			
+			@Test
+			void testDecreaseReorderAmount()
+			{
+				Item.DecreaseReorderAmount(70);//now getting 70 less potatos from 70
+				assertEquals(0 == Item.findItemReorderAmount());
+			}
+			
+			@Test (expected = IndexOutOfBoundsException.class)
+			void testNegitiveDecreaseReorderAmount()
+			{
+				Item.DecreaseReorderAmount(-70);//now getting 70 less potatos from 70
+			}
 			
 			@Test
 			void testAddTempControlItem()
 			{
 				Item ice_cream = new Item("ice cream", 100, 200, "Brisbane", 10, -30);//assume only 1 item can exist at a time				
-				assertEquals(ice_cream == Item.findItem());
-				// TODO: Why should the Item find itself?
+				assertEquals(-30 == Item.findItem().getTemperature());//find icecream and its temp should be -30 
 			}
 			
 			@Test 
