@@ -6,23 +6,23 @@ import static org.junit.Assert.assertTrue;
 import exceptions.DeliveryException;
 import exceptions.StockException;
 
-class StockTest {
+public class StockTest {
 
 	
 	@Test
-	void testHasStock()
+	public void testHasStock()
 	{
 		assertTrue("milk", Stock.item.getName(milk));//
 	}
 	
 	@Test
-	void testHasManyStock()
+	public void testHasManyStock()
 	{
 		assertTrue(50, Stock.item.getQuantity(milk));//find how many of item one you have
 	}
 	
 	@Test
-	void testAddStock()
+	public void testAddStock()
 	{
 		Stock potato = new Stock("potato", 100);
 		Stock.addItem(potato);//add potatos
@@ -30,7 +30,7 @@ class StockTest {
 	}
 	
 	@Test
-	void testIncreaseStock()
+	public void testIncreaseStock()
 	{
 		Stock.IncreaseAmount(100);//add potatos
 		assertEquals(150 == Stock.item.getQuantity(milk));//did u add more milk
@@ -38,40 +38,40 @@ class StockTest {
 	
 
 	@Test (expected = IndexOutOfBoundsException.class)
-	void testNegitiveIncreaseStock()
+	public void testNegitiveIncreaseStock()
 	{
 		Stock.IncreaseAmount(milk, -100);//add potatos
 	}
 	
 	@Test
-	void testDecreaseStock()
+	public void testDecreaseStock()
 	{
 		Stock.DecreaseAmount(20);//add potatos
 		assertEquals(30 == Stock.item.getQuantity(milk));//did u add more milk
 	}
 	
 	@Test (expected = IndexOutOfBoundsException.class)
-	void testNegitiveDecreaseStock()
+	public void testNegitiveDecreaseStock()
 	{
 		Stock.DecreaseAmount(-20);//add potatos
 		assertEquals(30 == Stock.item.getQuantity(milk));//did u add more milk
 	}
 	
 	@Test (expected = StockException.class)
-	void testRemoveStock()
+	public void testRemoveStock()
 	{
 		Stock.removeItem(milk);//no milk left
 		Stock.removeItem(milk);//cant remove a item that doesnt exist
 	}
 	
 	@Test (expected = StockException.class)
-	void testNegitaveStock()
+	public void testNegitaveStock()
 	{
 		Stock potato = new Stock("potato", -50);//cant have negitive stock
 	}
 	
 	@Test
-	void testRemoveAll()
+	public void testRemoveAll()
 	{
 		Stock.addItem("potato", 100);//add potatos
 		Stock.addItem("carrots", 100);//add potatos
@@ -81,13 +81,13 @@ class StockTest {
 	
 
 	@Test (expected = StockException.class)
-	void testInitialInventory()
+	public void testInitialInventory()
 	{
 		assertEquals("potato", 50 == Item.findItem(milk));//a potato is not milk
 	}
 	
 	@Test
-	void testAddItem()
+	public void testAddItem()
 	{
 		Stock dolly = new Stock("dolls", 100);
 		Stock potato = new Stock("potato", 50);
@@ -97,7 +97,7 @@ class StockTest {
 	}
 	
 	@Test
-	void testRemoveItem()
+	public void testRemoveItem()
 	{
 		Stock dolly = new Stock("dolls", 100);
 		Stock potato = new Stock("potato", 50);
@@ -109,7 +109,7 @@ class StockTest {
 	
 	
 	@Before
-	private void setup()//give the store a sale
+	public void setup()//give the store a sale
 	{
 		Stock milk = new Stock("milk", 50);//50 milk in stock
 		//name, manufacture cost, sell cost, reorder point, reorder amount

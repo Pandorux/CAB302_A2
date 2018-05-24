@@ -16,72 +16,72 @@ import exceptions.DeliveryException;
  * @author Jared Carey
  *
  */
-class RefrigeratedTruckTest extends TruckBaseTest {
+public class RefrigeratedTruckTest extends TruckBaseTest {
 	
 	@Before
-	void beforeEachTest() {
+	public void beforeEachTest() {
 		// id, capacity, temp
 		dummyTruck = new RefrigeratedTruck();	
 	}
 	
 	@Test(expected = DeliveryException.class)
-	void testTemperatureStaysInRange_00() {
+	public void testTemperatureStaysInRange_00() {
 		dummyTruck.setTemp(50);
 	}
 	
 	@Test(expected = DeliveryException.class)
-	void testTemperatureStaysInRange_01() {
+	public void testTemperatureStaysInRange_01() {
 		dummyTruck.setTemp(-50);
 	}
 	
 	@Test(expected = DeliveryException.class)
-	void testTemperatureStaysInRange_02() {
+	public void testTemperatureStaysInRange_02() {
 		dummyTruck.setTemp(-50);
 	}
 	
 	@Test(expected = DeliveryException.class)
-	void testAddItemOutOfTempRange_00() {
+	public void testAddItemOutOfTempRange_00() {
 		dummyTruck.addItem("Milk", 30);
 	}
 	
 	@Test(expected = DeliveryException.class)
-	void testAddItemOutOfTempRange_01() {
+	public void testAddItemOutOfTempRange_01() {
 		dummyTruck.addItem("Milk", -30);
 	}
 	
 	@Test
-	void testTruckCost_Empty() {
+	public void testTruckCost_Empty() {
 		assertEquals(900, dummyTruck.getCost());
 	}
 	
 	@Test
-	void testTruckCost_00() {
+	public void testTruckCost_00() {
 		dummyTruck.addItems(cargoMaker.CreateCargo(500));
 		assertEquals(900 + (0.25 * 500) * (Math.pow(0.7, dummyTruck.getTemp() / 5)), dummyTruck.getCost());
 	}
 	
 	@Test
-	void testTruckCost_01() {
+	public void testTruckCost_01() {
 		dummyTruck.addItems(cargoMaker.CreateCargo(1000));
 		assertEquals(900 + 200 * (Math.pow(0.7, dummyTruck.getTemp() / 5)), dummyTruck.getCost());
 	}
 	
 	@Test
-	void testTruckCost_02() {
+	public void testTruckCost_02() {
 		dummyTruck.capacity = 2000;
 		dummyTruck.addItems(cargoMaker.CreateCargo(2000));
 		assertEquals(900 + 200 * (Math.pow(0.7, dummyTruck.getTemp() / 5)), dummyTruck.getCost());
 	}
 	
 	@Test
-	void testTruckCost_03() {
+	public void testTruckCost_03() {
 		dummyTruck.capacity = 5000;
 		dummyTruck.addItems(cargoMaker.CreateCargo(5000));
 		assertEquals(900 + 200 * (Math.pow(0.7, dummyTruck.getTemp() / 5)), dummyTruck.getCost());
 	}
 	
 	@Test
-	void testAddItemsInTempRange() {
+	public void testAddItemsInTempRange() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 	}

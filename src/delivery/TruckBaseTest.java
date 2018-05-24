@@ -29,7 +29,7 @@ import store.Item;
  * @author Jared Carey
  *
  */
-abstract class TruckBaseTest {
+public class TruckBaseTest {
 	
 	TruckBase dummyTruck = null;
 	DummyCargoCreator cargoMaker = new DummyCargoCreator();
@@ -41,7 +41,7 @@ abstract class TruckBaseTest {
 	 * @author Jared Carey
 	 *
 	 */
-	private class dummyTruckBase extends TruckBase { 
+	protected class dummyTruckBase extends TruckBase { 
 		
 		dummyTruckBase(int capacity) {
 			super(capacity);
@@ -59,7 +59,7 @@ abstract class TruckBaseTest {
 	 * @author Jared Carey
 	 *
 	 */
-	public class DummyItem extends Item {
+	protected class DummyItem extends Item {
 		
 		String name;
 		double temp;
@@ -78,7 +78,7 @@ abstract class TruckBaseTest {
 	 * Class used for creating dynamic dummy cargo for unit tests
 	 *
 	 */
-	public class DummyCargoCreator {
+	protected class DummyCargoCreator {
 		
 		public ArrayList<Item> CreateCargo(int amount) {
 			
@@ -95,7 +95,7 @@ abstract class TruckBaseTest {
 			return cargo;
 		}
 		
-		private Pair<String, Integer> GetItem() {
+		protected Pair<String, Integer> GetItem() {
 			Random rand = new Random();
 			
 			switch(rand.nextInt(2)) {
@@ -117,75 +117,75 @@ abstract class TruckBaseTest {
 	}
 	
 	@Before
-	void beforeEachTest() {
+	public void beforeEachTest() {
 		dummyTruck = new dummyTruckBase();	
 	}
 	
 	@Test // Double Check Test Functionality
-	void testTruckId_00() {
+	public void testTruckId_00() {
 		assertEquals(1, dummyTruck.getId());
 	}
 	
 	@Test // Double Check Test Functionality
-	void testTruckId_01() {
+	public void testTruckId_01() {
 		dummyTruckBase dummy00 = new dummyTruckBase();
 		dummyTruckBase dummy01 = new dummyTruckBase();
 		assertEquals(3, dummy01.getId());
 	}
 	
 	@Test
-	void testGetCapacity_00() {
+	public void testGetCapacity_00() {
 		assertEquals(1000, dummyTruck.getCapacity());
 	}
 	
 	@Test
-	void testGetCapacity_01() {
+	public void testGetCapacity_01() {
 		dummyTruck = new dummyTruckBase(34567);
 		assertEquals(34567, dummyTruck.getCapacity());
 	}
 	
 	@Test
-	void testTruckCost_Empty() {
+	public void testTruckCost_Empty() {
 		assertEquals((750), dummyTruck.getCost());
 	}
 	
 	@Test
-	void testTruckCost_01() {
+	public void testTruckCost_01() {
 		ArrayList<Item> items = cargoMaker.CreateCargo(1000);
 		dummyTruck.addItems(items);
 		assertEquals((750 + 0.25 * 1000), dummyTruck.getCost());
 	}
 	
 	@Test
-	void testTruckCost_02() {
+	public void testTruckCost_02() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(5000);
 		dummyTruck.addItems(items);
 		assertEquals((750 + 0.25 * 5000), dummyTruck.getCost());
 	}
 	
 	@Test
-	void testTruckRemoveItem_Item() {
+	public void testTruckRemoveItem_Item() {
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
 		assertEquals(false, dummyTruck.getItems(item));
 	}
 	
 	@Test
-	void testTruckRemoveItem_Name() {
+	public void testTruckRemoveItem_Name() {
 		dummyTruck.addItems(new DummyItem("Milk", 0));
 		dummyTruck.removeItems("Milk");
 		assertEquals(null, dummyTruck.getItems("Milk"));
 	}
 	
 	@Test
-	void testTruckAddItem() {
+	public void testTruckAddItem() {
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
 		assertEquals(item, dummyTruck.getItems(item));
 	}
 	
 	@Test
-	void testTruckGetItems_Name() {
+	public void testTruckGetItems_Name() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		int totalItems = 0;
@@ -201,7 +201,7 @@ abstract class TruckBaseTest {
 	
 	// TODO: Fix GetItem Name
 	@Test
-	void testTruckGetItems_TempEqual() {
+	public void testTruckGetItems_TempEqual() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		int totalItems = 0;
@@ -217,7 +217,7 @@ abstract class TruckBaseTest {
 	
 	// TODO: Fix GetItem Name
 	@Test
-	void testTruckGetItems_TempLessOf() {
+	public void testTruckGetItems_TempLessOf() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		int totalItems = 0;
@@ -233,7 +233,7 @@ abstract class TruckBaseTest {
 	
 	// TODO: Fix GetItem Name
 	@Test
-	void testTruckGetItems_TempMoreThan() {
+	public void testTruckGetItems_TempMoreThan() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		int totalItems = 0;
@@ -248,7 +248,7 @@ abstract class TruckBaseTest {
 	}
 	
 	@Test
-	void testTruckGetItem_Name() {
+	public void testTruckGetItem_Name() {
 		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
@@ -256,7 +256,7 @@ abstract class TruckBaseTest {
 	}
 	
 	@Test
-	void testTruckGetItem_Temp() {
+	public void testTruckGetItem_Temp() {
 		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
@@ -264,7 +264,7 @@ abstract class TruckBaseTest {
 	}
 	
 	@Test
-	void testTruckGetItem_Item() {
+	public void testTruckGetItem_Item() {
 		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
@@ -272,7 +272,7 @@ abstract class TruckBaseTest {
 	}
 	
 	@Test
-	void testTruckRemoveItems_Items() {
+	public void testTruckRemoveItems_Items() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems(items);
@@ -280,7 +280,7 @@ abstract class TruckBaseTest {
 	}
 	
 	@Test
-	void testTruckRemoveItems_Name() {
+	public void testTruckRemoveItems_Name() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems("Milk");
@@ -290,7 +290,7 @@ abstract class TruckBaseTest {
 	
 	// TODO: Fix GetItem and RemoveItems Name
 	@Test
-	void testTruckRemoveItems_TempEqual() {
+	public void testTruckRemoveItems_TempEqual() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems(-20);
@@ -300,7 +300,7 @@ abstract class TruckBaseTest {
 	
 	// TODO: Fix GetItem and RemoveItems Name
 	@Test
-	void testTruckRemoveItems_TempLessThan() {
+	public void testTruckRemoveItems_TempLessThan() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems(-20);
@@ -310,7 +310,7 @@ abstract class TruckBaseTest {
 	
 	// TODO: Fix GetItem and RemoveItems Name
 	@Test
-	void testTruckRemoveItems_TempMoreThan() {
+	public void testTruckRemoveItems_TempMoreThan() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems(-20);
@@ -318,7 +318,7 @@ abstract class TruckBaseTest {
 	}
 	
 	@Test
-	void testTruckEmptyTruck() {
+	public void testTruckEmptyTruck() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.empty();
@@ -326,7 +326,7 @@ abstract class TruckBaseTest {
 	}
 	
 	@Test(expected = DeliveryException.class)
-	void testCapacityCannotExceedMax() {
+	public void testCapacityCannotExceedMax() {
 		ArrayList<DummyItem> items = cargoMaker.CreateCargo(2000);
 		dummyTruck.addItems(items);
 	}
