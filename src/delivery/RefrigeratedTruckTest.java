@@ -8,6 +8,12 @@ import exceptions.DeliveryException;
 
 /**
  * 
+ * JUnit Test Case that tests the functionality held within the
+ * RefrigeratedTruck class.
+ * <br>
+ * <br>
+ * This Test Case extends the TruckBaseTest Test Case.
+ * 
  * @author Jared Carey
  *
  */

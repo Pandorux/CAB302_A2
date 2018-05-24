@@ -126,9 +126,9 @@ public class Item {
 								Integer.parseInt(params[4]), Double.parseDouble(params[5])));
 						break;
 						
-					default:
-						throw CSVFormatException();
-						break;
+//					default:
+//						throw CSVFormatException();
+//						break;
 				}
 			}
 			return items;

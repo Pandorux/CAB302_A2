@@ -23,22 +23,22 @@ import store.Item;
 
 /**
  * 
+ * JUnit Test Case for the functionality held within the 
+ * abstract class TruckBase.
+ * 
  * @author Jared Carey
  *
  */
 abstract class TruckBaseTest {
-	
-	@Rule
-	public final ExpectedException e = ExpectedException.none();
 	
 	TruckBase dummyTruck = null;
 	DummyCargoCreator cargoMaker = new DummyCargoCreator();
 	
 	/**
 	 * 
-	 * @author Jared Carey
-	 *
 	 * Mock Class for testing the abstract class TruckBase
+	 * 
+	 * @author Jared Carey
 	 *
 	 */
 	private class dummyTruckBase extends TruckBase { 
@@ -54,10 +54,10 @@ abstract class TruckBaseTest {
 	
 	/**
 	 * 
+	 * Mock class of Item
+	 * 
 	 * @author Jared Carey
 	 *
-	 * Mock of Item
-	 * 
 	 */
 	public class DummyItem extends Item {
 		
