@@ -168,9 +168,7 @@ public abstract class TruckBase {
 		}
 		
 	}
-
-
-
+	
 	public Object getItems(String string) 
 	{
 		ArrayList<Object> List_of_things = new ArrayList<Object>();
@@ -185,8 +183,6 @@ public abstract class TruckBase {
 		
 		return List_of_things;//then return the list
 	}
-
-
 
 	public ArrayList<Item> getItems(double temp)//needs checkTemprature to be implemented in item to work
 	{
@@ -247,12 +243,12 @@ public abstract class TruckBase {
 	{
 		return this.capacity;
 	}
-/*
-	public void setTemp(int i) 
+
+	public void setTemp(int i) //the temp can only be of a refregerated truck
 	{
-		RefrigeratedTruck.temprature = i;	
+		RefrigeratedTruck.temprature = i;	//obselete since this is automated
 	}
-*/
+
 	public static double getTemp() 
 	{
 		return RefrigeratedTruck.temprature;

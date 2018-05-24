@@ -53,7 +53,8 @@ public class Manifest {
 			}
 			return items;
 		}
-		catch (CSVFormatException e) {
+		catch (CSVFormatException e) 
+		{
 			
 		}
 		/**
@@ -62,7 +63,7 @@ public class Manifest {
 		 * @return
 		 */
 		
-		public Object getTruck(int id)
+		public TruckBase getTruck(int id)
 		{
 			
 			return Trucks.get(id);
@@ -92,7 +93,5 @@ public class Manifest {
 			
 		}
 		
-		
-	}	
 	
 }

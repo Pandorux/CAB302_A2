@@ -17,6 +17,12 @@ public class Truck extends TruckBase {
 		super();
 		TruckBase.capacity = cargo;
 	}
+
+	public Truck() 
+	{
+		super();
+		TruckBase.capacity = 1000;//original capacity
+	}
 	
 
 }

@@ -58,7 +58,7 @@ class ManifestTest {
 	@Test
 	void testAddTruck() {
 		manifest.addTruck(new Truck());
-		assertEquals(6, manifest.getTruck(6).getId);
+		assertEquals(6, manifest.getTruck(6).getId());
 	}
 	
 	@Test
