@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import exceptions.CSVFormatException;
-import store.CSVException;
 import store.Item;
 
 public class Manifest {

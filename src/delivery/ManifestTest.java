@@ -10,6 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * A JUnit Test Class that tests functionality held within the
+ * Manifest class.
+ * 
  * 
  * @author Jared Carey
  *
@@ -18,13 +21,7 @@ class ManifestTest {
 	
 	public Manifest manifest;
 	public ArrayList<TruckBase> trucks;
-	
-	@Test
-	void testManifestConstruction() {
-		// TODO:
-	}
-	
-	
+		
 	@Test
 	void testGetTruck_00() {
 		assertEquals(1, manifest.getTruck(1).getId());
@@ -60,27 +57,8 @@ class ManifestTest {
 	
 	@Test
 	void testAddTruck() {
-		
-	}
-	
-	@Test
-	void testGetTrucks() {
-		// TODO: Remove truck from manifest using its id
-	}
-	
-	@Test
-	void testAddTrucks() {
-		
-	}
-	
-	@Test
-	void testGetAllRefrigeratedTrucks() {
-		
-	}
-	
-	@Test
-	void testGetAllStandardTrucks() {
-		
+		manifest.addTruck(new Truck());
+		assertEquals(6, manifest.getTruck(6).getId);
 	}
 	
 	@Test
