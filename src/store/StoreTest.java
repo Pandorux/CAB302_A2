@@ -7,6 +7,35 @@ import exceptions.DeliveryException;
 
 public class StoreTest {
 
+	private Store store;
+	
+	@Before
+	public void Setup()//create a stores info
+	{
+		Store store = new Store("bob", 50.00);
+	}
+	
+	
+	public void testResetSingleton_Inventory()
+	{
+		Store.deconstructor();//this resets the singleton;
+		assertEquals("",store.getInventory());//shouldnt have a inventory
+	}
+	
+	public void testResetSingleton_Capital()
+	{
+		Store.deconstructor();//this resets the singleton;
+		assertEquals(Double.NaN ,store.getCapital());//shouldnt have a capital
+		
+	}
+	
+	public void testResetSingleton_Name()
+	{
+		Store.deconstructor();//this resets the singleton;
+		assertEquals(null ,store.getName());//shouldnt have a name
+	}
+	
+	/*
 	@Test
 	public void testSingleton_00()
 	{
@@ -14,85 +43,78 @@ public class StoreTest {
 	}
 	
 	@Test
-	public void testSingleton_01()
+	public void testSingleton_01()////////////////////////////////////////////////////////////////////////////
 	{
 		Store store2 = new Store();
 		assertTrue(testStore.instance == store2.instance);
 	}
+	*/
 	
 	@Test
 	public void testEmptyStore()
 	{
-		assertTrue(Store.instance.inventory.length == 0);
+		assertTrue(0 == Store.getInstance().inventory.length());
 	}
 	
 	@Test
 	public void testGetName()
 	{
-		assertEquals("bob", Store.instance.getName());
+		assertEquals("bob",  Store.getInstance().getName());
 	}
 	
 	@Test
 	public void testGetCapital()
 	{
-		assertEquals(50, Store.instance.getCapital());
+		assertEquals(50.00,  Store.getInstance().getCapital());
 	}
 	
 	@Test 
 	public void testSetCapital()
 	{
-		Store.instance.setCapital(100.00);//capital is now 100 from what it was initially
-		assertEquals(100, Store.instance.getCapital());
+		 Store.getInstance().setCapital(100.00);//capital is now 100 from what it was initially
+		assertEquals(100.00,  Store.getInstance().getCapital());
 	}
 	
 	@Test
 	public void testRenameStore()
 	{
-		Store.renameStore("bills");
-		assertTrue("bills" == Store.instance.getName());
+		Store.getInstance().renameStore("bills");
+		assertTrue("bills" ==  Store.getInstance().getName());
 	}
 	
 	@Test
 	public void testAddCapital()
 	{
-		Store.instance.AddCapital(100.50);
-		assertTrue(150.50, Store.instance.getCapital());
+		 Store.getInstance().AddCapital(100.50);
+		assertTrue(150.50,  Store.getInstance().getCapital());
 	}
 	
 	@Test (expected = IndexOutOfBoundsException.class)
 	public void testAddNegitiveCapital()
 	{
-		Store.instance.AddCapital(-100.50);
+		 Store.getInstance().AddCapital(-100.50);
 	}
 	
 	@Test 
 	public void testRemoveCapital()
 	{
-		Store.instance.removeCapital(10.50);//50 - 10 = 39.50
-		assertTrue(39.50, Store.instance.getCaptial());
+		 Store.getInstance().removeCapital(10.50);//50 - 10 = 39.50
+		assertTrue(39.50,  Store.getInstance().getCaptial());
 	}	
 
 	@Test (expected = IndexOutOfBoundsException.class)
 	public void testRemoveNegitiveCapital()
 	{
-		Store.instance.removeCapital(-10.50);
+		 Store.getInstance().removeCapital(-10.50);
 	}	
 	
-	//item tests from store
-	
-	
-	@Before
-	public void Setup()//create a stores info
-	{
-		Store store = new Store("bob", 50);
-	}
 	
 	@After
-	public  void clearAll()
+	public void resetSingleton()
 	{
-		Store.instance.renameStore(null);//remove name
-		Store.instance.setCapital(Double.NaN);//makes the capital to not a number
-		Store.instance.clearInventory();//removes all the elements of the inventory
+		 Store.getInstance().renameStore(null);//remove name
+		 Store.getInstance().setCapital(Double.NaN);//makes the capital to not a number
+		 Store.getInstance().clearInventory();//removes all the elements of the inventory
 	}
 	
 	
