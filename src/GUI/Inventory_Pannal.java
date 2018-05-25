@@ -22,28 +22,20 @@ public class Inventory_Pannal extends JFrame {
 		
 		
 		
-		//set layout
-		Dimension size = getPreferredSize();
-		size.width = 250;
-		setPreferredSize(size);
-		
-		
-		
 		//create swing components
-		String line = "\n";
-		String extend = "\t\t\t\t\t";
-		//Container menu_content = getContentPane();
-		
-		//JButton view_Inventory = new JButton("View Inventory");
 		JButton View_Sales_Log = new JButton("View Sales Log");
 		JButton view_Manifest = new JButton("View Manifest");
-		//JButton order_Stock = new JButton("Order Stock");
-		JButton Search_List = new JButton("Order Stock");
+		JButton Search_List = new JButton("Sale");
 		JTextField search = new JTextField(10);
 		JButton See_Inventroy = new JButton("See Inventory");
 		JLabel Title = new JLabel("SuperMart Systems");
 		
-		
+		JButton add_Item = new JButton("Add Item");
+		JButton remove_Item = new JButton("Remove Item");
+		JButton edit_Item = new JButton("Edit Item");
+		JTextField add = new JTextField(20);
+		JTextField remove = new JTextField(20);
+		JTextField edit = new JTextField(20);
 		//set layout
 		setLayout(new GridBagLayout());
 		
@@ -53,21 +45,18 @@ public class Inventory_Pannal extends JFrame {
 		//add swing components to frame
 		
 				
-		gc.weighty = 10;
+				gc.weighty = 10;
+		
 				gc.gridx = 2;
-				gc.gridy = 1;//top right?
+				gc.gridy = 1;
 				add(View_Sales_Log, gc);
 				
 				gc.gridx = 0;
-				gc.gridy = 1;//top left?
+				gc.gridy = 1;
 				add(view_Manifest, gc);
 				
-				//gc.gridx = 1;
-				//gc.gridy = 1;//top mid?
-				//add(order_Stock, gc);
-				
 				gc.gridx = 1;
-				gc.gridy = 0;//top left?
+				gc.gridy = 0;
 				add(Title, gc);
 				
 				gc.gridx = 1;
@@ -78,14 +67,38 @@ public class Inventory_Pannal extends JFrame {
 				gc.gridy = 2;
 				add(Search_List, gc);
 				
-				//Container c = getContentPane();
-				
-				gc.gridx = 0;
-				gc.gridy = 2;
+				gc.gridx = 1;
+				gc.gridy = 1;
 				add(See_Inventroy, gc);
 				
+				gc.gridx = 0;
+				gc.gridy = 3;
+				add(add_Item, gc);
 				
-				search.setText("Order Here");
+				gc.gridx = 0;
+				gc.gridy = 4;
+				add(remove_Item, gc);
+				
+				gc.gridx = 0;
+				gc.gridy = 5;
+				add(edit_Item, gc);
+				
+				gc.gridx = 1;
+				gc.gridy = 3;
+				add(add, gc);
+				
+				gc.gridx = 1;
+				gc.gridy = 4;
+				add(remove, gc);
+				
+				gc.gridx = 1;
+				gc.gridy = 5;
+				add(edit, gc);
+				search.setText("What was sold?");
+				
+				add.setText("name, manufacture cost, sell cost, reorder point, reorder amount");
+				remove.setText("name, manufacture cost, sell cost, reorder point, reorder amount");
+				edit.setText("name, manufacture cost, sell cost, reorder point, reorder amount");
 				
 				
 				View_Sales_Log.addActionListener(new ActionListener()
@@ -124,19 +137,8 @@ public class Inventory_Pannal extends JFrame {
 					}
 				});
 				
-				/*
-				order_Stock.addActionListener(new ActionListener()
-				{
-					
-					public void actionPerformed(ActionEvent e) 
-					{
-						JFrame frame = new Stock_Order_Pannel("Order Stock");
-						frame.setSize(500,500);
-						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-						frame.setVisible(true);
-					}
-				});
-			*/
+				
+				
 	}
 
 }
