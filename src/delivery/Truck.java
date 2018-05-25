@@ -11,13 +11,18 @@ public class Truck extends TruckBase {
 		super();
 		
 	}
-
+/**
+ * 
+ * @param cargo will be the new max cargo space of the truck
+ */
 	public Truck(int cargo)
 	{
 		super();
 		TruckBase.capacity = cargo;
 	}
-
+/**
+ * default truck
+ */
 	public Truck() 
 	{
 		super();

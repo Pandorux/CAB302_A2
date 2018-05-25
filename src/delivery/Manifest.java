@@ -69,24 +69,44 @@ public class Manifest {
 			return Trucks.get(id);
 		}
 		
-
+		
+		/**
+		 * 
+		 * @param id remove the truck with id
+		 */
+		
 		public void removeTruck(int id) 
 		{
 			Trucks.remove(id);
 			
 		}
 
+		/**
+		 * 
+		 * @param truck adds the truck to the manifest and gives it a appropriate id
+		 */
+		
 		public void addTruck(TruckBase truck) 
 		{
 			Trucks.put(truck.getId(), truck);
 		}
 
+		/**
+		 * 
+		 * @param refrigeratedTruck makes a refrigerated truck and gives it a id
+		 */
+		
 		public void addTruck(RefrigeratedTruck refrigeratedTruck) 
 		{
 			Trucks.put(refrigeratedTruck.getId(), refrigeratedTruck);
 			
 		}
 
+		/**
+		 * 
+		 * @param id removes the truck with a ID of id
+		 */
+		
 		public void remove(int id) 
 		{
 			Trucks.remove(id,Trucks.get(id));//remove truck with id

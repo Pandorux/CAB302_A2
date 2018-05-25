@@ -141,13 +141,20 @@ public abstract class TruckBase {
 	}
 
 
-
+/**
+ * 
+ * @param i position in the inventory
+ * @return the item at position i in the inventory
+ */
 	public Object getItem(int i) 
 	{
 		return cargo.get(i);
 	}
 
-
+/**
+ * 
+ * @param items remove all items that aare passed theough as paramaters
+ */
 
 	public void removeItems(ArrayList<Item> items)
 	{
@@ -155,7 +162,10 @@ public abstract class TruckBase {
 		
 	}
 
-
+/**
+ * 
+ * @param string remove all items that have the name passed through the parameters
+ */
 
 	public void removeItems(String string) 
 	{
@@ -168,6 +178,12 @@ public abstract class TruckBase {
 		}
 		
 	}
+	
+	/**
+	 * 
+	 * @param string  the name of the item
+	 * @return all items with the name passed as the paramater
+	 */
 	
 	public Object getItems(String string) 
 	{
@@ -184,6 +200,12 @@ public abstract class TruckBase {
 		return List_of_things;//then return the list
 	}
 
+	
+	/**
+	 * 
+	 * @param temp get all the items with the temprature of temp or lower
+	 * @return return these items
+	 */
 	public ArrayList<Item> getItems(double temp)//needs checkTemprature to be implemented in item to work
 	{
 		// TODO: Fix Naming
@@ -201,7 +223,10 @@ public abstract class TruckBase {
 	}
 
 
-
+/**
+ * 
+ * @param temp remove all items with a temprature of temp or lower
+ */
 	public void removeItems(double temp)//needs checkTemprature to be implemented in item to work
 	{
 		
@@ -215,7 +240,9 @@ public abstract class TruckBase {
 	}
 
 
-
+/**
+ * remove everything
+ */
 	public void empty() 
 	{
 		for (int l = 0; l < cargo.size(); l++)//remove everything
@@ -225,7 +252,12 @@ public abstract class TruckBase {
 	}
 
 
-	
+	/**
+	 * 
+	 * @param name add a new item 
+	 * @param i how many of said item
+	 * @return return the paramaters as a new item
+	 */
 
 	public Item addItem(String name, int i) 
 	{
@@ -234,21 +266,42 @@ public abstract class TruckBase {
 		return thing;
 	}
 
+	/**
+	 * 
+	 * @return finds the id of a truck
+	 */
+	
 	public Integer getId() 
 	{
 		return this.id;
 	}
 
-	public Object getCapacity() 
+	/**
+	 * 
+	 * @return the capasity of the truck 
+	 */
+	
+	public Integer getCapacity() 
 	{
 		return this.capacity;
 	}
 
+	
+	/**
+	 * 
+	 * @param i set the temp of the truck to i
+	 * 
+	 */
 	public void setTemp(int i) //the temp can only be of a refregerated truck
 	{
 		RefrigeratedTruck.temprature = i;	//obselete since this is automated
 	}
 
+	
+	/**
+	 * 
+	 * @return the temprature of a truck
+	 */
 	public static double getTemp() 
 	{
 		return RefrigeratedTruck.temprature;
