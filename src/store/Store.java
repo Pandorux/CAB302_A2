@@ -33,7 +33,7 @@ public class Store {
 		capital -= amt;
 	}
 	
-	public void getName() {
+	public String getName() {
 		return name;
 	}
 	
