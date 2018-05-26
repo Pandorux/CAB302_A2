@@ -1,36 +1,35 @@
-package store.Reagan_assesment_supermart;
+package store;
 
 import java.util.ArrayList;
 
 public class Store {
 
-	public static Store instance = null;
+	protected static Store instance = new Store();
 	
 	private String name;
 	private Stock inventory;
 	private double capital;
 	
 	// TODO: throw exception if store alreadys exists?
-	public Store(String name) {
-		this.name = name;
-		this.inventory = new Stock();
-		this.capital = 0;
-		instance = this;
-	}
-
-	public Store(String name, double capital) {
-		this.name = name;
-		this.inventory = new Stock();
-		this.capital = capital;
-		instance = this;
+	protected Store() {	
+		name = "";
+		inventory = new Stock();
+		capital = 0.0;
 	}
 	
-	public void AddCapital(double amt) {
-		capital += amt;
+	public static Store getInstance() {
+		return instance;
+	}
+	
+	public void addCapital(double amt) throws IndexOutOfBoundsException {
+		if(amt < 0) 
+			throw new IndexOutOfBoundsException("Input amount cannot be less than 0");
+		else
+			capital += amt;
 	}
 	
 	public void removeCapital(double amt) {
-		capital -= amt;
+		capital -= Math.abs(amt);
 	}
 	
 	public String getName() {
@@ -39,6 +38,24 @@ public class Store {
 	
 	public void renameStore(String storeName) {
 		name = storeName;
+	}
+	
+	/**
+	 * <h1>Deconstructor method<h1>
+	 * <br>
+	 * <br>
+	 * Sets all values of class to their beginning state.
+	 */
+	public void deconstruct() {
+		instance = new Store();		
+	}
+
+	public double getCapital() {
+		return capital;
+	}
+
+	public Stock getInventory() {
+		return inventory;
 	}
 	
 }
