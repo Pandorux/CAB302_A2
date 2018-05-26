@@ -1,5 +1,5 @@
-package store
-import exceptions;
+package store;
+package exceptions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import exceptions.CSVFormatException;
 
 public class Stock {
 
-	private HashMap<String, ArrayList<Item>> storeProducts;
+	private HashMap<String, Pair<Item, Integer>> storeProducts;
 	
 	public Stock() {
 		storeProducts = new HashMap<String, ArrayList<Item>>();

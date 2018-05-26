@@ -57,13 +57,18 @@ public class Item {
 		return manufactureCost;
 	}
 
-	public void increaseReorderAmount(int amt) {
+	public void increaseReorderAmount(int amt) throws IndexOutOfBoundsException{	
+		if(amt < 0)
+			throw new IndexOutOfBoundsException("Input amount cannot be less than 0");
 		reorderAmount += amt;
 	}
 	
 	// TODO: add exception to this when it goes under 0
-	public void decreaaseReorderAmount(int amt) {
-		reorderAmount -= amt;
+	public void decreaseReorderAmount(int amt) throws IndexOutOfBoundsException {
+		if(reorderAmount - amt < 0)
+			throw new IndexOutOfBoundsException("Cannot reorder a negative number of " + name);
+		else
+			reorderAmount -= amt;
 	}
 	
 	public int findItemReorderAmount() {
@@ -136,6 +141,13 @@ public class Item {
 		catch (CSVFormatException e) {
 			
 		}	
+	}
+
+	public boolean checkTemperature() {
+		if(Double.isNaN(temperature))
+			return false;
+		else
+			return true;
 	}
 }
 	
