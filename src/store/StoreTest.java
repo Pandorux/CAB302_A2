@@ -15,13 +15,14 @@ public class StoreTest {
 		Store store = new Store("bob", 50.00);
 	}
 	
-	
+	@Test
 	public void testResetSingleton_Inventory()
 	{
 		Store.deconstructor();//this resets the singleton;
 		assertEquals("",store.getInventory());//shouldnt have a inventory
 	}
 	
+	@Test
 	public void testResetSingleton_Capital()
 	{
 		Store.deconstructor();//this resets the singleton;
@@ -29,26 +30,12 @@ public class StoreTest {
 		
 	}
 	
+	@Test
 	public void testResetSingleton_Name()
 	{
 		Store.deconstructor();//this resets the singleton;
 		assertEquals(null ,store.getName());//shouldnt have a name
 	}
-	
-	/*
-	@Test
-	public void testSingleton_00()
-	{
-		assertTrue(Store.instance == store);
-	}
-	
-	@Test
-	public void testSingleton_01()////////////////////////////////////////////////////////////////////////////
-	{
-		Store store2 = new Store();
-		assertTrue(testStore.instance == store2.instance);
-	}
-	*/
 	
 	@Test
 	public void testEmptyStore()
@@ -86,7 +73,7 @@ public class StoreTest {
 	public void testAddCapital()
 	{
 		 Store.getInstance().AddCapital(100.50);
-		assertTrue(150.50,  Store.getInstance().getCapital());
+		assertTrue(150.50 == Store.getInstance().getCapital());
 	}
 	
 	@Test (expected = IndexOutOfBoundsException.class)
@@ -99,7 +86,7 @@ public class StoreTest {
 	public void testRemoveCapital()
 	{
 		 Store.getInstance().removeCapital(10.50);//50 - 10 = 39.50
-		assertTrue(39.50,  Store.getInstance().getCaptial());
+		assertTrue(39.50 ==  Store.getInstance().getCaptial());
 	}	
 
 	@Test (expected = IndexOutOfBoundsException.class)

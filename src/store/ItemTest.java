@@ -3,9 +3,12 @@ package store;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import exceptions.StockException;
+
+import static org.junit.Assert.assertTrue;
 
 import java.io.EOFException;
 import java.util.ArrayList;
@@ -35,7 +38,7 @@ import java.util.ArrayList;
 			void testIncreaseManufactureCost()
 			{
 				potato.increasePrice(80);//now worth $80
-				assertEquals(130, potato.findItemManufactureCost());//find second item
+				assertTrue(130 == potato.findItemManufactureCost());//find second item
 			}
 			
 			@Test (expected = IndexOutOfBoundsException.class)
@@ -48,7 +51,7 @@ import java.util.ArrayList;
 			void testDecreaseManufactureCost()
 			{
 				potato.decreasePrice(10);//now worth $80
-				assertEquals(40, potato.findItemManufactureCost());//find second item
+				assertTrue(40 == potato.findItemManufactureCost());//find second item
 			}
 			
 			@Test (expected = IndexOutOfBoundsException.class)
@@ -61,7 +64,7 @@ import java.util.ArrayList;
 			void testIncreaseItemSalesCost()
 			{
 				potato.increaseCost(90);//now costs a extra $90 dollars to buy potatos with base of 50
-				assertEquals(150, potato.findItemCost());
+				assertTrue(150 == potato.findItemCost());
 			}
 			
 			@Test (expected = IndexOutOfBoundsException.class)

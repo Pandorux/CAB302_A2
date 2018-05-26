@@ -63,7 +63,6 @@ public class StockTest {
 	public void testNegitiveDecreaseStock()
 	{
 		milk.DecreaseAmount(-20);//add potatos
-		assertEquals(30 == milk.getQuantity());//did u add more milk
 	}
 	
 	@Test (expected = StockException.class)
@@ -87,14 +86,15 @@ public class StockTest {
 		potato.addItem();//add potatos
 		carrot.addItem();//add potatos
 		Stock.removeAll();//no stock now exists
-		assertTrue(null , getAllStock());//there should be no items in stock
+		assertTrue(null == getAllStock());//there should be no items in stock
 	}
 	
 
 	@Test (expected = StockException.class)
 	public void testInitialInventory()
 	{
-		assertEquals("potato", 50 == milk.findItem());//a potato is not milk
+		Stock potato = new Stock("potato", 50);//50 milk in stock
+		assertTrue(potato == milk.findItem());//a potato is not milk
 	}
 	
 	@Test
@@ -104,7 +104,7 @@ public class StockTest {
 		Stock potato = new Stock("potato", 50);
 		dolly.addItem();	
 		potato.addItem();
-		assertEquals(dolly == dolly.findItem());//find second item
+		assertTrue(dolly == dolly.findItem());//find second item
 	}
 	
 	@Test
