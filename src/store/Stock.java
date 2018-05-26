@@ -1,5 +1,5 @@
 package store;
-package exceptions;
+import exceptions.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,19 +8,18 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 import exceptions.CSVFormatException;
+import javafx.util.Pair;
 
 public class Stock {
 
 	private HashMap<String, Pair<Item, Integer>> storeProducts;
 	
 	public Stock() {
-		storeProducts = new HashMap<String, ArrayList<Item>>();
+		storeProducts = new HashMap<String, Pair<Item, Integer>>();
 	}
 	
 	public void removeAll() {
-		for(Iterator<String> i = storeProducts.keySet().iterator(); i.hasNext();) {
-			storeProducts.get(i.next()).clear();
-		}
+
 	}	
 	
 	// TODO: How to add item?
@@ -46,6 +45,11 @@ public class Stock {
 		catch (CSVFormatException e) {
 			
 		}	
+	}
+
+	public int length() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 
