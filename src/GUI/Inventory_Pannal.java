@@ -14,8 +14,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Inventory_Pannal extends JFrame {
+import store.Stock;
+import store.Store;
 
+public class Inventory_Pannal extends JFrame {
+	
 	public Inventory_Pannal(String title) 
 	{
 		super (title);
@@ -33,9 +36,11 @@ public class Inventory_Pannal extends JFrame {
 		JButton add_Item = new JButton("Add Item");
 		JButton remove_Item = new JButton("Remove Item");
 		JButton edit_Item = new JButton("Edit Item");
-		JTextField add = new JTextField(20);
+
 		JTextField remove = new JTextField(20);
 		JTextField edit = new JTextField(20);
+		
+		
 		//set layout
 		setLayout(new GridBagLayout());
 		
@@ -83,31 +88,31 @@ public class Inventory_Pannal extends JFrame {
 				gc.gridy = 5;
 				add(edit_Item, gc);
 				
-				gc.gridx = 1;
-				gc.gridy = 3;
-				add(add, gc);
 				
-				gc.gridx = 1;
-				gc.gridy = 4;
-				add(remove, gc);
+				//gc.gridx = 1;
+				//gc.gridy = 4;
+				//add(remove, gc);
 				
 				gc.gridx = 1;
 				gc.gridy = 5;
 				add(edit, gc);
+				
 				search.setText("What was sold?");
 				
-				add.setText("name, manufacture cost, sell cost, reorder point, reorder amount");
-				remove.setText("name, manufacture cost, sell cost, reorder point, reorder amount");
-				edit.setText("name, manufacture cost, sell cost, reorder point, reorder amount");
+				
+				remove.setText("Infomation");
+				edit.setText("name");
 				
 				
+				//menu navigation
 				View_Sales_Log.addActionListener(new ActionListener()
 				{
 					
 					public void actionPerformed(ActionEvent e) 
 					{
+						setVisible(false);
 						JFrame frame = new Sales_Pannel("Sales Logs");
-						frame.setSize(500,500);
+						frame.setSize(1000,1000);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);
 					}
@@ -118,8 +123,9 @@ public class Inventory_Pannal extends JFrame {
 					
 					public void actionPerformed(ActionEvent e) 
 					{
+						setVisible(false);
 						JFrame frame = new Inventory("Inventory");
-						frame.setSize(500,500);
+						frame.setSize(1000,1000);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);
 					}
@@ -130,15 +136,63 @@ public class Inventory_Pannal extends JFrame {
 					
 					public void actionPerformed(ActionEvent e) 
 					{
+						setVisible(false);
 						JFrame frame = new Manifest_Pannel("Manifest");
-						frame.setSize(500,500);
+						frame.setSize(1000,1000);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);
 					}
 				});
 				
 				
+				edit_Item.addActionListener(new ActionListener()
+				{
+					
+					public void actionPerformed(ActionEvent e) 
+					{
+						if (edit.getText() == "name")//there needs to be a value in this
+						{
+							//do nothing
+						}
+						else
+						{
+							System.out.println(edit.getText());
+							setVisible(false);
+							JFrame frame = new editItemPanel("Edit Items", edit.getText());
+							frame.setSize(1000,1000);
+							frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							frame.setVisible(true);
+						}
+						
+					}
+				});
+				//*************************************************************************************
+				//functionality
+				add_Item.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e) 
+					{
+						//open a new window to make this work right
+						setVisible(false);
+						JFrame frame = new Add_Item_Pannel("Adding Item");
+						frame.setSize(400,100);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						frame.setVisible(true);
+					}
+				});
 				
+				remove_Item.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e) 
+					{
+						//open a new window to make this work right
+						setVisible(false);
+						JFrame frame = new Remove_Item_Pannel("Removing Item");
+						frame.setSize(400,100);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						frame.setVisible(true);
+					}
+				});
 	}
 
 }

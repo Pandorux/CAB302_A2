@@ -12,7 +12,7 @@ public class BaseFrame //this initializes the frame
 				public void run()
 				{
 					JFrame frame = new MainMenu("SuperMart Systems");
-					frame.setSize(500,500);
+					frame.setSize(1000,1000);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setVisible(true);
 				}

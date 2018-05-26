@@ -6,6 +6,8 @@ import store.Item;
 
 public class Truck extends TruckBase {
 	
+	
+	
 	public Truck(int id, int capacity2)
 	{
 		super();

@@ -2,6 +2,8 @@ package delivery;
 import delivery.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import exceptions.DeliveryException;
 import delivery.Truck;
@@ -23,46 +25,46 @@ public class ManifestTest {
 		
 	@Test
 	public void testGetTruck_00() {
-		assertEquals(1, manifest.getTruck(1).getId());
+		assertTrue(1 == manifest.getTruck(1).getId());
 	}
 
 	@Test
 	public void testGetTruck_01() {
-		assertEquals(4, manifest.getTruck(4).getId());
+		assertTrue(4 ==  manifest.getTruck(4).getId());
 	}
 	
 	@Test
 	public void testGetTruckThatIsntInManifest_00() {
 		manifest.removeTruck(4);
-		assertEquals(null, manifest.getTruck(4));
+		assertTrue(null == manifest.getTruck(4));
 	}
 
 	@Test
 	public void testGetTruckThatIsntInManifest_01() {
-		assertEquals(null, manifest.getTruck(7).getId());
+		assertTrue(null == manifest.getTruck(7).getId());
 	}
 	
 	@Test
 	public void testRemoveTruck_00() {
 		manifest.removeTruck(1);
-		assertEquals(null, manifest.getTruck(1));
+		assertTrue(null == manifest.getTruck(1));
 	}
 	
 	@Test
 	public void testRemoveTruck_01() {
 		manifest.removeTruck(1);
-		assertEquals(null, manifest.removeTruck(1));
+		assertTrue(null == manifest.removeTruck(1));
 	}
 	
 	@Test
 	public void testAddTruck() {
 		manifest.addTruck(new Truck());
-		assertEquals(6, manifest.getTruck(6).getId());
+		assertTrue(6 == manifest.getTruck(6).getId());
 	}
 	
 	@Test
 	public void testManifestSize_00() {
-		assertEquals(5, manifest.length());
+		assertTrue(5 == manifest.length());
 	}
 	
 	@Test

@@ -43,8 +43,9 @@ public class Sales_Pannel extends JFrame {
 					
 					public void actionPerformed(ActionEvent e) 
 					{
+						setVisible(false);
 						JFrame frame = new Inventory_Pannal("Inventory Infomation");
-						frame.setSize(500,500);
+						frame.setSize(1000,1000);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);
 					}

@@ -25,6 +25,13 @@ public abstract class TruckBase {
 	 * @param capacity2  its id and capacity of the truck
 	 */
 	
+	public TruckBase(int capacity) 
+	{
+		totalTrucks++;
+		this.id = totalTrucks;
+		this.capacity = capacity;
+	}
+	
 	public TruckBase()
 	{
 		totalTrucks++;
@@ -32,12 +39,7 @@ public abstract class TruckBase {
 		this.capacity = 1000;
 	}
 	
-	public TruckBase(int capacity) 
-	{
-		totalTrucks++;
-		this.id = totalTrucks;
-		this.capacity = capacity;
-	}
+
 	
 	/**
 	 * 
@@ -118,7 +120,15 @@ public abstract class TruckBase {
 
 	public void addItems(Item item)
 	{
-		cargo.add(item);//add the cargo of the truck to the trucks cargo	
+		if (item.getQuantity() <= 0)//if negitive input or 0
+		{
+			
+		}
+		else 
+		{
+			cargo.add(item);//add the cargo of the truck to the trucks cargo	
+		}
+		
 	}
 
 	
@@ -128,7 +138,7 @@ public abstract class TruckBase {
 	 * @return return the objects information
 	 */
 
-	public Object getItem(Item item) 
+	public Item getItem(Item item) 
 	{
 		for (int i = 0; i < cargo.size() - 1; i++)
 		{
@@ -137,7 +147,7 @@ public abstract class TruckBase {
 				return cargo.get(i);
 			}
 		}
-		return "Error, item not found";
+		return null;
 	}
 
 
@@ -146,7 +156,7 @@ public abstract class TruckBase {
  * @param i position in the inventory
  * @return the item at position i in the inventory
  */
-	public Object getItem(int i) 
+	public Item getItem(int i) 
 	{
 		return cargo.get(i);
 	}
@@ -185,13 +195,29 @@ public abstract class TruckBase {
 	 * @return all items with the name passed as the paramater
 	 */
 	
-	public Object getItems(String string) 
+	public ArrayList<Item> getItems(String string) //a array of items that have the name ...
 	{
-		ArrayList<Object> List_of_things = new ArrayList<Object>();
+		ArrayList<Item> List_of_things = new ArrayList<Item>();
 		
 		for (int i = 0; i < cargo.size(); i++)//search through all items
 		{
 			if (cargo.get(i).getName() == string)//for each object found that is what we are looking for
+			{
+				RefrigeratedTruck.Inventory.add(cargo.get(i));//add cold item to cold truck
+			}
+		}
+		
+		return List_of_things;//then return the list
+	}
+	
+	
+	public ArrayList<Item> getItems(Item thing) //a array of items ...
+	{
+		ArrayList<Item> List_of_things = new ArrayList<Item>();
+		
+		for (int i = 0; i < cargo.size(); i++)//search through all items
+		{
+			if (cargo.get(i) == thing)//for each object found that is what we are looking for
 			{
 				RefrigeratedTruck.Inventory.add(cargo.get(i));//add cold item to cold truck
 			}
@@ -305,6 +331,52 @@ public abstract class TruckBase {
 	public static double getTemp() 
 	{
 		return RefrigeratedTruck.temprature;
+	}
+
+	public ArrayList<Item> getItemsWithTempUnder(int temp) 
+	{
+		ArrayList<Item> List_of_things = new ArrayList<Item>();
+		for (int i = 0; i < cargo.size(); i++)
+		{			
+			if (cargo.get(i).getTemperature() <= temp)//if object is cooler then temp
+			{
+				List_of_things.add(cargo.get(i));//add it to the list
+			}
+		}
+		return List_of_things;
+	}
+
+	public ArrayList<Item> getItemsWithTemp(int temp) 
+	{
+		ArrayList<Item> List_of_things = new ArrayList<Item>();
+		
+		for (int i = 0; i < cargo.size(); i++)
+		{			
+			if (cargo.get(i).getTemperature() == temp)//if object is cooler then temp
+			{
+				List_of_things.add(cargo.get(i));//add it to the list
+			}
+		}
+		return List_of_things;
+	}
+
+	public ArrayList<Item> getItemsWithTempOver(int temp) 
+	{
+		ArrayList<Item> List_of_things = new ArrayList<Item>();
+		
+		for (int i = 0; i < cargo.size(); i++)
+		{			
+			if (cargo.get(i).getTemperature() >= temp)//if object is cooler then temp
+			{
+				List_of_things.add(cargo.get(i));//add it to the list
+			}
+		}
+		return List_of_things;
+	}
+
+	public Integer getTotalItems() 
+	{
+		return cargo.size();
 	}
 
 	

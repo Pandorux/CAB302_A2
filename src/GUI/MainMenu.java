@@ -20,11 +20,6 @@ public class MainMenu extends JFrame
 	{
 		super(title);
 		
-		Dimension size = getPreferredSize();
-		size.width = 250;
-		setPreferredSize(size);
-		
-		
 		
 		//create swing components
 		
@@ -86,8 +81,9 @@ public class MainMenu extends JFrame
 					
 					public void actionPerformed(ActionEvent e) 
 					{
+						setVisible(false);
 						JFrame frame = new Inventory_Pannal("Inventory Infomation");
-						frame.setSize(500,500);
+						frame.setSize(1000,1000);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);
 					}
@@ -98,8 +94,9 @@ public class MainMenu extends JFrame
 					
 					public void actionPerformed(ActionEvent e) 
 					{
+						setVisible(false);
 						JFrame frame = new Sales_Pannel("Sales Logs");
-						frame.setSize(500,500);
+						frame.setSize(1000,1000);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);
 					}
@@ -110,8 +107,9 @@ public class MainMenu extends JFrame
 					
 					public void actionPerformed(ActionEvent e) 
 					{
+						setVisible(false);
 						JFrame frame = new Manifest_Pannel("Manifest");
-						frame.setSize(500,500);
+						frame.setSize(1000,1000);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);
 					}
@@ -123,8 +121,9 @@ public class MainMenu extends JFrame
 					
 					public void actionPerformed(ActionEvent e) 
 					{
+						setVisible(false);
 						JFrame frame = new Stock_Order_Pannel("Order Stock");
-						frame.setSize(500,500);
+						frame.setSize(1000,1000);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);
 					}

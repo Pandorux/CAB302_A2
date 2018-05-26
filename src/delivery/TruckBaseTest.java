@@ -61,12 +61,8 @@ public class TruckBaseTest {
 	 */
 	protected class DummyItem extends Item {
 		
-		String name;
-		double temp;
-		
-		DummyItem(String name, double temp) {
-			this.name = name;
-			this.temp = temp;
+		DummyItem(String name, double temperature) {
+			super(name, 0.0, 0.0, "NoneOfYourBusiness", 0, temperature);
 		}
 		
 	}
@@ -123,70 +119,70 @@ public class TruckBaseTest {
 	
 	@Test // Double Check Test Functionality
 	public void testTruckId_00() {
-		assertEquals(1, dummyTruck.getId());
+		assertTrue(1 == dummyTruck.getId());
 	}
 	
 	@Test // Double Check Test Functionality
 	public void testTruckId_01() {
 		dummyTruckBase dummy00 = new dummyTruckBase();
 		dummyTruckBase dummy01 = new dummyTruckBase();
-		assertEquals(3, dummy01.getId());
+		assertTrue(3 == dummy01.getId());
 	}
 	
 	@Test
 	public void testGetCapacity_00() {
-		assertEquals(1000, dummyTruck.getCapacity());
+		assertTrue(1000 == dummyTruck.getCapacity());
 	}
 	
 	@Test
 	public void testGetCapacity_01() {
 		dummyTruck = new dummyTruckBase(34567);
-		assertEquals(34567, dummyTruck.getCapacity());
+		assertTrue(34567 == dummyTruck.getCapacity());
 	}
 	
 	@Test
 	public void testTruckCost_Empty() {
-		assertEquals((750), dummyTruck.getCost());
+		assertTrue((750) == dummyTruck.getCost());
 	}
 	
 	@Test
 	public void testTruckCost_01() {
 		ArrayList<Item> items = cargoMaker.CreateCargo(1000);
 		dummyTruck.addItems(items);
-		assertEquals((750 + 0.25 * 1000), dummyTruck.getCost());
+		assertTrue((750 + 0.25 * 1000) == dummyTruck.getCost());
 	}
 	
 	@Test
-	public void testTruckCost_02() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(5000);
+	public void testTruckCost_02() {//this is gonna error coz the max capasity for a normal truck is 1000 not 5000
+		ArrayList<Item> items = cargoMaker.CreateCargo(5000);
 		dummyTruck.addItems(items);
-		assertEquals((750 + 0.25 * 5000), dummyTruck.getCost());
+		assertTrue((750 + 0.25 * 5000) == dummyTruck.getCost());
 	}
 	
 	@Test
 	public void testTruckRemoveItem_Item() {
 		DummyItem item = new DummyItem("Milk", 0);
-		dummyTruck.addItems(item);
-		assertEquals(false, dummyTruck.getItems(item));
+		dummyTruck.removeItem(item);
+		assertTrue(false == dummyTruck.getItems(item));
 	}
 	
 	@Test
 	public void testTruckRemoveItem_Name() {
 		dummyTruck.addItems(new DummyItem("Milk", 0));
 		dummyTruck.removeItems("Milk");
-		assertEquals(null, dummyTruck.getItems("Milk"));
+		assertTrue(null == dummyTruck.getItems("Milk"));
 	}
 	
 	@Test
 	public void testTruckAddItem() {
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
-		assertEquals(item, dummyTruck.getItems(item));
+		assertTrue(item == dummyTruck.getItems(item).get(0));
 	}
 	
 	@Test
 	public void testTruckGetItems_Name() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
@@ -196,13 +192,13 @@ public class TruckBaseTest {
 			}
 		}
 		
-		assertEquals(totalItems, dummyTruck.getItems("Milk").length);
+		assertEquals(totalItems, dummyTruck.getItems("Milk").size());
 	}
 	
 	// TODO: Fix GetItem Name
 	@Test
 	public void testTruckGetItems_TempEqual() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
@@ -212,13 +208,13 @@ public class TruckBaseTest {
 			}
 		}
 		
-		assertEquals(totalItems, dummyTruck.getItemsWithTemp(-20).length);
+		assertEquals(totalItems, (dummyTruck.getItemsWithTemp(-20)).size());
 	}
 	
 	// TODO: Fix GetItem Name
 	@Test
 	public void testTruckGetItems_TempLessOf() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
@@ -228,13 +224,13 @@ public class TruckBaseTest {
 			}
 		}
 		
-		assertEquals(totalItems, dummyTruck.getItemsWithTempUnder(-20).length);
+		assertEquals(totalItems, (dummyTruck.getItemsWithTempUnder(-20)).size());
 	}
 	
 	// TODO: Fix GetItem Name
 	@Test
 	public void testTruckGetItems_TempMoreThan() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		int totalItems = 0;
 		
@@ -244,7 +240,7 @@ public class TruckBaseTest {
 			}
 		}
 		
-		assertEquals(totalItems, dummyTruck.getItemsWithTempOver(-20).length);
+		assertEquals(totalItems, (dummyTruck.getItemsWithTempOver(-20)).size());
 	}
 	
 	@Test
@@ -273,15 +269,15 @@ public class TruckBaseTest {
 	
 	@Test
 	public void testTruckRemoveItems_Items() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems(items);
-		assertEquals(0, dummyTruck.getTotalItems());
+		assertTrue(0 == dummyTruck.getTotalItems());
 	}
 	
 	@Test
 	public void testTruckRemoveItems_Name() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems("Milk");
 		
@@ -291,7 +287,7 @@ public class TruckBaseTest {
 	// TODO: Fix GetItem and RemoveItems Name
 	@Test
 	public void testTruckRemoveItems_TempEqual() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems(-20);
 		
@@ -301,7 +297,7 @@ public class TruckBaseTest {
 	// TODO: Fix GetItem and RemoveItems Name
 	@Test
 	public void testTruckRemoveItems_TempLessThan() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems(-20);
 		
@@ -311,7 +307,7 @@ public class TruckBaseTest {
 	// TODO: Fix GetItem and RemoveItems Name
 	@Test
 	public void testTruckRemoveItems_TempMoreThan() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems(-20);
 		assertEquals(null, dummyTruck.getItem(-20));
@@ -319,15 +315,15 @@ public class TruckBaseTest {
 	
 	@Test
 	public void testTruckEmptyTruck() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(500);
+		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.empty();
-		assertEquals(0, dummyTruck.totalItems());
+		assertTrue(0 == dummyTruck.getTotalItems());
 	}
 	
 	@Test(expected = DeliveryException.class)
 	public void testCapacityCannotExceedMax() {
-		ArrayList<DummyItem> items = cargoMaker.CreateCargo(2000);
+		ArrayList<Item> items = cargoMaker.CreateCargo(2000);
 		dummyTruck.addItems(items);
 	}
 }

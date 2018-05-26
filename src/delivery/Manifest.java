@@ -73,12 +73,12 @@ public class Manifest {
 		/**
 		 * 
 		 * @param id remove the truck with id
+		 * @return 
 		 */
 		
-		public void removeTruck(int id) 
+		public TruckBase removeTruck(int id) 
 		{
-			Trucks.remove(id);
-			
+			return Trucks.remove(id);
 		}
 
 		/**
@@ -111,6 +111,13 @@ public class Manifest {
 		{
 			Trucks.remove(id,Trucks.get(id));//remove truck with id
 			
+		}
+
+
+		public int length() 
+		{
+			
+			return Trucks.size();
 		}
 		
 	
