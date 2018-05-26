@@ -1,6 +1,7 @@
 package store;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -121,14 +122,14 @@ public class Item {
 	 * 
 	 * @param filePath
 	 * @return
+	 * @throws FileNotFoundException 
 	 * @throws CSVException
 	 */
-	public static ArrayList<Item> importItemCSV(String filePath) throws CSVException{
+	public static ArrayList<Item> importItemCSV(String filePath) throws CSVFormatException, FileNotFoundException{
 		
 		File file = new File(filePath);
 		Scanner inputStream = new Scanner(file);
 		inputStream.useDelimiter("(\\s\n)"); // Separates CSV lines
-		
 
 		try {	
 			ArrayList<Item> items = new ArrayList<Item>();
@@ -149,16 +150,20 @@ public class Item {
 								Integer.parseInt(params[4]), Double.parseDouble(params[5])));
 						break;
 						
-//					default:
-//						throw CSVFormatException();
-//						break;
+					default:
+						inputStream.close();
+						throw new CSVFormatException("Incorrect amount of attributes in CSV");
 				}
 			}
+			inputStream.close();
 			return items;
 		}
 		catch (CSVFormatException e) {
-			
+			inputStream.close();
+			throw new CSVFormatException("Imported CSV does not meet format");
 		}	
+		
+		
 	}
 
 
