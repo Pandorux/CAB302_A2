@@ -8,6 +8,7 @@ import org.junit.rules.ExpectedException;
 
 import exceptions.StockException;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.EOFException;
@@ -34,53 +35,55 @@ public class ItemTest {
 	@Test
 	public void testIncreaseManufactureCost()
 	{
-		potato.increasePrice(80);//now worth $80
+		potato.increaseManufactureCost(80);//now worth $80
 		assertTrue(130 == potato.findItemManufactureCost());//find second item
 	}
 	
 	@Test (expected = IndexOutOfBoundsException.class)
-	public void testNegitiveIncreaseManufactureCost()
+	public void testNegativeIncreaseManufactureCost()
 	{
-		potato.increasePrice(-80);//now worth $80
+		potato.increaseManufactureCost(-80);//now worth $80
 	}
 	
 	@Test
 	public void testDecreaseManufactureCost()
 	{
-		potato.decreasePrice(10);//now worth $80
+		potato.decreaseManufactureCost(10);//now worth $40
 		assertTrue(40 == potato.findItemManufactureCost());//find second item
 	}
 	
-	@Test (expected = IndexOutOfBoundsException.class)
+	@Test
 	public void testNegativeDecreaseManufactureCost()
 	{
-		potato.decreasePrice(-10);//now worth $80
+		potato.decreaseManufactureCost(-10);//now worth $40
+		assertTrue(40 == potato.findItemManufactureCost());
 	}
 	
 	@Test
 	public void testIncreaseItemSalesCost()
 	{
-		potato.increaseCost(90);//now costs a extra $90 dollars to buy potatos with base of 50
-		assertTrue(150 == potato.findItemCost());
+		potato.increaseRetailPrice(90);//now costs a extra $90 dollars to buy potatos with base of 50
+		assertTrue(150 == potato.findRetailPrice());
 	}
 	
 	@Test (expected = IndexOutOfBoundsException.class)
-	public void testNegitiveIncreaseItemSalesCost()
+	public void testNegativeIncreaseItemSalesCost()
 	{
-		potato.increaseCost(-90);//now costs a extra $90 dollars to buy potatos with base of 50
+		potato.increaseRetailPrice(-90);//now costs a extra $90 dollars to buy potatos with base of 50
 	}
 	
 	@Test
 	public void testDecreaseItemSalesCost()
 	{
-		potato.decreaseCost( 5);//now costs a $5 less to buy potatos base 60
-		assertTrue(55 == potato.findItemCost());
+		potato.decreaseRetailPrice(5);//now costs a $5 less to buy potatos base 60
+		assertTrue(55 == potato.findRetailPrice());
 	}
 	
-	@Test (expected = IndexOutOfBoundsException.class)
-	public void testNegitiveDecreaseItemSalesCost()
+	@Test
+	public void testNegativeDecreaseItemSalesCost() 
 	{
-		potato.decreaseCost(-5);//now costs a $5 less to buy potatos base 60
+		potato.decreaseRetailPrice(-5);//now costs a $5 less to buy potatos base 60
+		assertTrue(55 == potato.findRetailPrice());
 	}
 	
 
@@ -99,7 +102,7 @@ public class ItemTest {
 	}
 	
 	@Test (expected = IndexOutOfBoundsException.class)
-	public void testNegitiveIncreaseReorderAmount()
+	public void testNegitiveIncreaseReorderAmount() 
 	{
 		potato.increaseReorderAmount(-100);//now a extra getting 100 potato from 70
 	}
@@ -108,13 +111,7 @@ public class ItemTest {
 	public void testDecreaseReorderAmount()
 	{
 		potato.decreaseReorderAmount(70);//now getting 70 less potatos from 70
-		assertTrue(0 < potato.findItemReorderAmount());
-	}
-	
-	@Test (expected = IndexOutOfBoundsException.class)
-	public void testNegitiveDecreaseReorderAmount()
-	{
-		potato.decreaseReorderAmount(-80);//now getting 70 less potatos from 70
+		assertTrue(0 == potato.findItemReorderAmount());
 	}
 	
 	@Test
@@ -127,7 +124,7 @@ public class ItemTest {
 	@Test 
 	public void testItemTempControlNotCooled()
 	{
-		assertTrue(potato.checkTemperature());//NaN if there is not a temp control
+		assertFalse(potato.checkTemperature()); //NaN if there is not a temp control
 	}//potatos arn't temp controlled
 		
 		

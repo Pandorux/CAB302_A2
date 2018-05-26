@@ -1,6 +1,7 @@
 package store;
 
 import java.io.File;
+import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,12 +14,12 @@ import exceptions.*;
  */
 public class Item {
 
-	String name;
-	double manufactureCost;
-	double retailPrice;
-	String reorderPoint;
-	int reorderAmount;
-	double temperature;
+	private String name;
+	private double manufactureCost;
+	private double retailPrice;
+	private String reorderPoint;
+	private int reorderAmount;
+	private double temperature;
 	
 	public Item(String name, double manufactureCost, double retailPrice, 
 			String reorderPoint, int reorderAmount) {
@@ -40,33 +41,29 @@ public class Item {
 		this.temperature = temperature;
 	}
 	
-	public void increasePrice(double amt) {
-		retailPrice += amt;
-	}
-	
 	public String getName() {
 		return name;
 	}
 	
-	// TODO: add exception for when you go under 0
-	public void decreasePrice(double amt) {
-		retailPrice -= amt;
+	public void rename(String newName) {
+		this.name = newName;
 	}
-
-	public double findItemCost() {
-		return manufactureCost;
+	
+	public double findRetailPrice() {
+		return retailPrice;
 	}
 
 	public void increaseReorderAmount(int amt) throws IndexOutOfBoundsException{	
 		if(amt < 0)
 			throw new IndexOutOfBoundsException("Input amount cannot be less than 0");
-		reorderAmount += amt;
+		else
+			reorderAmount += amt;
 	}
 	
 	// TODO: add exception to this when it goes under 0
-	public void decreaseReorderAmount(int amt) throws IndexOutOfBoundsException {
-		if(reorderAmount - amt < 0)
-			throw new IndexOutOfBoundsException("Cannot reorder a negative number of " + name);
+	public void decreaseReorderAmount(int amt) {
+		if(reorderAmount - Math.abs(amt) < 0)
+			throw new IndexOutOfBoundsException("ReorderAmount cannot be less than 0");
 		else
 			reorderAmount -= amt;
 	}
@@ -91,12 +88,33 @@ public class Item {
 		return temperature;
 	}
 	
-	public void increaseCost(double amt) {
-		manufactureCost += amt;	
+	public boolean checkTemperature() {
+		if(Double.isNaN(temperature))
+			return false;
+		else
+			return true;
+	}
+
+	public void increaseManufactureCost(double amt) throws IndexOutOfBoundsException {
+		if(amt < 0)
+			throw new IndexOutOfBoundsException("Input amount cannot be less than 0");
+		else
+			manufactureCost += amt;		
 	}
 	
-	public void decreaseCost(double amt) {
-		manufactureCost -= amt;	
+	public void decreaseManufactureCost(double amt) {
+		manufactureCost -= Math.abs(amt);	
+	}
+
+	public void increaseRetailPrice(double amt) throws IndexOutOfBoundsException {
+		if(amt < 0)
+			throw new IndexOutOfBoundsException("Input amount cannot be less than 0");
+		else
+			retailPrice += amt;
+	}
+	
+	public void decreaseRetailPrice(double amt) {
+		retailPrice -= Math.abs(amt);
 	}
 	
 	/**
@@ -143,12 +161,8 @@ public class Item {
 		}	
 	}
 
-	public boolean checkTemperature() {
-		if(Double.isNaN(temperature))
-			return false;
-		else
-			return true;
-	}
+
+
 }
 	
 
