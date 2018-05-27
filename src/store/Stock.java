@@ -52,22 +52,4 @@ public class Stock {
 		return 0;
 	}
 
-
-	/**
-	 * @author n9999884
-	 * @return 
-	 */
-	public static String giveInventory()
-	{
-		if (storeProducts.size() == 0)
-		{
-			return null;
-		}
-		else
-		{
-			return storeProducts.toString();
-		}
-		
-	}
-	
 }

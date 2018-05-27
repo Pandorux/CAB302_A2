@@ -84,14 +84,9 @@ public class Store {
 	 */
 	public static HashMap<Integer, Pair<String, Integer>> giveSalesList()
 	{
-		if (salesList.size() == 0)
-		{
-			return salesList;
-		}
-		else 
-		{
-			return null;
-		}
+	
+		return salesList;
+		
 	}
 	
 }

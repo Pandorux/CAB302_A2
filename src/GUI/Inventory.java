@@ -25,7 +25,7 @@ public class Inventory extends JFrame
 		JTextArea inv = new JTextArea();
 		JButton quit = new JButton("Back");
 		
-		inv.setText(Stock.giveInventory());
+		inv.setText(Stock.giveInventory().toString());
 		
 		//swing stuff to a container
 		Container c = getContentPane();
@@ -33,7 +33,7 @@ public class Inventory extends JFrame
 		c.add(inv, BorderLayout.CENTER);
 		c.add(quit, BorderLayout.SOUTH);
 		
-		inv.setEditable(false);//user cant edit the inventory here
+		inv.setEditable(false);//user can't edit the inventory here
 		
 		quit.addActionListener(new ActionListener()
 		{

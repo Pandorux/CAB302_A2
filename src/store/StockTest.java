@@ -18,7 +18,7 @@ public class StockTest {
 		{
 			milk.add(new Item("Milk", 10.00, 10.00, "Zimbabwe", 50, -20));
 		}
-		Stock inventory = new Stock();
+		inventory = new Stock();
 		inventory.addItems(milk);
 		//50 milk in stock
 		//name, manufacture cost, sell cost, reorder point, reorder amount
