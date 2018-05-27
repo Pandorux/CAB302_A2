@@ -1,8 +1,12 @@
 package store;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
+import exceptions.CSVFormatException;
 import javafx.util.Pair;
 
 public class Store {
@@ -34,7 +38,7 @@ public class Store {
 	 */
 	public static void Sale(String item, Integer quantity)//item being sold
 	{
-		Stock.removeItems(getItem(item), quantity);
+		inventory.removeItems(item, quantity);
 		salesList.put(salesId, new Pair<String, Integer>(item, quantity));
 		salesId++;
 	}
@@ -89,6 +93,26 @@ public class Store {
 	{
 		return salesList;
 		
+	}
+	
+	public static ArrayList<Item> importStockCSV(String filePath) throws CSVFormatException, FileNotFoundException{
+		
+		File file = new File(filePath);
+		Scanner inputStream = new Scanner(file);
+		inputStream.useDelimiter("(\\s\n)"); // Separates CSV lines
+		
+
+		try {	
+			ArrayList<Item> items = new ArrayList<Item>();
+			while (inputStream.hasNext()) {
+				String[] params = inputStream.next().split(",");
+				salesList.put(salesId, new Pair<String, Integer>(params[0], Integer.parseInt(params[1])));
+			}
+			return items;
+		}
+		catch (CSVFormatException e) {
+			throw new CSVFormatException("Incorrect format used");
+		}	
 	}
 	
 }

@@ -88,13 +88,6 @@ public class Stock {
 			return removedItems;
 		}
 	}
-	
-	public static ArrayList<Item> importStockCSV(String filePath) throws CSVFormatException{
-		
-		File file = new File(filePath);
-		Scanner inputStream = new Scanner(file);
-		inputStream.useDelimiter("(\\s\n)"); // Separates CSV lines
-		
 
 		try {	
 			ArrayList<Item> items = new ArrayList<Item>();
@@ -124,6 +117,7 @@ public class Stock {
 
 
    public static ArrayList<Item> getItem(String name)
+   public boolean getItem(String name)
    {
        if (items.size() == 0)
        {
@@ -158,5 +152,21 @@ public class Stock {
 	   
    }
 
-
+	/**
+	 * @author n9999884
+	 * @return 
+	 */
+	public static String giveInventory()
+	{
+		if (storeProducts.size() == 0)
+		{
+			return null;
+		}
+		else
+		{
+			return storeProducts.toString();
+		}
+		
+	}
+	
 }
