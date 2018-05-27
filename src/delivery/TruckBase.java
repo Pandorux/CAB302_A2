@@ -37,6 +37,10 @@ public abstract class TruckBase {
 		this.capacity = 1000;
 	}
 	
+	public static int getTotalTrucks() {
+		return totalTrucks;
+	}
+	
 	/**
 	 * 
 	 * @author n9999884

@@ -70,19 +70,5 @@ public class ManifestTest {
 	public void testManifestSize_00() {
 		assertTrue(5 == manifest.length());
 	}
- 
-	@Test
-	public void testManifestSize_01() {
-		manifest.remove(1);
-		manifest.remove(4);
-		assertEquals(3, trucks.size());
-	}
-	
-	@Test
-	public void testManifestSize_02() {
-		manifest.addTruck(new Truck());
-		manifest.addTruck(new RefrigeratedTruck());
-		assertEquals(7, trucks.size());
-	}
 
 }
