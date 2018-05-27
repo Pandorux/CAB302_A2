@@ -167,7 +167,6 @@ public abstract class TruckBase {
 				i.remove();
 		}
 
-		System.out.println(count + " Milk Removed");
 	}
 	
 	/**
