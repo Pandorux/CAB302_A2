@@ -2,8 +2,10 @@ package delivery;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Iterator;
 
 import delivery.TruckBaseTest.DummyItem;
+import exceptions.DeliveryException;
 import store.Item;
 
 public abstract class TruckBase {
@@ -20,11 +22,7 @@ public abstract class TruckBase {
 	//make standby trucks
 	
 	
-	/**
-	 * 
-	 * @param capacity2  its id and capacity of the truck
-	 */
-	
+
 	public TruckBase(int capacity) 
 	{
 		totalTrucks++;
@@ -39,18 +37,18 @@ public abstract class TruckBase {
 		this.capacity = 1000;
 	}
 	
-
-	
 	/**
 	 * 
 	 * @author n9999884
 	 * 
 	 * @param createCargo adds the cargo that the truck should have to the cargo
-	 */
-	
-	public void addItems(ArrayList<Item> items) 
+	 */	
+	public void addItems(ArrayList<Item> items) throws DeliveryException
 	{
-		cargo.addAll(items);//add the cargo of the truck to the trucks cargo		
+		if(cargo.size() + items.size() > capacity)
+			throw new DeliveryException("This truck cannot contain more than " + capacity + " items at a time");
+		else
+			cargo.addAll(items);//add the cargo of the truck to the trucks cargo		
 	}
 
 	
@@ -58,31 +56,15 @@ public abstract class TruckBase {
 	 * 
 	 * @return  returns the cost that the truck will have to make a trip
 	 */
-	
 	public double getCost() //assuming this truck is not being cooled
 	{
-		return (750 + (0.25 * capacity));
+		return (750 + (0.25 * cargo.size()));
 	}
 
-	/*
-	
-	
-	public void addItems(String Item) 
-	{
-		if (cargo.size() < capacity)//if not full
-		{
-			cargo.add(Item);//add the item to the inventory of objects
-		}
-			
-		
-	}
-*/
 	/**
 	 * 
 	 * @param string the item that the function should remove
 	 */
-	
-	
 	public void removeItem(String string) 
 	{
 		for (int i = 0; i < cargo.size() - 1; i++)
@@ -100,35 +82,28 @@ public abstract class TruckBase {
 	 * @param string  view the item and its details 
 	 * @return  the item and its relevant info
 	 */
-	
 	public Item getItem(String name) 
 	{
-		for (int i = 0; i < cargo.size() - 1; i++)
+		for (int i = 0; i < cargo.size(); i++)
 		{
 			if (cargo.get(i).getName() == name)
 			{
-				return (Item) cargo.get(i);
+				return cargo.get(i);
 			}
 		}
-		throw new InputMismatchException();
+		return null;
 	}
-
+	
 	/**
 	 * 
 	 * @param item  adds the object into the inventory of the truck
 	 */
-
-	public void addItems(Item item)
+	public void addItem(Item item) throws DeliveryException
 	{
-//		if (item.getQuantity() <= 0)//if negitive input or 0
-//		{
-//			
-//		}
-//		else 
-//		{
-//			cargo.add(item);//add the cargo of the truck to the trucks cargo	
-//		}
-		
+		if(cargo.size() + 1 > capacity)
+			throw new DeliveryException("This truck cannot contain more than " + capacity + " items at a time");
+		else
+			cargo.add(item);//add the cargo of the truck to the trucks cargo	
 	}
 
 	
@@ -137,10 +112,9 @@ public abstract class TruckBase {
 	 * @param item  the item the user wants to view
 	 * @return return the objects information
 	 */
-
 	public Item getItem(Item item) 
 	{
-		for (int i = 0; i < cargo.size() - 1; i++)
+		for (int i = 0; i < cargo.size(); i++)
 		{
 			if (cargo.get(i) == item)
 			{
@@ -170,9 +144,10 @@ public abstract class TruckBase {
  */
 
 	public void removeItems(ArrayList<Item> items)
-	{
-		cargo.remove(items);
-		
+	{ 
+		for(Item i: items) {
+			cargo.remove(i);
+		}	
 	}
 
 /**
@@ -180,16 +155,15 @@ public abstract class TruckBase {
  * @param string remove all items that have the name passed through the parameters
  */
 
-	public void removeItems(String string) 
+	public void removeItems(String itemName) 
 	{
-		for (int i = 0; i < cargo.size(); i++)
-		{
-			if (cargo.get(i).getName() == string)
-			{
-				cargo.remove(i);
-			}
+		int count = 0;
+		for(Iterator<Item> i = cargo.iterator(); i.hasNext();) {
+			if(i.next().getName() == itemName)
+				i.remove();
 		}
-		
+
+		System.out.println(count + " Milk Removed");
 	}
 	
 	/**
@@ -228,7 +202,6 @@ public abstract class TruckBase {
 		
 		return items;//then return the list
 	}
-
 	
 	/**
 	 * 
@@ -268,29 +241,9 @@ public abstract class TruckBase {
 		}
 	}
 
-
-/**
- * remove everything
- */
 	public void empty() 
 	{
-		for (int l = 0; l < cargo.size(); l++)//remove everything
-		{
-			cargo.remove(l);
-		}
-	}
-
-
-	/**
-	 * 
-	 * @param name add a new item 
-	 * @param i how many of said item
-	 * @return return the paramaters as a new item
-	 */
-
-	public void addItem(Item item)
-	{
-		cargo.add(item);
+		cargo.clear();
 	}
 
 	/**
@@ -355,7 +308,7 @@ public abstract class TruckBase {
 		
 		for (int i = 0; i < cargo.size(); i++)
 		{			
-			if (cargo.get(i).getTemperature() >= temp)//if object is cooler then temp
+			if (cargo.get(i).getTemperature() > temp)//if object is cooler then temp
 			{
 				List_of_things.add(cargo.get(i));//add it to the list
 			}
@@ -378,7 +331,7 @@ public abstract class TruckBase {
 	}
 
 	public void removeItem(Item item) {
-		// TODO Auto-generated method stub
+		cargo.remove(item);
 	}
 
 	public ArrayList<Item> getItemsTempLess(int temp) {
