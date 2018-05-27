@@ -149,7 +149,7 @@ public class Item {
 								Double.parseDouble(params[3]), params[2], 
 								Integer.parseInt(params[4]), Double.parseDouble(params[5])));
 						break;
-						
+					
 					default:
 						inputStream.close();
 						throw new CSVFormatException("Incorrect amount of attributes in CSV");

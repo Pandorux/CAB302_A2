@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import org.junit.*;
+
+import delivery.TruckBaseTest.DummyItem;
 import exceptions.DeliveryException;
 import store.Item;
 
@@ -59,7 +61,7 @@ public class RefrigeratedTruckTest extends TruckBaseTest {
 	
 	@Test
 	public void testTruckCost_Empty() {
-		assertTrue(900 == dummyRefrigeratedTruck.getCost());
+		assertTrue(1100 == dummyRefrigeratedTruck.getCost());
 	}
 	
 	@Test
@@ -87,5 +89,19 @@ public class RefrigeratedTruckTest extends TruckBaseTest {
 	public void testAddItemsInTempRange() {
 		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyRefrigeratedTruck.addItems(items);
+	}
+	
+	@Test
+	@Override
+	public void testTruckAddItem() {
+		Item item = new DummyItem("Milk", 0);
+		dummyRefrigeratedTruck.addItem(item);
+		assertTrue(item == dummyRefrigeratedTruck.getItem(item));
+	}
+	
+	@Test
+	@Override
+	public void testGetCapacity_00() {
+		assertTrue(800 == dummyRefrigeratedTruck.getCapacity());
 	}
 }

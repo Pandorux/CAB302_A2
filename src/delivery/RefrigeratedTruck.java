@@ -64,11 +64,14 @@ public class RefrigeratedTruck extends TruckBase {
 	 * @return return the paramaters as a new item
 	 */
 	@Override
-	public Item addItem(String name, int i)
+	public void addItem(Item item) throws DeliveryException
 	{
-		Item thing = addItem(name, i);//have a item factory here probs
-		cargo.add(thing);
-		return thing;
+		if(item.checkTemperature()) {
+			if(item.getTemperature() < minTemp || maxTemp < item.getTemperature()) {
+				throw new DeliveryException("This truck cannot contain an item with a temperature of " + item.getTemperature());
+			}
+		}
+			super.addItem(item);
 	}
 	
 	/**
@@ -76,8 +79,10 @@ public class RefrigeratedTruck extends TruckBase {
 	 */
 	@Override
 	public double getCost() //assuming this truck is not being cooled
-	{
-		return 900 + 200 * java.lang.Math.pow((0.7), temperature/5);//900+200 * 0.7^t/5
+	{	if(Double.isNaN(temperature))
+			return 900 + 200;
+		else
+			return 900 + 200 * java.lang.Math.pow((0.7), temperature/5);//900+200 * 0.7^t/5
 	}
 	
 	/**
