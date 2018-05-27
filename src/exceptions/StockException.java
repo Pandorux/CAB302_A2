@@ -1,14 +1,20 @@
 package exceptions;
 
-public class StockException extends Exception {
+public class StockException extends RuntimeException {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String issue;
 	
-	StockException(String issue) {
+	public StockException(String issue) {
 		this.issue = issue;
 	}
 	
-	public static void PrintException() {
+	public StockException() { }
+	
+	public void PrintException() {
 		System.out.println("StockException Thrown: "+ issue);
 	}
 	
