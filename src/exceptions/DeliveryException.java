@@ -1,10 +1,10 @@
 package exceptions;
 
-public class DeliveryException extends Exception {
+public class DeliveryException extends RuntimeException {
 
 	private String issue;
 	
-	DeliveryException(String issue) {
+	public DeliveryException(String issue) {
 		this.issue = issue;
 	}
 	

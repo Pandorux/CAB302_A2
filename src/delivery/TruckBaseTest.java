@@ -146,14 +146,14 @@ public class TruckBaseTest {
 	}
 	
 	@Test
-	public void testTruckCost_01() {
+	public void testTruckCost_00() {
 		ArrayList<Item> items = cargoMaker.CreateCargo(1000);
 		dummyTruck.addItems(items);
 		assertTrue((750 + 0.25 * 1000) == dummyTruck.getCost());
 	}
 	
 	@Test
-	public void testTruckCost_02() {//this is gonna error coz the max capasity for a normal truck is 1000 not 5000
+	public void testTruckCost_01() {//this is gonna error coz the max capasity for a normal truck is 1000 not 5000
 		ArrayList<Item> items = cargoMaker.CreateCargo(5000);
 		dummyTruck.addItems(items);
 		assertTrue((750 + 0.25 * 5000) == dummyTruck.getCost());

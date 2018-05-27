@@ -2,13 +2,15 @@ package delivery;
 
 import java.util.ArrayList;
 
+import exceptions.DeliveryException;
+import store.Item;
+
 public class RefrigeratedTruck extends TruckBase {
-
-	static double temprature;
 	
-	static ArrayList<Object> Inventory = new ArrayList<Object>();
-	//public Object Inventory;
-
+	public final double maxTemp = 10;
+	public final double minTemp = -20;
+	
+	private double temperature;
 	
 	/**
 	 * 
@@ -18,7 +20,7 @@ public class RefrigeratedTruck extends TruckBase {
 	{
 		// TODO Auto-generated constructor stub
 		super(capacity);
-		this.temprature = FindTruckTemp();//does not have a temp?////////////////////////////////////////////////////////////////////
+		this.temperature = FindTruckTemp();//does not have a temp?////////////////////////////////////////////////////////////////////
 	}
 
 	/**
@@ -29,7 +31,7 @@ public class RefrigeratedTruck extends TruckBase {
 		// TODO Auto-generated constructor stub
 		super ();
 		this.capacity = 800;//capasity is specified to be 800 in task sheet
-		temprature = FindTruckTemp();
+		temperature = FindTruckTemp();
 	}
 
 	/**
@@ -41,26 +43,56 @@ public class RefrigeratedTruck extends TruckBase {
 	
 	double FindTruckTemp()
 	{
-		for (int i = 0; i < Inventory.size(); i++)
+		for (int i = 0; i < cargo.size(); i++)
 		{
-			if(Double.isNaN(temprature)) 
+			if(Double.isNaN(temperature)) 
 			{
-				temprature = cargo.get(i).getTemperature();
+				temperature = cargo.get(i).getTemperature();
 			}
-			else if (cargo.get(i).getTemperature() < temprature)
+			else if (cargo.get(i).getTemperature() < temperature)
 			{
-				temprature = cargo.get(i).getTemperature();
+				temperature = cargo.get(i).getTemperature();
 			}
 		}
-		return temprature; 
+		return temperature; 
 	}
+	
+	/**
+	 * 
+	 * @param name add a new item 
+	 * @param i how many of said item
+	 * @return return the paramaters as a new item
+	 */
+	@Override
+	public Item addItem(String name, int i)
+	{
+		Item thing = addItem(name, i);//have a item factory here probs
+		cargo.add(thing);
+		return thing;
+	}
+	
 	/**
 	 * makes the cost of the truck change if the truck needs cooling
 	 */
 	@Override
 	public double getCost() //assuming this truck is not being cooled
 	{
-		return 900 + 200 * java.lang.Math.pow((0.7), temprature/5);//900+200 * 0.7^t/5
+		return 900 + 200 * java.lang.Math.pow((0.7), temperature/5);//900+200 * 0.7^t/5
 	}
-			
+	
+	/**
+	 * 
+	 * @param i set the temp of the truck to i
+	 * 
+	 */
+	public void setTemp(double temp) throws DeliveryException //the temp can only be of a refregerated truck
+	{
+		if(temp < minTemp || maxTemp < temp) {
+			throw new DeliveryException(temp + " is not in temperature range");
+		}
+		else {
+			temperature = temp;
+		}
+	}
+				
 }
