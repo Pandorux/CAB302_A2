@@ -21,7 +21,7 @@ public class StoreTest {
 	{
 		Store.getInstance().deconstruct();
 	}
-	
+ 
 	@Test
 	public void testResetSingleton_Inventory()
 	{

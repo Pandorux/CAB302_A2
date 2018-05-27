@@ -128,7 +128,7 @@ public class StockTest {
 	{
 		ArrayList<Item> milk02 = inventory.removeItems("milk", 2000);//sherbert doesnt exist
 	}
-	
+ 
 	// TODO: Fix this Unit Test
 	@Test (expected = IndexOutOfBoundsException.class)
 	public void testNegativeStock()

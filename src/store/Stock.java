@@ -11,8 +11,6 @@ public class Stock {
 	
 	private HashMap<String, ArrayList<Item>> items;
 
-	static HashMap<String, Pair<Item, Integer>> storeProducts;
-	
 	public Stock() {
 		items = new HashMap<String, ArrayList<Item>>();
 	}
@@ -23,7 +21,7 @@ public class Stock {
 		else
 			return 0;
 	}
-	
+ 
 	public void removeAll() {
 		
 	}	

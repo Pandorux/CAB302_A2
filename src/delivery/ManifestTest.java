@@ -70,7 +70,7 @@ public class ManifestTest {
 	public void testManifestSize_00() {
 		assertTrue(5 == manifest.length());
 	}
-	
+ 
 	@Test
 	public void testManifestSize_01() {
 		manifest.remove(1);

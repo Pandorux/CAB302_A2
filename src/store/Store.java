@@ -15,7 +15,7 @@ public class Store {
 	private String name;
 	private Stock inventory;
 	private double capital;
-	
+
 	// TODO: throw exception if store alreadys exists?
 	protected Store() {	
 		name = "";
