@@ -11,10 +11,22 @@ import store.Item;
 
 public class Manifest {
 	
+	HashMap<Integer, TruckBase> fleet;//ID, Truck
 	
+	public Manifest() {
+		fleet = new HashMap<Integer, TruckBase>();
+	}
 	
-	static HashMap<Integer, TruckBase> Trucks = new HashMap<Integer, TruckBase>();//ID, Truck
+	/**
+	 * 
+	 * @param i truck ID
+	 * @return
+	 */
 	
+	public TruckBase getTruck(int id)
+	{
+		return fleet.get(id);
+	}
 	
 	public Manifest()
 	{
@@ -23,21 +35,67 @@ public class Manifest {
 	
 	
 	/**
+	 * 
+	 * @param id remove the truck with id
+	 * @return 
+	 */
+	
+	public TruckBase removeTruck(int id) 
+	{
+		return fleet.remove(id);
+	}
+
+	/**
+	 * 
+	 * @param truck adds the truck to the manifest and gives it a appropriate id
+	 */
+	
+	public void addTruck(TruckBase truck) 
+	{
+		fleet.put(truck.getId(), truck);
+		System.out.println(fleet.get(truck.getId()));
+	}
+
+	public void addTrucks(ArrayList<TruckBase> trucks) 
+	{
+		for(TruckBase t: trucks) {
+			addTruck(t);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param id removes the truck with a ID of id
+	 */
+	
+	public void remove(int id) 
+	{
+		fleet.remove(id,fleet.get(id));//remove truck with id
+	}
+
+
+	public int length() 
+	{
+		
+		return fleet.size();
+	}
+	
+	/**
 	 * @author Jared Carey
 	 * 
 	 * @param filePath
 	 * @return
 	 * @throws CSVException
 	 */
-	public static ArrayList<Item> importItemCSV(String filePath) throws CSVException{
+	public static ArrayList<TruckBase> importItemCSV(String filePath) throws CSVException{
 		
 		File file = new File(filePath);
 		Scanner inputStream = new Scanner(file);
 		inputStream.useDelimiter(">"); // Separates CSV lines by Truck Groupings
 		TruckFactory truckCreator = new TruckFactory();
-
+		
 		try {	
-			ArrayList<TruckBase> items = new ArrayList<TruckBase>();
+			ArrayList<TruckBase> trucks = new ArrayList<TruckBase>();
 			while (inputStream.hasNext()) {
 				String[] params = inputStream.next().split(",");
 				
@@ -52,13 +110,17 @@ public class Manifest {
 						break;
 						
 					default:
-						throw CSVFormatException();
+						throw new CSVFormatException("There is no " + params[0] + " truck");
 				}
 					// TODO: Append to Manifest
 						
 				}
+				return trucks;
 			}
-			return items;
+			catch (CSVFormatException e) 
+			{
+				throw new CSVFormatException("Imported CSV does not meet format requirements");
+			}
 		}
 		catch (CSVFormatException e) 
 		{
@@ -90,20 +152,7 @@ public class Manifest {
 			return Trucks.remove(id);
 		}
 
-		/**
-		 * 
-		 * @param truck adds the truck to the manifest and gives it a appropriate id
-		 */
-		
-		public void addTruck(TruckBase truck) 
-		{
-			Trucks.put(truck.getId(), truck);
-		}
 
-		/**
-		 * 
-		 * @param refrigeratedTruck makes a refrigerated truck and gives it a id
-		 */
 		
 		public void addTruck(RefrigeratedTruck refrigeratedTruck) 
 		{

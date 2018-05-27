@@ -8,23 +8,33 @@ import exceptions.StockException;
 
 public class StockTest {
 
-	private Stock inventory;
-	private ArrayList<Item> milk;
+	public Stock inventory;
+	public ArrayList<Item> milk;
+	public ArrayList<Item> potato;
 	
 	@Before
 	public void setup()//give the store a sale
 	{
+		milk = new ArrayList<Item>();
+		potato = new ArrayList<Item>();
+		
+		milk = new ArrayList<Item>();
 		for (int  i = 0; i < 500; i++)
 		{
 			milk.add(new Item("Milk", 10.00, 10.00, "Zimbabwe", 50, -20));
 		}
-		Stock inventory = new Stock();
+		
+		for (int  i = 0; i < 1000; i++)
+		{
+			potato.add(new Item("Potato", 10.00, 10.00, "Zimbabwe", 50));
+		}
+		
+		inventory = new Stock();
 		inventory.addItems(milk);
 		//50 milk in stock
 		//name, manufacture cost, sell cost, reorder point, reorder amount
 		
 	}
-	
 	
 	@Test
 	public void testItemQuantity_SameCase()
@@ -43,15 +53,16 @@ public class StockTest {
 	{
 		assertTrue(500 == inventory.getQuantity("MILK"));//find how many of item one you have
 	}
+
+	@Test
+	public void testItemQuantity_00()
+	{
+		assertTrue(500 == inventory.length());//find how many of item one you have
+	}
 	
 	@Test
 	public void testAddStock()
 	{
-		ArrayList<Item> potato;
-		for (int  i = 0; i < 1000; i++)
-		{
-			potato.add(new Item("Potato", 10.00, 10.00, "Zimbabwe", 50));
-		}
 		inventory.addItems(potato);//add potatos
 		assertTrue(1000 == inventory.getQuantity("Potato"));//did u add potatos?
 	}
@@ -59,41 +70,50 @@ public class StockTest {
 	@Test
 	public void testIncreaseStock()
 	{
-		inventory.IncreaseAmount("milk", 100);
+		//inventory.addItems("milk", 100);
 		assertTrue(600 == inventory.getQuantity("milk"));//did u add more milk
 	}
 	
 
-	@Test (expected = IndexOutOfBoundsException.class)
-	public void testNegitiveIncreaseStock()
+	@Test 
+	public void testAddItem_ExistingItem()
 	{
-		inventory.IncreaseAmount("milk", -100);
+		inventory.addItem(new Item("Milk", 10.00, 10.00, "Zimbabwe", 50, -20));
+		assertTrue(501 == inventory.getQuantity("Milk"));
+	}
+	
+	@Test 
+	public void testAddItem_NotExistingItem()
+	{
+		inventory.addItem(new Item("Potato", 10.00, 10.00, "Zimbabwe", 50));
+		assertTrue(1 == inventory.getQuantity("Potato"));
 	}
 	
 	@Test (expected = StockException.class)
 	public void testIncreaseStock_ItemDoesntExist()
 	{
-		inventory.IncreaseAmount("sherbert", 100);
+		inventory.addItems(potato);
 	}
 	
 	
-	@Test 
+	@Test (expected = StockException.class)
 	public void testRemoveAllStock_NoExistingItem()
 	{
-		assertTrue(null == inventory.removeItems("sherbert"));//sherbert doesnt exist
+		inventory.removeItems("sherbert");//sherbert doesnt exist
 	}
 	
 	@Test 
 	public void testRemoveAllStock()
 	{
-		ArrayList<Item> milk02 = inventory.removeItems("milk");//sherbert doesnt exist
-		assertTrue(milk == milk02);//did u add more milk
+		ArrayList<Item> milk02 = inventory.removeItems("Milk");//sherbert doesnt exist
+		System.out.println(milk02);
+		assertTrue(500 == milk02.size());//did u add more milk
 	}
 	
-	@Test 
+	@Test (expected = StockException.class)
 	public void testRemoveSomeStock_NoExistingItem()
 	{
-		assertTrue(null == inventory.removeItems("sherbert", 90));//sherbert doesnt exist
+		inventory.removeItems("sherbert", 90);//sherbert doesnt exist
 	}
 	
 	@Test 
@@ -109,17 +129,18 @@ public class StockTest {
 		ArrayList<Item> milk02 = inventory.removeItems("milk", 2000);//sherbert doesnt exist
 	}
 	
+	// TODO: Fix this Unit Test
 	@Test (expected = IndexOutOfBoundsException.class)
-	public void testNegitaveStock()
+	public void testNegativeStock()
 	{
-		Stock potato = new Stock("potato", -50);//cant have negitive stock
+		Stock potato = new Stock();//cant have negitive stock
 	}
 	
 
-	@Test (expected = StockException.class)
+	@Test
 	public void testInitialInventory()
 	{
-		Stock invetory = new Stock();//50 milk in stock
+		inventory = new Stock();//50 milk in stock
 		assertTrue(0 == inventory.length());//a potato is not milk
 	}
 	
