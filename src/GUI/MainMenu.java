@@ -6,19 +6,27 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import exceptions.CSVFormatException;
 import sun.misc.GC;
+
+import store.Stock;
+import store.Store;
+import store.Item;
+
 
 public class MainMenu extends JFrame 
 {
 	public MainMenu(String title)
 	{
 		super(title);
+		
 		
 		
 		//create swing components
@@ -29,6 +37,8 @@ public class MainMenu extends JFrame
 		JButton View_Sales_Log = new JButton("View Sales Log");
 		JButton view_Manifest = new JButton("View Manifest");
 		JButton order_Stock = new JButton("Manage Stock");
+		
+		JButton import_CSV = new JButton("Import CSV's");
 		
 		JLabel Title = new JLabel("SuperMart Systems");
 		
@@ -46,6 +56,10 @@ public class MainMenu extends JFrame
 				gc.gridx = 1;
 				gc.gridy = 1;//top left?
 				add(view_Inventory, gc);
+				
+				gc.gridx = 2;
+				gc.gridy = 1;
+				add(import_CSV, gc);
 				
 		
 				gc.gridx = 3;
@@ -121,7 +135,24 @@ public class MainMenu extends JFrame
 					}
 				});
 				
-				
+				import_CSV.addActionListener(new ActionListener()
+				{
+					
+					public void actionPerformed(ActionEvent e) 
+					{
+						final String dir = System.getProperty("user.dir");
+						
+						try 
+						{
+							Item.importItemCSV(dir);
+						} 
+						catch (FileNotFoundException | CSVFormatException e1) 
+						{
+							e1.printStackTrace();
+						}
+						//import the CSV via this button when needed
+					}
+				});
 				
 				
 		}

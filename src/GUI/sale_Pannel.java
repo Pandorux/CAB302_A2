@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import store.Stock;
+import store.Store;
 
 public class sale_Pannel extends JFrame {
 

@@ -34,6 +34,8 @@ public class Inventory_Pannal extends JFrame {
 		JButton See_Inventroy = new JButton("See Inventory");
 		JLabel Title = new JLabel("SuperMart Systems");
 		
+		JLabel errors = new JLabel("This is where errors will appear");
+		
 		JButton add_Item = new JButton("Add Item");
 		JButton remove_Item = new JButton("Remove Item");
 		JButton edit_Item = new JButton("Edit Item");
@@ -53,6 +55,10 @@ public class Inventory_Pannal extends JFrame {
 				
 		gc.weighty = 0.5;
 		
+				gc.gridx = 1;
+				gc.gridy = 10;//at the lowest point in the panel
+				add(errors, gc);
+		
 				gc.gridx = 2;
 				gc.gridy = 1;
 				add(View_Sales_Log, gc);
@@ -64,7 +70,6 @@ public class Inventory_Pannal extends JFrame {
 				gc.gridx = 1;
 				gc.gridy = 0;
 				add(Title, gc);
-				
 				
 				gc.gridx = 0;
 				gc.gridy = 2;
@@ -144,30 +149,38 @@ public class Inventory_Pannal extends JFrame {
 				});
 				
 				
+				//*************************************************************************************
+				//functionality
+				
 				edit_Item.addActionListener(new ActionListener()
 				{
 					
 					public void actionPerformed(ActionEvent e) 
 					{
-						if (edit.getText() == "name")//there needs to be a value in this
+						if (Stock.getItem(edit.getText()) != null)
 						{
-							//do nothing
+							System.out.print("it works!");
+						}
+						else 
+						{
+							System.out.print("failure");
+						}
+						if (Stock.getItem(edit.getText().toUpperCase()) == null)//if the item being searched doesn't exist
+						{
+							errors.setText("The item you want to edit doesnt exist!");
+							
 						}
 						else
 						{
-							
 							setVisible(false);
 							JFrame frame = new editItemPanel("Edit Items", edit.getText());//pass on the items name
 							frame.setSize(1000,1000);
 							frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 							frame.setVisible(true);
 						}
-						
 					}
 				});
 				
-				//*************************************************************************************
-				//functionality
 				add_Item.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e) 
@@ -175,7 +188,7 @@ public class Inventory_Pannal extends JFrame {
 						//open a new window to make this work right
 						setVisible(false);
 						JFrame frame = new Add_Item_Pannel("Adding Item");
-						frame.setSize(400,100);
+						frame.setSize(900,100);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);
 					}
@@ -188,7 +201,7 @@ public class Inventory_Pannal extends JFrame {
 						//open a new window to make this work right
 						setVisible(false);
 						JFrame frame = new Remove_Item_Pannel("Removing Item");
-						frame.setSize(400,100);
+						frame.setSize(900,100);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);
 					}

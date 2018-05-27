@@ -7,13 +7,19 @@ import java.util.Scanner;
 
 import exceptions.CSVFormatException;
 import exceptions.StockException;
+import javafx.util.Pair;
 
 public class Stock {
 	
-	private HashMap<String, ArrayList<Item>> items;
+	private static HashMap<String, ArrayList<Item>> items;
 
 	public Stock() {
 		items = new HashMap<String, ArrayList<Item>>();
+	}
+	
+	public HashMap<String, ArrayList<Item>> returnStock()
+	{
+		return items;
 	}
 	
 	public int getQuantity(String itemName) {
@@ -48,7 +54,7 @@ public class Stock {
 	}
 	
 	// TODO:
-	public ArrayList<Item> removeItems(String itemName, int amt) throws StockException {
+	public static ArrayList<Item> removeItems(String itemName, int amt) throws StockException {
 		itemName = itemName.toUpperCase();
 		if(!items.containsKey(itemName)) {
 			throw new StockException(itemName + "does not exist");
@@ -67,7 +73,7 @@ public class Stock {
 	
 	}
 	
-	public ArrayList<Item> removeItems(String itemName) throws StockException {
+	public static ArrayList<Item> removeItems(String itemName) throws StockException {
 		itemName = itemName.toUpperCase();
 		if(!items.containsKey(itemName)) {
 			throw new StockException(itemName + "does not exist");
@@ -103,11 +109,11 @@ public class Stock {
 		}	
 	}
 	
-   public String giveInventory()
+   public static String giveInventory()
    {
        if (items.size() == 0)
        {
-           return null;
+           return "";
        }
        else
        {
@@ -116,39 +122,41 @@ public class Stock {
 
    }
 
-   public boolean getItem(String name)
+
+   public static ArrayList<Item> getItem(String name)
    {
        if (items.size() == 0)
        {
-           return false;
+    	   System.out.println("list is empty");
+           return null;
        }
        else
        {
-           for (int i = 0; i < items.size(); i++)//for every item
+           for (String key: items.keySet())//for every item
            {
-               if (items.containsKey(name))//if the primary field (name) is the same as the searched name
+        	   System.out.println("Checking against " + name);
+        	   System.out.println("key: " + key);
+               if (key.equalsIgnoreCase(name))//if the primary field (name) is the same as the searched name
                {
-                   return true;//return that it exists
+            	   return items.get(key); //return the item at the current index
                }
            }
-           return false;//it doesnt exist
+           System.out.println("not in list");
+           return null;//it doesnt exist
        }
+   }
+   
+   public static ArrayList<Item> printAllItems()
+   {
+	   ArrayList<Item> potato = new ArrayList<Item>();
+	   for (int i = 0; i < items.size(); i++)
+	   {
+		   potato.addAll(items.get(i));
+	   }
+	   
+	return potato;
+	   
+   }
 
-	/**
-	 * @author n9999884
-	 * @return 
-	 */
-	public static String giveInventory()
-	{
-		if (storeProducts.size() == 0)
-		{
-			return null;
-		}
-		else
-		{
-			return storeProducts.toString();
-		}
-		
-	}
-	
+
 }

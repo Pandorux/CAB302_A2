@@ -12,40 +12,17 @@ import store.Item;
 
 public class Manifest {
 	
-	HashMap<Integer, TruckBase> fleet;//ID, Truck
 	
-	public Manifest() {
-		fleet = new HashMap<Integer, TruckBase>();
-	}
-
-	/**
-	 * 
-	 * @param i truck ID
-	 * @return
-	 */
+	//protected static Manifest instance = new Manifest();//make a manifest
+	private static HashMap<Integer, TruckBase> Trucks = new HashMap<Integer, TruckBase>();//ID, Truck
 	
-	public TruckBase getTruck(int id)
+	
+	public Manifest()
 	{
-		return fleet.get(id);
+		Trucks = new HashMap<Integer, TruckBase>();//initialise
 	}
 	
-	
-	/**
-	 * 
-	 * @param id remove the truck with id
-	 * @return 
-	 */
-	
-	public TruckBase removeTruck(int id) 
-	{
-		return fleet.remove(id);
-	}
 
-	/**
-	 * 
-	 * @param truck adds the truck to the manifest and gives it a appropriate id
-	 */
-	
 	public void addTruck(TruckBase truck) 
 	{
 		fleet.put(truck.getId(), truck);
@@ -74,6 +51,8 @@ public class Manifest {
 		
 		return fleet.size();
 	}
+=======
+>>>>>>> reagan/Implementation
 	
 	/**
 	 * @author Jared Carey
@@ -118,5 +97,69 @@ public class Manifest {
 		{
 			throw new CSVFormatException("Imported CSV does not meet format requirements");
 		}
-	}	
+	}
+		
+		/**
+		 * 
+		 * @param id remove the truck with id
+		 * @return 
+		 */
+		
+		public TruckBase removeTruck(int id) 
+		{
+			return Trucks.remove(id);
+		}
+
+		/**
+		 * 
+		 * @param truck adds the truck to the manifest and gives it a appropriate id
+		 */
+		
+		public void addTruck(TruckBase truck) 
+		{
+			Trucks.put(truck.getId(), truck);
+		}
+
+		/**
+		 * 
+		 * @param refrigeratedTruck makes a refrigerated truck and gives it a id
+		 */
+		
+		public void addTruck(RefrigeratedTruck refrigeratedTruck) 
+		{
+			Trucks.put(refrigeratedTruck.getId(), refrigeratedTruck);
+			
+		}
+
+		/**
+		 * 
+		 * @param id removes the truck with a ID of id
+		 */
+		
+		public void remove(int id) 
+		{
+			Trucks.remove(id,Trucks.get(id));//remove truck with id
+			
+		}
+
+
+		public int length() 
+		{
+			
+			return Trucks.size();
+		}
+		
+		
+		public static String giveManifest()
+		{
+			if (Trucks.size() == 0)
+			{
+				return "";
+			}
+			else 
+			{
+				return Trucks.toString();
+			}
+			
+		}
 }

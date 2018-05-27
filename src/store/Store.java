@@ -7,10 +7,13 @@ import javafx.util.Pair;
 
 public class Store {
 
+	
+	
 	protected static Store instance = new Store();
 	static HashMap<Integer, Pair<String, Integer >> salesList;//id, name, quantity
+
 	
-	private int salesId;
+	private static int salesId;
 	
 	private String name;
 	private Stock inventory;
@@ -29,7 +32,7 @@ public class Store {
 	 * @author n9999884
 	 * @param item
 	 */
-	public void Sale(String item, Integer quantity)//item being sold
+	public static void Sale(String item, Integer quantity)//item being sold
 	{
 		Stock.removeItems(getItem(item), quantity);
 		salesList.put(salesId, new Pair<String, Integer>(item, quantity));
@@ -84,14 +87,8 @@ public class Store {
 	 */
 	public static HashMap<Integer, Pair<String, Integer>> giveSalesList()
 	{
-		if (salesList.size() == 0)
-		{
-			return salesList;
-		}
-		else 
-		{
-			return null;
-		}
+		return salesList;
+		
 	}
 	
 }

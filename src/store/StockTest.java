@@ -23,6 +23,7 @@ public class StockTest {
 		{
 			milk.add(new Item("Milk", 10.00, 10.00, "Zimbabwe", 50, -20));
 		}
+
 		
 		for (int  i = 0; i < 1000; i++)
 		{

@@ -21,6 +21,7 @@ public class Item {
 	private String reorderPoint;
 	private int reorderAmount;
 	private double temperature;
+	public static ArrayList<Item> item;
 	
 	public Item(String name, double manufactureCost, double retailPrice, 
 			String reorderPoint, int reorderAmount) {
