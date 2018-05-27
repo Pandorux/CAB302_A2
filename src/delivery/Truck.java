@@ -20,7 +20,7 @@ public class Truck extends TruckBase {
 	public Truck(int cargo)
 	{
 		super();
-		TruckBase.capacity = cargo;
+		capacity = cargo;
 	}
 /**
  * default truck
@@ -28,7 +28,7 @@ public class Truck extends TruckBase {
 	public Truck() 
 	{
 		super();
-		TruckBase.capacity = 1000;//original capacity
+		capacity = 1000;//original capacity
 	}
 	
 

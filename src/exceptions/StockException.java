@@ -1,15 +1,15 @@
 package exceptions;
 
-public class StockException extends Exception {
+public class StockException extends RuntimeException {
 	
 	private String issue;
 	
-	StockException(String issue) {
+	public StockException(String issue) {
 		this.issue = issue;
 	}
 	
-	public static void PrintException() {
-		System.out.println("StockException Thrown: "+ issue);
+	public void PrintException() {
+		System.out.println("DeliveryException Thrown: " + issue);
 	}
 	
 }

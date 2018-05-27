@@ -17,7 +17,7 @@ public class Remove_Item_Pannel extends JFrame {
 	public Remove_Item_Pannel(String title) {
 		super();
 			
-			JButton addItem = new JButton("Add");
+			JButton addItem = new JButton("Remove");
 			JTextField Name = new JTextField(10);
 			JTextField quantity = new JTextField(10);
 			

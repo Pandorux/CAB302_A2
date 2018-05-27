@@ -31,11 +31,18 @@ public class Manifest_Pannel extends JFrame {
 			JTextArea inv = new JTextArea();
 			JButton quit = new JButton("Back");
 			
-			//System.out.println();
 			
-			//String string = Manifest.giveManifest();
+			String var = (Manifest.giveManifest()).toString();
 			
-			inv.setText((Manifest.giveManifest()).toString());//shows the manifest
+			if (var == "")
+			{
+				inv.append("  ");
+			}
+			else 
+			{
+				inv.setText(Manifest.giveManifest());//shows the manifest
+			}
+			
 				
 			//swing stuff to a container
 			Container c = getContentPane();

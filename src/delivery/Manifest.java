@@ -12,8 +12,8 @@ import store.Item;
 public class Manifest {
 	
 	
-	
-	static HashMap<Integer, TruckBase> Trucks = new HashMap<Integer, TruckBase>();//ID, Truck
+	//protected static Manifest instance = new Manifest();//make a manifest
+	private static HashMap<Integer, TruckBase> Trucks = new HashMap<Integer, TruckBase>();//ID, Truck
 	
 	
 	public Manifest()
@@ -129,9 +129,18 @@ public class Manifest {
 			return Trucks.size();
 		}
 		
-		public static HashMap<Integer, TruckBase> giveManifest()
+		
+		public static String giveManifest()
 		{
-			return Trucks;
+			if (Trucks.size() == 0)
+			{
+				return "";
+			}
+			else 
+			{
+				return Trucks.toString();
+			}
+			
 		}
 		
 		

@@ -23,14 +23,17 @@ public class ManifestTest {
 	public Manifest manifest;
 	public ArrayList<TruckBase> trucks;
 		
-	@Test
-	public void testGetTruck_00() {
-		assertTrue(1 == manifest.getTruck(1).getId());
-	}
-
-	@Test
-	public void testGetTruck_01() {
-		assertTrue(4 ==  manifest.getTruck(4).getId());
+	@Before
+	public void beforeEachTest() {
+		trucks = new ArrayList<TruckBase>();
+		trucks.add(new Truck(1));
+		trucks.add(new RefrigeratedTruck(2));
+		trucks.add(new Truck(3));
+		trucks.add(new RefrigeratedTruck(4));
+		trucks.add(new Truck(5));
+		
+		manifest = new Manifest();
+		manifest.addTrucks(trucks);
 	}
 	
 	@Test
@@ -41,7 +44,7 @@ public class ManifestTest {
 
 	@Test
 	public void testGetTruckThatIsntInManifest_01() {
-		assertTrue(null == manifest.getTruck(7).getId());
+		assertTrue(null == manifest.getTruck(7));
 	}
 	
 	@Test
@@ -58,8 +61,9 @@ public class ManifestTest {
 	
 	@Test
 	public void testAddTruck() {
-		manifest.addTruck(new Truck());
-		assertTrue(6 == manifest.getTruck(6).getId());
+		TruckBase t = new Truck();
+		manifest.addTruck(t);
+		assertTrue(t.getId() == manifest.getTruck(t.getId()).getId());
 	}
 	
 	@Test
@@ -78,19 +82,7 @@ public class ManifestTest {
 	public void testManifestSize_02() {
 		manifest.addTruck(new Truck());
 		manifest.addTruck(new RefrigeratedTruck());
-		assertEquals(7, trucks.size()); 
-	}
-	
-	@Before
-	public void beforeEachTest() {
-		trucks = new ArrayList<TruckBase>();
-		trucks.add(new Truck(1));
-		trucks.add(new RefrigeratedTruck(2));
-		trucks.add(new Truck(3));
-		trucks.add(new RefrigeratedTruck(4));
-		trucks.add(new Truck(5));
-		
-		manifest = new Manifest();
+		assertEquals(7, trucks.size());
 	}
 
 }

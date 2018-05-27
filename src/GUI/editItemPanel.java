@@ -182,7 +182,8 @@ public class editItemPanel extends JFrame {
 					
 					public void actionPerformed(ActionEvent e) 
 					{
-						Item.increaseManufactureCost(Integer.parseInt(manufactureCost.getText()));
+						Item.item = Stock.getItem(text);
+						Item.item.increaseManufactureCost(Integer.parseInt(manufactureCost.getText()));
 					}
 				});
 				

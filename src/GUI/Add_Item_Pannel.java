@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import store.Stock;
 import store.Store;
+import store.Item;
 
 public class Add_Item_Pannel extends JFrame {
 
@@ -18,16 +19,20 @@ public class Add_Item_Pannel extends JFrame {
 	{
 		
 		JButton addItem = new JButton("Add");
-		JTextField Name = new JTextField(10);
-		JTextField quantity = new JTextField(10);
 		
+		JTextField Name = new JTextField(10);
+		JTextField manufactureCost = new JTextField(10);
+		JTextField retailPrice = new JTextField(10);
+		JTextField reorderPoint = new JTextField(10);
+		JTextField reorderAmount = new JTextField(10);
+		
+		JTextField quantity = new JTextField(10);
 		
 		setLayout(new GridBagLayout());
 		
 		GridBagConstraints gc = new GridBagConstraints();
 		
-		Name.setText("name");
-		quantity.setText("quantity");
+		
 		
 		gc.gridx = 0;
 		gc.gridy = 1;
@@ -39,10 +44,31 @@ public class Add_Item_Pannel extends JFrame {
 		
 		gc.gridx = 2;
 		gc.gridy = 1;
-		add(quantity, gc);
+		add(manufactureCost, gc);
+		
+		gc.gridx = 3;
+		gc.gridy = 1;
+		add(retailPrice, gc);
+		
+		gc.gridx = 4;
+		gc.gridy = 1;
+		add(reorderPoint, gc);
+		
+		gc.gridx = 5;
+		gc.gridy = 1;
+		add(reorderAmount, gc);
+	/*
+		gc.gridx = 6;
+		gc.gridy = 1;
+		add(quantity, gc);*/
 		// TODO Auto-generated constructor stub
 		
-		
+		Name.setText("name");
+		manufactureCost.setText("manufacture cost");
+		retailPrice.setText("retail price");
+		reorderPoint.setText("reorder point");
+		reorderAmount.setText("reorder amount");
+		quantity.setText("quantity");
 		
 		
 		addItem.addActionListener(new ActionListener()
@@ -50,13 +76,28 @@ public class Add_Item_Pannel extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) //add item then back to the main menu
 			{
-				Stock.addItem(Name.getText(),Integer.parseInt(quantity.getText()));
+				try 
+				{
+					//make the new item
+					Item thing = new Item(Name.getText(),Double.parseDouble(manufactureCost.getText()),Double.parseDouble(retailPrice.getText()),reorderPoint.getText(),Integer.parseInt(reorderAmount.getText()));
+					Store.getInstance().getInventory().addItem(thing);
+					
+					setVisible(false);
+					JFrame frame = new Inventory_Pannal("Inventory Infomation");
+					frame.setSize(1000,1000);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame.setVisible(true);
+				}
+				catch (Exception e1)
+				{
+					
+				}
 				
-				setVisible(false);
-				JFrame frame = new Inventory_Pannal("Inventory Infomation");
-				frame.setSize(1000,1000);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setVisible(true);
+				
+				//Item item = new Item(Name.getText(),Integer.parseInt(quantity.getText()));//add a new item that only has quantity and its name
+				//Stock.addItem();
+				
+				
 				
 			}
 		});
