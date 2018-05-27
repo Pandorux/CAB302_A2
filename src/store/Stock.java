@@ -19,7 +19,7 @@ public class Stock {
 	}
 	
 	public void removeAll() {
-
+		
 	}	
 	
 	// TODO: How to add item?
