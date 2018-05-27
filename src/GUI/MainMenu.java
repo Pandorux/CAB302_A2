@@ -25,24 +25,16 @@ public class MainMenu extends JFrame
 		
 		Container menu_content = getContentPane();
 		
-		JButton view_Inventory = new JButton("View Inventory");
+		JButton view_Inventory = new JButton("Edit Inventory");
 		JButton View_Sales_Log = new JButton("View Sales Log");
 		JButton view_Manifest = new JButton("View Manifest");
-		JButton order_Stock = new JButton("Order Stock");
+		JButton order_Stock = new JButton("Manage Stock");
 		
 		JLabel Title = new JLabel("SuperMart Systems");
 		
 		
 		
 		//add swing components to frame
-		
-		
-		
-		
-		
-				
-				
-				
 				//set layout
 				setLayout(new GridBagLayout());
 				
@@ -60,13 +52,13 @@ public class MainMenu extends JFrame
 				gc.gridy = 1;//top left?
 				add(View_Sales_Log, gc);
 				
-				gc.gridx = 1;
+				gc.gridx = 2;
 				gc.gridy = 2;//top left?
 				add(view_Manifest, gc);
 				
-				gc.gridx = 3;
-				gc.gridy = 2;//top left?
-				add(order_Stock, gc);
+				//gc.gridx = 3;
+				//gc.gridy = 2;//top left?
+				//add(order_Stock, gc);
 				
 				
 				gc.gridx = 2;
@@ -122,7 +114,7 @@ public class MainMenu extends JFrame
 					public void actionPerformed(ActionEvent e) 
 					{
 						setVisible(false);
-						JFrame frame = new Stock_Order_Pannel("Order Stock");
+						JFrame frame = new Stock_Order_Pannel("Manage Stock");
 						frame.setSize(1000,1000);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);

@@ -12,7 +12,7 @@ import javafx.util.Pair;
 
 public class Stock {
 
-	private HashMap<String, Pair<Item, Integer>> storeProducts;
+	static HashMap<String, Pair<Item, Integer>> storeProducts;
 	
 	public Stock() {
 		storeProducts = new HashMap<String, Pair<Item, Integer>>();
@@ -53,6 +53,21 @@ public class Stock {
 	}
 
 
-
+	/**
+	 * @author n9999884
+	 * @return 
+	 */
+	public static String giveInventory()
+	{
+		if (storeProducts.size() == 0)
+		{
+			return null;
+		}
+		else
+		{
+			return storeProducts.toString();
+		}
+		
+	}
 	
 }

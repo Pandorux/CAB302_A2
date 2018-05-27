@@ -14,42 +14,45 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+
+import store.Stock;
+import store.Store;
+import delivery.Manifest;
+
 public class Sales_Pannel extends JFrame {
 
 	public Sales_Pannel(String title) 
 	{
 		super (title);
-		
-		
-		
-
 		//set layout
-				setLayout(new BorderLayout());
+			setLayout(new BorderLayout());
 				
-				//maKE BUTTONS
-				JTextArea inv = new JTextArea();
-				JButton quit = new JButton("Back");
+			//maKE BUTTONS
+			JTextArea inv = new JTextArea();
+			JButton quit = new JButton("Back");
 				
-				//swing stuff to a container
-				Container c = getContentPane();
+			inv.setText(Store.giveSalesList().toString());//all of the sales will be stored here
 				
-				c.add(inv, BorderLayout.CENTER);
-				c.add(quit, BorderLayout.SOUTH);
+			//swing stuff to a container
+			Container c = getContentPane();
+			
+			c.add(inv, BorderLayout.CENTER);
+			c.add(quit, BorderLayout.SOUTH);
 				
-				inv.setEditable(false);//user cant edit the inventory here
+			inv.setEditable(false);//user cant edit the inventory here
 				
-				quit.addActionListener(new ActionListener()
-				{
+			quit.addActionListener(new ActionListener()
+			{
 					
-					public void actionPerformed(ActionEvent e) 
-					{
-						setVisible(false);
-						JFrame frame = new Inventory_Pannal("Inventory Infomation");
-						frame.setSize(1000,1000);
-						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-						frame.setVisible(true);
-					}
-				});
+				public void actionPerformed(ActionEvent e) 
+				{
+					setVisible(false);
+					JFrame frame = new Inventory_Pannal("Inventory Infomation");
+					frame.setSize(1000,1000);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame.setVisible(true);
+				}
+			});
 	}
 
 }

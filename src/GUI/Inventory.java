@@ -9,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
+import store.Stock;
+
+
 public class Inventory extends JFrame 
 {
 	public Inventory (String title)
@@ -21,6 +24,8 @@ public class Inventory extends JFrame
 		//maKE BUTTONS
 		JTextArea inv = new JTextArea();
 		JButton quit = new JButton("Back");
+		
+		inv.setText(Stock.giveInventory());
 		
 		//swing stuff to a container
 		Container c = getContentPane();

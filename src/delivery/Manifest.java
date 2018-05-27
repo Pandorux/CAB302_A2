@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import exceptions.CSVFormatException;
+import javafx.util.Pair;
 import store.Item;
 
 public class Manifest {
@@ -13,6 +14,12 @@ public class Manifest {
 	
 	
 	static HashMap<Integer, TruckBase> Trucks = new HashMap<Integer, TruckBase>();//ID, Truck
+	
+	
+	public Manifest()
+	{
+		Trucks = new HashMap<Integer, TruckBase>();//initialise
+	}
 	
 	
 	/**
@@ -57,6 +64,8 @@ public class Manifest {
 		{
 			
 		}
+		
+		
 		/**
 		 * 
 		 * @param i truck ID
@@ -119,6 +128,13 @@ public class Manifest {
 			
 			return Trucks.size();
 		}
+		
+		public static HashMap<Integer, TruckBase> giveManifest()
+		{
+			return Trucks;
+		}
+		
+		
 		
 	
 }

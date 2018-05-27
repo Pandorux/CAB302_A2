@@ -28,8 +28,9 @@ public class Inventory_Pannal extends JFrame {
 		//create swing components
 		JButton View_Sales_Log = new JButton("View Sales Log");
 		JButton view_Manifest = new JButton("View Manifest");
-		JButton Search_List = new JButton("Sale");
-		JTextField search = new JTextField(10);
+		JButton Sale = new JButton("Sale");
+		JTextField saleName = new JTextField(10);
+		JTextField saleQuantity = new JTextField(10);
 		JButton See_Inventroy = new JButton("See Inventory");
 		JLabel Title = new JLabel("SuperMart Systems");
 		
@@ -50,7 +51,7 @@ public class Inventory_Pannal extends JFrame {
 		//add swing components to frame
 		
 				
-				gc.weighty = 10;
+		gc.weighty = 0.5;
 		
 				gc.gridx = 2;
 				gc.gridy = 1;
@@ -64,13 +65,10 @@ public class Inventory_Pannal extends JFrame {
 				gc.gridy = 0;
 				add(Title, gc);
 				
-				gc.gridx = 1;
-				gc.gridy = 2;
-				add(search, gc);
 				
-				gc.gridx = 2;
+				gc.gridx = 0;
 				gc.gridy = 2;
-				add(Search_List, gc);
+				add(Sale, gc);
 				
 				gc.gridx = 1;
 				gc.gridy = 1;
@@ -97,7 +95,8 @@ public class Inventory_Pannal extends JFrame {
 				gc.gridy = 5;
 				add(edit, gc);
 				
-				search.setText("What was sold?");
+				saleName.setText("name");
+				saleQuantity.setText("quantity");
 				
 				
 				remove.setText("Infomation");
@@ -156,9 +155,9 @@ public class Inventory_Pannal extends JFrame {
 						}
 						else
 						{
-							System.out.println(edit.getText());
+							
 							setVisible(false);
-							JFrame frame = new editItemPanel("Edit Items", edit.getText());
+							JFrame frame = new editItemPanel("Edit Items", edit.getText());//pass on the items name
 							frame.setSize(1000,1000);
 							frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 							frame.setVisible(true);
@@ -166,6 +165,7 @@ public class Inventory_Pannal extends JFrame {
 						
 					}
 				});
+				
 				//*************************************************************************************
 				//functionality
 				add_Item.addActionListener(new ActionListener()
@@ -193,6 +193,21 @@ public class Inventory_Pannal extends JFrame {
 						frame.setVisible(true);
 					}
 				});
+				
+				
+				Sale.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e) 
+					{
+						setVisible(false);
+						JFrame frame = new sale_Pannel("Removing Item");
+						frame.setSize(400,100);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						frame.setVisible(true);
+						//Store.Sale()
+					}
+				});
+				
 	}
 
 }

@@ -26,27 +26,18 @@ public class Stock_Order_Pannel extends JFrame
 		JButton View_Sales_Log = new JButton("View Sales Log");
 		JButton view_Manifest = new JButton("View Manifest");
 		//JButton order_Stock = new JButton("Order Stock");
-		
 		JLabel Title = new JLabel("SuperMart Systems");
 		
-		
-		
-		//add swing components to frame
-		
-		
-		
-		
-		
 				
-				
-				
-				//set layout
+		//set layout
 	
 		setLayout(new GridBagLayout());
 		
 		GridBagConstraints gc = new GridBagConstraints();
 
-
+		gc.weighty = 0.5;
+		
+		//add swing components to frame
 		gc.gridx = 3;
 		gc.gridy = 1;//top left?
 		add(view_Inventory, gc);
@@ -98,7 +89,7 @@ public class Stock_Order_Pannel extends JFrame
 					public void actionPerformed(ActionEvent e) 
 					{
 						setVisible(false);
-						JFrame frame = new Manifest_Pannel("Manifest");
+						JFrame frame = new Manifest_Pannel("View Manifest");
 						frame.setSize(1000,1000);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);

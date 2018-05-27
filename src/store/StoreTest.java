@@ -103,6 +103,9 @@ public class StoreTest {
 		 assertTrue(39.50 == Store.getInstance().getCapital());
 	}		
 	
+	
+	
+	
 	// TODO: Is it possble for capital to below $0.00?
 	
 }
