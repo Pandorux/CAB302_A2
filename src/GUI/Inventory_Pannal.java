@@ -157,10 +157,18 @@ public class Inventory_Pannal extends JFrame {
 					
 					public void actionPerformed(ActionEvent e) 
 					{
-						if (Stock.getItem(edit.getText()) == null)//if the item being searched doesn't exist
+						if (Stock.getItem(edit.getText()) != null)
 						{
-							
+							System.out.print("it works!");
+						}
+						else 
+						{
+							System.out.print("failure");
+						}
+						if (Stock.getItem(edit.getText().toUpperCase()) == null)//if the item being searched doesn't exist
+						{
 							errors.setText("The item you want to edit doesnt exist!");
+							
 						}
 						else
 						{
@@ -193,7 +201,7 @@ public class Inventory_Pannal extends JFrame {
 						//open a new window to make this work right
 						setVisible(false);
 						JFrame frame = new Remove_Item_Pannel("Removing Item");
-						frame.setSize(400,100);
+						frame.setSize(900,100);
 						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setVisible(true);
 					}

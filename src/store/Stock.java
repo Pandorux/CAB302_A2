@@ -74,7 +74,7 @@ public class Stock {
 	
 	}
 	
-	public ArrayList<Item> removeItems(String itemName) throws StockException {
+	public static ArrayList<Item> removeItems(String itemName) throws StockException {
 		itemName = itemName.toUpperCase();
 		if(!items.containsKey(itemName)) {
 			throw new StockException(itemName + "does not exist");
@@ -124,19 +124,35 @@ public class Stock {
    {
        if (items.size() == 0)
        {
+    	   System.out.println("list is empty");
            return null;
        }
        else
        {
-           for (int i = 0; i < items.size(); i++)//for every item
+           for (String key: items.keySet())//for every item
            {
-               if (storeProducts.containsKey(name))//if the primary field (name) is the same as the searched name
+        	   System.out.println("Checking against " + name);
+        	   System.out.println("key: " + key);
+               if (key.equalsIgnoreCase(name))//if the primary field (name) is the same as the searched name
                {
-            	   return items.get(name); 
+            	   return items.get(key); //return the item at the current index
                }
            }
+           System.out.println("not in list");
            return null;//it doesnt exist
        }
+   }
+   
+   public static ArrayList<Item> printAllItems()
+   {
+	   ArrayList<Item> potato = new ArrayList<Item>();
+	   for (int i = 0; i < items.size(); i++)
+	   {
+		   potato.addAll(items.get(i));
+	   }
+	   
+	return potato;
+	   
    }
 
 

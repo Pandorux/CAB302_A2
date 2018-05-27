@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import store.Stock;
@@ -19,6 +20,7 @@ public class Add_Item_Pannel extends JFrame {
 	{
 		
 		JButton addItem = new JButton("Add");
+		JButton back = new JButton("Back to Inventory");
 		
 		JTextField Name = new JTextField(10);
 		JTextField manufactureCost = new JTextField(10);
@@ -27,6 +29,8 @@ public class Add_Item_Pannel extends JFrame {
 		JTextField reorderAmount = new JTextField(10);
 		
 		JTextField quantity = new JTextField(10);
+		
+		JLabel labelerror = new JLabel("hello");
 		
 		setLayout(new GridBagLayout());
 		
@@ -37,6 +41,14 @@ public class Add_Item_Pannel extends JFrame {
 		gc.gridx = 0;
 		gc.gridy = 1;
 		add(addItem, gc);
+		
+		gc.gridx = 1;
+		gc.gridy = 2;
+		add(labelerror, gc);
+		
+		gc.gridx = 99;//at the end
+		gc.gridy = 1;
+		add(back, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 1;
@@ -90,7 +102,7 @@ public class Add_Item_Pannel extends JFrame {
 				}
 				catch (Exception e1)
 				{
-					
+					labelerror.setText("You entered the infomation incorrectly, please try again");
 				}
 				
 				
@@ -98,6 +110,21 @@ public class Add_Item_Pannel extends JFrame {
 				//Stock.addItem();
 				
 				
+				
+			}
+		});
+		
+		
+		back.addActionListener(new ActionListener()
+		{
+			
+			public void actionPerformed(ActionEvent e) //remove item then back to the main menu
+			{
+					setVisible(false);
+					JFrame frame = new Inventory_Pannal("Inventory Infomation");
+					frame.setSize(1000,1000);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame.setVisible(true);
 				
 			}
 		});

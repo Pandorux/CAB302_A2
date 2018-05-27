@@ -32,16 +32,9 @@ public class Manifest_Pannel extends JFrame {
 			JButton quit = new JButton("Back");
 			
 			
-			String var = (Manifest.giveManifest()).toString();
 			
-			if (var == "")
-			{
-				inv.append("  ");
-			}
-			else 
-			{
-				inv.setText(Manifest.giveManifest());//shows the manifest
-			}
+			inv.setText(Manifest.giveManifest());//shows the manifest
+			
 			
 				
 			//swing stuff to a container

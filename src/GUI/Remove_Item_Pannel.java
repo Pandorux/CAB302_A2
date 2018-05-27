@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import store.Stock;
@@ -20,6 +21,11 @@ public class Remove_Item_Pannel extends JFrame {
 			JButton addItem = new JButton("Remove");
 			JTextField Name = new JTextField(10);
 			JTextField quantity = new JTextField(10);
+			JLabel label = new JLabel("Hello");
+			JButton back = new JButton("Back to inventory");
+
+
+			
 			
 			
 			Name.setText("name");
@@ -35,12 +41,16 @@ public class Remove_Item_Pannel extends JFrame {
 			add(addItem, gc);
 			
 			gc.gridx = 1;
+			gc.gridy = 2;
+			add(label, gc);
+			
+			gc.gridx = 1;
 			gc.gridy = 1;
 			add(Name, gc);
 			
 			gc.gridx = 2;
 			gc.gridy = 1;
-			add(quantity, gc);
+			add(back, gc);
 			// TODO Auto-generated constructor stub
 			
 			
@@ -51,13 +61,34 @@ public class Remove_Item_Pannel extends JFrame {
 				
 				public void actionPerformed(ActionEvent e) //remove item then back to the main menu
 				{
-					Stock.removeItems(Name.getText(),Integer.parseInt(quantity.getText()));
+					try 
+					{
+						Stock.removeItems(Name.getText());//,Integer.parseInt(quantity.getText())
+						
+						setVisible(false);
+						JFrame frame = new Inventory_Pannal("Inventory Infomation");
+						frame.setSize(1000,1000);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						frame.setVisible(true);
+					}
+					catch (Exception e1)
+					{
+						label.setText("You havent entered the infomation correctly, try again");
+					}
 					
-					setVisible(false);
-					JFrame frame = new Inventory_Pannal("Inventory Infomation");
-					frame.setSize(1000,1000);
-					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					frame.setVisible(true);
+				}
+			});
+			back.addActionListener(new ActionListener()
+			{
+				
+				public void actionPerformed(ActionEvent e) //remove item then back to the main menu
+				{
+						setVisible(false);
+						JFrame frame = new Inventory_Pannal("Inventory Infomation");
+						frame.setSize(1000,1000);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						frame.setVisible(true);
+					
 				}
 			});
 		

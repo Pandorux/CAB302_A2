@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -40,6 +41,7 @@ public class editItemPanel extends JFrame {
 		JButton incReorderAmm = new JButton("Increase Reorder Amount");
 		JButton decReorderAmm = new JButton("Decrease Reorder Amount");
 		JButton changeReorderLocation = new JButton("Change Reorder Location");
+		JButton backToInventory = new JButton("Back");
 		
 		JTextField reorderLocation = new JTextField(10);
 		JTextField manufactureCost = new JTextField(10);
@@ -63,6 +65,10 @@ public class editItemPanel extends JFrame {
 		gc.gridy = 1;//top left?
 		add(view_Inventory, gc);
 
+		gc.gridx = 3;
+		gc.gridy = 99;
+		add(backToInventory, gc);
+		
 		
 		gc.gridx = 2;
 		gc.gridy = 1;//top right?
@@ -183,7 +189,11 @@ public class editItemPanel extends JFrame {
 					public void actionPerformed(ActionEvent e) 
 					{
 						Item.item = Stock.getItem(text);
-						Item.item.increaseManufactureCost(Integer.parseInt(manufactureCost.getText()));
+						for(Iterator<Item> i = Item.item.iterator(); i.hasNext();)
+						{
+							i.next().increaseManufactureCost(Integer.parseInt(manufactureCost.getText()));
+						}
+						
 					}
 				});
 				
@@ -192,7 +202,12 @@ public class editItemPanel extends JFrame {
 					
 					public void actionPerformed(ActionEvent e) 
 					{
-						Item.decreaseManufactureCost(Integer.parseInt(manufactureCost.getText()));
+						Item.item = Stock.getItem(text);
+						
+						for(Iterator<Item> i = Item.item.iterator(); i.hasNext();)
+						{
+							i.next().decreaseManufactureCost(Integer.parseInt(manufactureCost.getText()));
+						}
 					}
 				});
 				
@@ -204,7 +219,12 @@ public class editItemPanel extends JFrame {
 					
 					public void actionPerformed(ActionEvent e) 
 					{
-						Item.increaseRetailPrice(Integer.parseInt(salesCost.getText()));
+						Item.item = Stock.getItem(text);
+						
+						for(Iterator<Item> i = Item.item.iterator(); i.hasNext();)
+						{
+							i.next().increaseRetailPrice(Integer.parseInt(salesCost.getText()));
+						}
 					}
 				});
 				
@@ -213,7 +233,12 @@ public class editItemPanel extends JFrame {
 					
 					public void actionPerformed(ActionEvent e) 
 					{
-						Item.decreaseRetailPrice(Integer.parseInt(salesCost.getText()));
+						Item.item = Stock.getItem(text);
+						
+						for(Iterator<Item> i = Item.item.iterator(); i.hasNext();)
+						{
+							i.next().decreaseRetailPrice(Integer.parseInt(salesCost.getText()));
+						}
 					}
 				});
 				
@@ -226,7 +251,12 @@ public class editItemPanel extends JFrame {
 					
 					public void actionPerformed(ActionEvent e) 
 					{
-						Item.increaseReorderAmount(Integer.parseInt(reorderAmm.getText()));
+						Item.item = Stock.getItem(text);
+						
+						for(Iterator<Item> i = Item.item.iterator(); i.hasNext();)
+						{
+							i.next().increaseReorderAmount(Integer.parseInt(reorderAmm.getText()));
+						}
 					}
 				});
 				
@@ -235,7 +265,12 @@ public class editItemPanel extends JFrame {
 					
 					public void actionPerformed(ActionEvent e) 
 					{
-						Item.decreaseReorderAmount(Integer.parseInt(reorderAmm.getText()));
+						Item.item = Stock.getItem(text);
+						
+						for(Iterator<Item> i = Item.item.iterator(); i.hasNext();)
+						{
+							i.next().decreaseReorderAmount(Integer.parseInt(reorderAmm.getText()));
+						}
 					}
 				});
 				
@@ -248,7 +283,25 @@ public class editItemPanel extends JFrame {
 					
 					public void actionPerformed(ActionEvent e) 
 					{
-						Item.changeReorderPoint(reorderLocation.getText());
+						Item.item = Stock.getItem(text);
+						
+						for(Iterator<Item> i = Item.item.iterator(); i.hasNext();)
+						{
+							i.next().changeReorderPoint(reorderLocation.getText());
+						}
+					}
+				});
+				
+				backToInventory.addActionListener(new ActionListener()
+				{
+					
+					public void actionPerformed(ActionEvent e) 
+					{
+						setVisible(false);
+						JFrame frame = new Inventory_Pannal("Inventory Infomation");
+						frame.setSize(1000,1000);
+						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						frame.setVisible(true);
 					}
 				});
 				
