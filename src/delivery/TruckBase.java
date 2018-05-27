@@ -12,7 +12,7 @@ public abstract class TruckBase {
 	
 	protected ArrayList<Item> cargo = new ArrayList<Item>();//Trucks inventory
 
-	protected int id;
+	protected final int id;
 	protected int capacity;//max capacity of normal truck	
 	
 	//public Object Truck = invenObjects.size();
