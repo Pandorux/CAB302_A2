@@ -163,7 +163,7 @@ public class TruckBaseTest {
 	public void testTruckRemoveItem_Item() {
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.removeItem(item);
-		assertTrue(false == dummyTruck.getItems(item));
+		assertTrue(null == dummyTruck.getItems(item));
 	}
 	
 	@Test
@@ -174,10 +174,10 @@ public class TruckBaseTest {
 	}
 	
 	@Test
-	public void testTruckAddItem() {
+	public void testTruckAddItems() {
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItems(item);
-		assertTrue(item == dummyTruck.getItems(item).get(0));
+		assertTrue(item == dummyTruck.getItem(item));
 	}
 	
 	@Test
@@ -287,30 +287,45 @@ public class TruckBaseTest {
 	// TODO: Fix GetItem and RemoveItems Name
 	@Test
 	public void testTruckRemoveItems_TempEqual() {
+		// Add Items
 		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
-		dummyTruck.removeItems(-20);
 		
-		assertEquals(null, dummyTruck.getItem(-20));
+		// Remove Items with a temp equal to -20 and 20 degrees
+		items = dummyTruck.getItemsWithTemp(-20);
+		dummyTruck.removeItems(items);
+		items = dummyTruck.getItemsWithTemp(20);
+		dummyTruck.removeItems(items);
+		
+		assertTrue(dummyTruck.getItemsWithTemp(-20).isEmpty() &&
+				dummyTruck.getItemsWithTemp(20).isEmpty());
 	}
 	
 	// TODO: Fix GetItem and RemoveItems Name
 	@Test
 	public void testTruckRemoveItems_TempLessThan() {
+		// Add Items
 		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
-		dummyTruck.removeItems(-20);
 		
-		assertEquals(null, dummyTruck.getItem(-20));
+		// Remove Items with a Temp Less than 10 Degrees
+		items = dummyTruck.getItemsTempLess(10);
+		dummyTruck.removeItems(items);
+		
+		assertTrue(dummyTruck.getItemsTempLess(10).isEmpty());
 	}
 	
-	// TODO: Fix GetItem and RemoveItems Name
 	@Test
 	public void testTruckRemoveItems_TempMoreThan() {
+		// Add Items
 		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
-		dummyTruck.removeItems(-20);
-		assertEquals(null, dummyTruck.getItem(-20));
+		
+		// Remove Items with a Temp Less than 10 Degrees
+		items = dummyTruck.getItemsTempMore(-10);
+		dummyTruck.removeItems(items);
+		
+		assertTrue(dummyTruck.getItemsTempMore(-10).isEmpty());
 	}
 	
 	@Test

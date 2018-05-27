@@ -120,14 +120,14 @@ public abstract class TruckBase {
 
 	public void addItems(Item item)
 	{
-		if (item.getQuantity() <= 0)//if negitive input or 0
-		{
-			
-		}
-		else 
-		{
-			cargo.add(item);//add the cargo of the truck to the trucks cargo	
-		}
+//		if (item.getQuantity() <= 0)//if negitive input or 0
+//		{
+//			
+//		}
+//		else 
+//		{
+//			cargo.add(item);//add the cargo of the truck to the trucks cargo	
+//		}
 		
 	}
 
@@ -158,7 +158,10 @@ public abstract class TruckBase {
  */
 	public Item getItem(int i) 
 	{
-		return cargo.get(i);
+		if(cargo.get(i) != null)
+			return cargo.get(i);
+		else
+			return null;
 	}
 
 /**
@@ -378,6 +381,39 @@ public abstract class TruckBase {
 	{
 		return cargo.size();
 	}
+
+	public ArrayList<Item> getItemsTempEqual(double temp) {
+		ArrayList<Item> items = new ArrayList<Item>();
+		for(Item i: cargo) {
+			if(i.getTemperature() == temp)
+				items.add(i);
+		}
+		return items;
+	}
+
+	public void removeItem(Item item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ArrayList<Item> getItemsTempLess(int temp) {
+		ArrayList<Item> items = new ArrayList<Item>();
+		for(Item i: cargo) {
+			if(i.getTemperature() < temp)
+				items.add(i);
+		}
+		return items;
+	}
+
+	public ArrayList<Item> getItemsTempMore(int temp) {
+		ArrayList<Item> items = new ArrayList<Item>();
+		for(Item i: cargo) {
+			if(i.getTemperature() > temp)
+				items.add(i);
+		}
+		return items;
+	}
+
 
 	
 
