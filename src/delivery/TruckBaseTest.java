@@ -265,9 +265,6 @@ public class TruckBaseTest {
 		ArrayList<Item> items = cargoMaker.CreateCargo(500);
 		dummyTruck.addItems(items);
 		dummyTruck.removeItems("Milk");
-		for(Item i: dummyTruck.getItems("Milk")) {
-			System.out.println(i.getName());
-		}
 		assertTrue(0 == dummyTruck.getItems("Milk").size());
 	}
 	

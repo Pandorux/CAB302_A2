@@ -65,15 +65,7 @@ public class StockTest {
 	{
 		inventory.addItems(potato);//add potatos
 		assertTrue(1000 == inventory.getQuantity("Potato"));//did u add potatos?
-	}
-	
-	@Test
-	public void testIncreaseStock()
-	{
-		//inventory.addItems("milk", 100);
-		assertTrue(600 == inventory.getQuantity("milk"));//did u add more milk
-	}
-	
+	}	
 
 	@Test 
 	public void testAddItem_ExistingItem()
@@ -89,10 +81,11 @@ public class StockTest {
 		assertTrue(1 == inventory.getQuantity("Potato"));
 	}
 	
-	@Test (expected = StockException.class)
+	@Test 
 	public void testIncreaseStock_ItemDoesntExist()
 	{
 		inventory.addItems(potato);
+		assertTrue(1000 == inventory.getQuantity("Potato"));
 	}
 	
 	
@@ -103,11 +96,10 @@ public class StockTest {
 	}
 	
 	@Test 
-	public void testRemoveAllStock()
+	public void testRemoveAllOfItem()
 	{
 		ArrayList<Item> milk02 = inventory.removeItems("Milk");//sherbert doesnt exist
-		System.out.println(milk02);
-		assertTrue(500 == milk02.size());//did u add more milk
+		assertTrue(500 == milk02.size());
 	}
 	
 	@Test (expected = StockException.class)
@@ -120,7 +112,7 @@ public class StockTest {
 	public void testRemoveSomeStock()
 	{
 		ArrayList<Item> milk02 = inventory.removeItems("milk", 200);//sherbert doesnt exist
-		assertTrue(300 == milk02.size());//did u add more milk
+		assertTrue(200 == milk02.size());//did u add more milk
 	}
 	
 	@Test (expected = StockException.class)
@@ -128,14 +120,6 @@ public class StockTest {
 	{
 		ArrayList<Item> milk02 = inventory.removeItems("milk", 2000);//sherbert doesnt exist
 	}
- 
-	// TODO: Fix this Unit Test
-	@Test (expected = IndexOutOfBoundsException.class)
-	public void testNegativeStock()
-	{
-		Stock potato = new Stock();//cant have negitive stock
-	}
-	
 
 	@Test
 	public void testInitialInventory()

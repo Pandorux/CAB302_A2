@@ -49,7 +49,6 @@ public class Manifest {
 	public void addTruck(TruckBase truck) 
 	{
 		fleet.put(truck.getId(), truck);
-		System.out.println(fleet.get(truck.getId()));
 	}
 
 	public void addTrucks(ArrayList<TruckBase> trucks) 
