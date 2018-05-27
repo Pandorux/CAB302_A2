@@ -82,39 +82,6 @@ public class Stock {
 			return removedItems;
 		}
 	}
-	
-	public static ArrayList<Item> importStockCSV(String filePath) throws CSVFormatException{
-		
-		File file = new File(filePath);
-		Scanner inputStream = new Scanner(file);
-		inputStream.useDelimiter("(\\s\n)"); // Separates CSV lines
-		
-
-		try {	
-			ArrayList<Item> items = new ArrayList<Item>();
-			while (inputStream.hasNext()) {
-				String[] params = inputStream.next().split(",");
-				// TODO: Append to Sales Log
-			}
-			return items;
-		}
-		catch (CSVFormatException e) {
-			
-		}	
-	}
-	
-   public String giveInventory()
-   {
-       if (items.size() == 0)
-       {
-           return null;
-       }
-       else
-       {
-           return items.toString();
-       }
-
-   }
 
    public boolean getItem(String name)
    {
@@ -138,15 +105,15 @@ public class Stock {
 	 * @author n9999884
 	 * @return 
 	 */
-	public static String giveInventory()
+	public String giveInventory()
 	{
-		if (storeProducts.size() == 0)
+		if (items.size() == 0)
 		{
 			return null;
 		}
 		else
 		{
-			return storeProducts.toString();
+			return items.toString();
 		}
 		
 	}

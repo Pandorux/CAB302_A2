@@ -1,6 +1,6 @@
 package exceptions;
 
-public class CSVFormatException extends Exception {
+public class CSVFormatException extends RuntimeException {
 
 	private String issue;
 	
