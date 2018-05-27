@@ -170,7 +170,7 @@ public class TruckBaseTest {
 	
 	@Test
 	public void testTruckAddItem() {
-		DummyItem item = new DummyItem("Milk", 0);
+		Item item = new DummyItem("Milk", 0);
 		dummyTruck.addItem(item);
 		assertTrue(item == dummyTruck.getItem(item));
 	}
@@ -240,24 +240,14 @@ public class TruckBaseTest {
 	
 	@Test
 	public void testTruckGetItem_Name() {
-		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
 		DummyItem item = new DummyItem("Milk", 0);
 		dummyTruck.addItem(item);
 		assertTrue(item == dummyTruck.getItem("Milk"));
 	}
 	
 	@Test
-	public void testTruckGetItem_Temp() {
-		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
-		DummyItem item = new DummyItem("Milk", 0);
-		dummyTruck.addItem(item);
-		assertTrue(item == dummyTruck.getItem(0));
-	}
-	
-	@Test
 	public void testTruckGetItem_Item() {
-		// TODO: Get one item from truck cargo that mets a certain criteria (name, temperature, etc)
-		DummyItem item = new DummyItem("Milk", 0);
+		Item item = new DummyItem("Milk", 0);
 		dummyTruck.addItem(item);
 		assertTrue(item == dummyTruck.getItem(item));
 	}

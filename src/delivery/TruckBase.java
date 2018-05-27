@@ -112,7 +112,6 @@ public abstract class TruckBase {
 	 * @param item  the item the user wants to view
 	 * @return return the objects information
 	 */
-
 	public Item getItem(Item item) 
 	{
 		for (int i = 0; i < cargo.size(); i++)
