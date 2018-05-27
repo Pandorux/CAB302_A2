@@ -9,7 +9,7 @@ public class DeliveryException extends RuntimeException {
 	}
 	
 	public void PrintException() {
-		System.out.println("DeliveryException Thrown: "+ issue);
+		System.out.println("DeliveryException Thrown: " + issue);
 	}
 	
 }

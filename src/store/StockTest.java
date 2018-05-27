@@ -22,7 +22,6 @@ public class StockTest {
 		for (int  i = 0; i < 500; i++)
 		{
 			milk.add(new Item("Milk", 10.00, 10.00, "Zimbabwe", 50, -20));
-			
 		}
 		
 		for (int  i = 0; i < 1000; i++)
@@ -30,13 +29,12 @@ public class StockTest {
 			potato.add(new Item("Potato", 10.00, 10.00, "Zimbabwe", 50));
 		}
 		
-		Stock inventory = new Stock();
+		inventory = new Stock();
 		inventory.addItems(milk);
 		//50 milk in stock
 		//name, manufacture cost, sell cost, reorder point, reorder amount
 		
 	}
-	
 	
 	@Test
 	public void testItemQuantity_SameCase()

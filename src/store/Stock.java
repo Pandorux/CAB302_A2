@@ -10,14 +10,14 @@ import exceptions.StockException;
 public class Stock {
 	
 	private HashMap<String, ArrayList<Item>> items;
-	
+
 	public Stock() {
 		items = new HashMap<String, ArrayList<Item>>();
 	}
 	
 	public int getQuantity(String itemName) {
-		if(items.containsKey(itemName))
-			return items.size();
+		if(items.containsKey(itemName.toUpperCase()))
+			return items.get("MILK").size();
 		else
 			return 0;
 	}
@@ -28,18 +28,18 @@ public class Stock {
 	
 	public int length() {
 		int count = 0;
-		for(ArrayList<Item> i: items.values()) {
-			count += i.size();
-		}
+		System.out.println("Working");
+		System.out.println(items.values());
+//		for(ArrayList<Item> i: items.values()) {
+//			System.out.println(i.size());
+//			count += i.size();
+//		}
 		return count;
 	}
 	
 	public void addItems(ArrayList<Item> newItems) {
 		for(Item i: newItems) {
 			addItem(i);
-		}
-		for(String i: items.keySet()) {
-			System.out.println(i);
 		}
 	}
 	
@@ -51,35 +51,33 @@ public class Stock {
 	
 	// TODO:
 	public ArrayList<Item> removeItems(String itemName, int amt) throws StockException {
-		System.out.println(items.containsKey(itemName.toUpperCase()));
-		return new ArrayList<Item>();
-//		if(!items.containsKey(itemName)) {
-//			throw new StockException(itemName + "does not exist");
-//		}
-//		else if(items.get(itemName).size() < Math.abs(amt)) {
-//			throw new StockException("Cannot remove " + amt + itemName + "; there is only " + items.get(itemName).size());
-//		}
-//		else {
-//			ArrayList<Item> removedItems = (ArrayList<Item>) items.get(itemName).subList(0, amt);
-//			for(Item i: removedItems) {
-//				items.get(itemName).remove(i);
-//			}
-//			return removedItems;
-//		}
+		itemName = itemName.toUpperCase();
+		if(!items.containsKey(itemName)) {
+			throw new StockException(itemName + "does not exist");
+		}
+		else if(items.get(itemName).size() < Math.abs(amt)) {
+			throw new StockException("Cannot remove " + amt + itemName + "; there is only " + items.get(itemName).size());
+		}
+		else {
+			ArrayList<Item> removedItems = (ArrayList<Item>) items.get(itemName).subList(0, amt);
+			for(Item i: removedItems) {
+				items.get(itemName).remove(i);
+			}
+			return removedItems;
+		}
 	
 	}
 	
 	public ArrayList<Item> removeItems(String itemName) throws StockException {
-		System.out.println(items.containsKey(itemName.toUpperCase()));
-		return new ArrayList<Item>();
-//		if(!items.containsKey(itemName)) {
-//			throw new StockException(itemName + "does not exist");
-//		}
-//		else {
-//			ArrayList<Item> removedItems = items.get(itemName);
-//			items.get(itemName).clear();
-//			return removedItems;
-//		}
+		itemName = itemName.toUpperCase();
+		if(!items.containsKey(itemName)) {
+			throw new StockException(itemName + "does not exist");
+		}
+		else {
+			ArrayList<Item> removedItems = items.get(itemName);
+			items.get(itemName).clear();
+			return removedItems;
+		}
 	}
 	
 	public static ArrayList<Item> importStockCSV(String filePath) throws CSVFormatException{
@@ -101,5 +99,38 @@ public class Stock {
 			
 		}	
 	}
+	
+   public String giveInventory()
+   {
+       if (items.size() == 0)
+       {
+           return null;
+       }
+       else
+       {
+           return items.toString();
+       }
+
+   }
+
+   public boolean getItem(String name)
+   {
+       if (items.size() == 0)
+       {
+           return false;
+       }
+       else
+       {
+           for (int i = 0; i < items.size(); i++)//for every item
+           {
+               if (items.containsKey(name))//if the primary field (name) is the same as the searched name
+               {
+                   return true;//return that it exists
+               }
+           }
+           return false;//it doesnt exist
+       }
+
+   }
 
 }
